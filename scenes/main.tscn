@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://byhucexau6tmj"]
+
+[ext_resource type="PackedScene" uid="uid://dbnohvauy4xkr" path="res://scenes/game/game_world.tscn" id="1_nev35"]
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
+zoom = Vector2(3.28, 3.28)
+
+[node name="GameWorld" parent="." instance=ExtResource("1_nev35")]

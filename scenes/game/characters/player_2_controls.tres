@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlayerControls" load_steps=2 format=3 uid="uid://bxqtn1udveeuw"]
+
+[ext_resource type="Script" path="res://scenes/game/characters/player_controls.gd" id="1_1fj5y"]
+
+[resource]
+script = ExtResource("1_1fj5y")
+player_index = 1
+move_left = "p2_move_left"
+move_right = "p2_move_right"
+move_up = "p2_move_up"
+move_down = "p2_move_down"
