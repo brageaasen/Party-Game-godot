@@ -1,70 +1,37 @@
+class_name Player
 extends CharacterBody2D
 
+@onready var animation_player = $AnimationPlayer
+@onready var look_direction = $LookDirection
 
 # Player identifier
 @export var controls : Resource = null
-@onready var animation_player = $AnimationPlayer
 
-
-const MAX_SPEED = 50.0
+const MAX_WALK_SPEED = 50.0
+const MAX_RUN_SPEED = 100.0
 const ACCEL = 750.0
 const FRICTION = 200.0
+
+# Look direction
+var last_direction : Vector2
+var interpolation_speed = 10.0  # Speed of interpolation
 
 var input : Vector2 = Vector2.ZERO
 
 func _physics_process(delta):
-	player_movement(delta)
-	update_animation()
+	if get_input() != Vector2.ZERO:
+		update_look_direction(input, delta)
 
 func get_input():
 	input.x = Input.get_action_strength(controls.move_right) - Input.get_action_strength(controls.move_left)
 	input.y = Input.get_action_strength(controls.move_down) - Input.get_action_strength(controls.move_up)
 	return input.normalized()
 
-func jump():
-	# Play jump animation
-	# Disable collision shape to trick a real 2d jump
-	pass
 
-func player_movement(delta):
-	var player_input = get_input()
-	
-	if player_input == Vector2.ZERO:
-		if velocity.length() > (FRICTION * delta):
-			velocity -= velocity.normalized() * (FRICTION * delta)
-		else:
-			velocity = Vector2.ZERO
-	else:
-		velocity += (player_input * ACCEL * delta)
-		velocity = velocity.limit_length(MAX_SPEED)
-	
-	move_and_slide()
+func update_look_direction(direction, delta):
+	# Smoothly interpolate the direction
+	last_direction = last_direction.lerp(direction, interpolation_speed * delta)
+	look_direction.rotation = last_direction.angle() - PI / 2  # Adjust angle to align with correct direction
 
-func update_animation():
-	if velocity.length() == 0:
-		animation_player.stop()
-		return
-	
-	var direction = velocity.normalized()
-	var angle = direction.angle()
-	
-	# Set the animation based on the direction angle
-	if angle >= -PI/8 and angle < PI/8:
-		animation_player.animation = "walking_r"
-	elif angle >= PI/8 and angle < 3*PI/8:
-		animation_player.animation = "walking_d_r"
-	elif angle >= 3*PI/8 and angle < 5*PI/8:
-		animation_player.animation = "walking_d"
-	elif angle >= 5*PI/8 and angle < 7*PI/8:
-		animation_player.animation = "walking_d_l"
-	elif angle >= -3*PI/8 and angle < -PI/8:
-		animation_player.animation = "walking_u_r"
-	elif angle >= -5*PI/8 and angle < -3*PI/8:
-		animation_player.animation = "walking_u"
-	elif angle >= -7*PI/8 and angle < -5*PI/8:
-		animation_player.animation = "walking_u_l"
-	else:
-		animation_player.animation = "walking_l"
-	
-	if !animation_player.is_playing():
-		animation_player.play()
+func get_look_direction():
+	return last_direction
