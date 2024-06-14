@@ -4,8 +4,6 @@ extends PlayerState
 @onready var collision_shape_2d = $"../../CollisionShape2D"
 @onready var collision_detection = $"../../GroundCheckArea/CollisionDetection"
 
-# Counter for the number of colliders in the ground check area
-var colliders_in_area = 0
 
 func enter(_msg := {}) -> void:
 	# Turn off Collision while jumping
@@ -20,9 +18,7 @@ func physics_update(delta):
 	change_state()
 
 func change_state():
-	if colliders_in_area == 0 and animation_player.current_animation_position >= animation_player.current_animation_length:
-		print(animation_player.current_animation_position)
-		print(animation_player.current_animation_length)
+	if animation_player.current_animation_position >= animation_player.current_animation_length:
 		state_machine.transition_to("Falling")
 
 func player_movement(delta):
@@ -74,10 +70,3 @@ func update_animation():
 		# Ensure the animation continues playing if it's the same
 		if !animation_player.is_playing():
 			animation_player.play(new_animation)
-
-
-func _on_ground_check_area_area_entered(area):
-	colliders_in_area += 1
-
-func _on_ground_check_area_area_exited(area):
-	colliders_in_area -= 1

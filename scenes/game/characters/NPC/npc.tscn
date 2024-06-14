@@ -1,21 +1,7 @@
-[gd_scene load_steps=79 format=3 uid="uid://dfnnxm42r1ks0"]
+[gd_scene load_steps=69 format=3 uid="uid://dla8ehrt1w152"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_otrf6"]
-[ext_resource type="Texture2D" uid="uid://dbpwylokfkrf6" path="res://assets/sprites/characters/black_0.png" id="2_vig24"]
-[ext_resource type="Script" path="res://scenes/game/characters/state_machine.gd" id="3_nqi5d"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/idle.gd" id="4_opj2s"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/walking.gd" id="5_7lb4a"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/jumping.gd" id="6_sbmbm"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/falling.gd" id="7_38dqu"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/running.gd" id="8_mgk4v"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/laying.gd" id="9_fmd6m"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/sitting.gd" id="10_32eji"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ot64g"]
-size = Vector2(10, 6)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehftr"]
-size = Vector2(10, 6)
+[ext_resource type="Script" path="res://scenes/game/characters/NPC/npc.gd" id="1_4u3ye"]
+[ext_resource type="Texture2D" uid="uid://cl4x3s11ej64a" path="res://assets/sprites/characters/brown_7.png" id="2_ncdb7"]
 
 [sub_resource type="Animation" id="Animation_jueai"]
 resource_name = "falling_d"
@@ -1159,58 +1145,31 @@ _data = {
 "walking_u_r": SubResource("Animation_w2sh0")
 }
 
-[node name="Player" type="CharacterBody2D"]
-collision_mask = 7
-script = ExtResource("1_otrf6")
-
-[node name="GroundCheckArea" type="Area2D" parent="."]
-collision_mask = 7
-
-[node name="CollisionDetection" type="CollisionShape2D" parent="GroundCheckArea"]
-position = Vector2(-1, 5)
-shape = SubResource("RectangleShape2D_ot64g")
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_4u3ye")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 5)
-shape = SubResource("RectangleShape2D_ehftr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_vig24")
+texture = ExtResource("2_ncdb7")
 hframes = 32
 vframes = 17
-frame = 48
+frame = 416
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qoxkf")
 }
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_nqi5d")
-initial_state = NodePath("Idle")
+[node name="Raycasts" type="Node2D" parent="."]
 
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("4_opj2s")
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(38, 0)
 
-[node name="Walking" type="Node" parent="StateMachine"]
-script = ExtResource("5_7lb4a")
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 7)
+target_position = Vector2(38, 0)
 
-[node name="Jumping" type="Node" parent="StateMachine"]
-script = ExtResource("6_sbmbm")
-
-[node name="Falling" type="Node" parent="StateMachine"]
-script = ExtResource("7_38dqu")
-
-[node name="Running" type="Node" parent="StateMachine"]
-script = ExtResource("8_mgk4v")
-
-[node name="Sitting" type="Node" parent="StateMachine"]
-script = ExtResource("10_32eji")
-
-[node name="Laying" type="Node" parent="StateMachine"]
-script = ExtResource("9_fmd6m")
-
-[node name="LookDirection" type="RayCast2D" parent="."]
-
-[connection signal="area_entered" from="GroundCheckArea" to="StateMachine/Falling" method="_on_ground_check_area_area_entered"]
-[connection signal="area_exited" from="GroundCheckArea" to="StateMachine/Falling" method="_on_ground_check_area_area_exited"]
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -7)
+target_position = Vector2(38, 0)

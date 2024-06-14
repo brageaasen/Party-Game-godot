@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbnohvauy4xkr"]
+[gd_scene load_steps=6 format=3 uid="uid://dbnohvauy4xkr"]
 
 [ext_resource type="Texture2D" uid="uid://cu7sc8br273lr" path="res://assets/sprites/test.png" id="1_6aow3"]
 [ext_resource type="PackedScene" uid="uid://dfnnxm42r1ks0" path="res://scenes/game/characters/player/player.tscn" id="1_u2527"]
 [ext_resource type="Resource" uid="uid://q7ddebftfpf0" path="res://scenes/game/characters/player_1_controls.tres" id="4_0e34k"]
 [ext_resource type="Resource" uid="uid://bxqtn1udveeuw" path="res://scenes/game/characters/player_2_controls.tres" id="5_2j25p"]
+[ext_resource type="PackedScene" uid="uid://dla8ehrt1w152" path="res://scenes/game/characters/NPC/npc.tscn" id="5_m55pd"]
 
 [node name="GameWorld" type="Node2D"]
 
@@ -16,3 +17,6 @@ controls = ExtResource("4_0e34k")
 [node name="Player2" parent="." instance=ExtResource("1_u2527")]
 position = Vector2(43, 28)
 controls = ExtResource("5_2j25p")
+
+[node name="NPC" parent="." instance=ExtResource("5_m55pd")]
+position = Vector2(65, -33)
