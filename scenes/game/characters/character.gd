@@ -6,6 +6,9 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite2D
 
+# Sorter game-mode
+var lifted = false
+
 # Movement
 const MAX_WALK_SPEED = 50.0
 const MAX_RUN_SPEED = 100.0
@@ -17,7 +20,6 @@ var last_direction : Vector2
 
 func _ready():
 	load_random_sprite()
-
 
 func load_random_sprite():
 	var dir = DirAccess.open("res://assets/sprites/characters/")
@@ -41,3 +43,6 @@ func load_random_sprite():
 				print("Failed to load sprite: %s" % random_sprite_path)
 	else:
 		print("Failed to open directory: res://assets/sprites/characters/")
+
+func set_lifted(val):
+	lifted = val

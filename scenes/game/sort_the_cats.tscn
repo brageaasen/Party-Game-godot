@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dngs5sx0hl8ys"]
+
+[ext_resource type="PackedScene" uid="uid://dla8ehrt1w152" path="res://scenes/game/characters/NPC/npc.tscn" id="1_i02rp"]
+[ext_resource type="Texture2D" uid="uid://cu7sc8br273lr" path="res://assets/sprites/test.png" id="1_s1u1y"]
+[ext_resource type="PackedScene" uid="uid://dfnnxm42r1ks0" path="res://scenes/game/characters/player/player.tscn" id="2_aiof0"]
+[ext_resource type="Resource" uid="uid://q7ddebftfpf0" path="res://scenes/game/characters/player/controls/player_1_controls.tres" id="3_eppj0"]
+[ext_resource type="Resource" uid="uid://bxqtn1udveeuw" path="res://scenes/game/characters/player/controls/player_2_controls.tres" id="4_bnxe8"]
+[ext_resource type="PackedScene" uid="uid://cg373l73l72wg" path="res://scenes/game/characters/player/sorter.tscn" id="6_r35lx"]
+
+[node name="SortTheCats" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_s1u1y")
+
+[node name="NPC" parent="." instance=ExtResource("1_i02rp")]
+
+[node name="NPC2" parent="." instance=ExtResource("1_i02rp")]
+position = Vector2(86, -44)
+
+[node name="NPC3" parent="." instance=ExtResource("1_i02rp")]
+position = Vector2(-127, -56)
+
+[node name="NPC4" parent="." instance=ExtResource("1_i02rp")]
+position = Vector2(64, 72)
+
+[node name="NPC5" parent="." instance=ExtResource("1_i02rp")]
+position = Vector2(-22, 57)
+
+[node name="Player2" parent="." instance=ExtResource("2_aiof0")]
+position = Vector2(-51, 1)
+controls = ExtResource("4_bnxe8")
+
+[node name="Sorter" parent="." instance=ExtResource("6_r35lx")]
+controls = ExtResource("3_eppj0")

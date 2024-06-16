@@ -10,3 +10,4 @@ extends Resource
 @export var jump := "p1_jump"
 @export var sit_down := "p1_sit_down"
 @export var lay_down := "p1_lay_down"
+@export var grab := "p1_grab"

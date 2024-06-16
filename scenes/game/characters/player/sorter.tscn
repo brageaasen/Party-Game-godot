@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg373l73l72wg"]
+
+[ext_resource type="Script" path="res://scenes/game/characters/player/sorter.gd" id="1_wkdoq"]
+[ext_resource type="Texture2D" uid="uid://ddk6wqt6hpy7i" path="res://assets/sprites/cursors/hands/back21.png" id="2_l2c5e"]
+[ext_resource type="Texture2D" uid="uid://b7oh0ay3enly1" path="res://assets/sprites/cursors/hands/back17.png" id="3_fuiuc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw4df"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l2c5e")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fuiuc")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d0p0"]
+radius = 33.0151
+
+[node name="Sorter" type="Node2D"]
+script = ExtResource("1_wkdoq")
+
+[node name="Cursor" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iw4df")
+animation = &"open"
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_8d0p0")
+
+[connection signal="area_entered" from="GrabArea" to="." method="_on_area_2d_area_entered"]

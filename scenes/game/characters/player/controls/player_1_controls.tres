@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerControls" load_steps=2 format=3 uid="uid://q7ddebftfpf0"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player_controls.gd" id="1_lmfpf"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/controls/player_controls.gd" id="1_lmfpf"]
 
 [resource]
 script = ExtResource("1_lmfpf")

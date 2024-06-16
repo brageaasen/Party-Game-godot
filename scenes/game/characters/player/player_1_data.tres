@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://36ppynbriqfv"]
+
+[ext_resource type="Script" path="res://scenes/game/characters/player/player_data.gd" id="1_larxt"]
+
+[resource]
+script = ExtResource("1_larxt")
+player_index = 0
+score = 0

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerControls" load_steps=2 format=3 uid="uid://bxqtn1udveeuw"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player_controls.gd" id="1_1fj5y"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/controls/player_controls.gd" id="1_1fj5y"]
 
 [resource]
 script = ExtResource("1_1fj5y")
@@ -13,3 +13,4 @@ run = "p2_run"
 jump = "p2_jump"
 sit_down = "p2_sit_down"
 lay_down = "p2_lay_down"
+grab = "p2_grab"
