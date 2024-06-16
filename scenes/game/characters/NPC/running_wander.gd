@@ -2,8 +2,9 @@ extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
-@export var state_countdown : float = 10
-var countdown_variable : float = 3
+@export var state_countdown : float = 4
+var countdown_variable : float = 2
+
 
 @export_group("State Behaviour")
 @export var chance_to_idle : float = 0.2
@@ -11,10 +12,15 @@ var countdown_variable : float = 3
 @export var chance_to_lay_down : float = 0
 @export var chance_to_sit_down : float = 0
 
+@onready var label = $"../../Label"
+
 func enter(_msg := {}) -> void:
-	print("NPC Entered running")
+	label.text = "RUNNING"
+	# Stop the timer before starting it
+	character.state_timer.stop()
 	# Start timer
 	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
+	print("Setting timer to: %f seconds" % random_countdown)
 	character.state_timer.wait_time = random_countdown
 	character.state_timer.start()
 
@@ -23,12 +29,15 @@ func physics_update(delta):
 	steer(delta)
 
 func change_state():
-	assert(chance_to_idle + chance_to_wander + chance_to_sit_down + chance_to_lay_down == 1)
+	var tolerance = 0.0001
+	var total_chance = chance_to_idle + chance_to_wander + chance_to_sit_down + chance_to_lay_down
+	assert(abs(total_chance - 1.0) < tolerance)
+	
 	var actions = [
 		{"chance": chance_to_idle, "action": "Idle"},
+		{"chance": chance_to_wander, "action": "Wander"},
 		{"chance": chance_to_sit_down, "action": "Sitting"},
-		{"chance": chance_to_lay_down, "action": "Laying"},
-		{"chance": chance_to_wander, "action": "Wander"}
+		{"chance": chance_to_lay_down, "action": "Laying"}
 	]
 	
 	var rand_value = randf()  # Generate a random number between 0 and 1
@@ -37,6 +46,7 @@ func change_state():
 	for action in actions:
 		cumulative_chance += action["chance"]
 		if rand_value < cumulative_chance:
+			character.last_state = self
 			state_machine.transition_to(action["action"])
 			break
 
@@ -136,7 +146,5 @@ func avoid_obstacles_steering() -> Vector2:
 
 
 func _on_state_timer_timeout():
-	if get_parent().state.name == self.name:
-		print()
-		print("Ran in running")
+	if get_parent().state.name == self.name and character.state_timer.time_left < 1:
 		change_state()

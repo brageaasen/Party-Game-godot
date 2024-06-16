@@ -11,8 +11,12 @@ var countdown_variable : float = 3
 @export var chance_to_sit_down : float = 0.6
 @export var chance_to_run : float = 0
 
+@onready var label = $"../../Label"
+
 func enter(_msg := {}) -> void:
-	print("NPC Entered laying")
+	label.text = "LAYING"
+	# Stop the timer before starting it
+	character.state_timer.stop()
 	# Start timer
 	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
 	character.state_timer.wait_time = random_countdown
@@ -22,11 +26,14 @@ func physics_update(delta):
 	update_animation()
 
 func change_state():
-	assert(chance_to_idle + chance_to_wander + chance_to_sit_down + chance_to_run == 1)
+	var tolerance = 0.0001
+	var total_chance = chance_to_idle + chance_to_wander + chance_to_sit_down + chance_to_run
+	assert(abs(total_chance - 1.0) < tolerance)
+	
 	var actions = [
 		{"chance": chance_to_idle, "action": "Idle"},
-		{"chance": chance_to_sit_down, "action": "Sitting"},
 		{"chance": chance_to_wander, "action": "Wander"},
+		{"chance": chance_to_sit_down, "action": "Sitting"},
 		{"chance": chance_to_run, "action": "RunningWander"}
 	]
 	
@@ -36,6 +43,7 @@ func change_state():
 	for action in actions:
 		cumulative_chance += action["chance"]
 		if rand_value < cumulative_chance:
+			character.last_state = self
 			state_machine.transition_to(action["action"])
 			break
 
@@ -74,7 +82,5 @@ func update_animation():
 
 
 func _on_state_timer_timeout():
-	if get_parent().state.name == self.name:
-		print()
-		print("Ran in laying")
+	if get_parent().state.name == self.name and character.state_timer.time_left < 1:
 		change_state()

@@ -2,19 +2,25 @@ extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
-@export var state_countdown : float = 5
+@export var state_countdown : float = 8
 var countdown_variable : float = 3
 
 @export_group("State Behaviour")
-@export var chance_to_idle : float = 0.2
-@export var chance_to_wander : float = 0.2
-@export var chance_to_lay_down : float = 0.6
+@export var chance_to_idle : float = 0.1
+@export var chance_to_wander : float = 0.1
+@export var chance_to_lay_down : float = 0.3
 @export var chance_to_run : float = 0
+@export var chance_to_look : float = 0.5
+
+@onready var label = $"../../Label"
 
 func enter(_msg := {}) -> void:
-	print("NPC Entered sitting")
+	label.text = "SITTING"
+	
+	# Stop the timer before starting it
+	character.state_timer.stop()
 	# Start timer
-	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
+	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable + chance_to_look)
 	character.state_timer.wait_time = random_countdown
 	character.state_timer.start()
 
@@ -22,20 +28,30 @@ func physics_update(delta):
 	update_animation()
 
 func change_state():
-	assert(chance_to_idle + chance_to_wander + chance_to_lay_down + chance_to_run == 1)
+	var tolerance = 0.0001
+	var total_chance = chance_to_idle + chance_to_wander + chance_to_lay_down + chance_to_run + chance_to_look
+	assert(abs(total_chance - 1.0) < tolerance)
+	
 	var actions = [
 		{"chance": chance_to_idle, "action": "Idle"},
 		{"chance": chance_to_wander, "action": "Wander"},
 		{"chance": chance_to_lay_down, "action": "Laying"},
-		{"chance": chance_to_run, "action": "RunningWander"}
+		{"chance": chance_to_run, "action": "RunningWander"},
+		{"chance": chance_to_look, "action": "Looking"}
 	]
 	
 	var rand_value = randf()  # Generate a random number between 0 and 1
 	var cumulative_chance = 0.0
 	
+	print(character.last_state.name)
+	if character.last_state.name == "Laying":
+		state_machine.transition_to("Idle")
+		return
+	
 	for action in actions:
 		cumulative_chance += action["chance"]
 		if rand_value < cumulative_chance:
+			character.last_state = self
 			state_machine.transition_to(action["action"])
 			break
 
@@ -73,7 +89,5 @@ func update_animation():
 
 
 func _on_state_timer_timeout():
-	if get_parent().state.name == self.name:
-		print()
-		print("Ran in sitting")
+	if get_parent().state.name == self.name and character.state_timer.time_left < 1:
 		change_state()

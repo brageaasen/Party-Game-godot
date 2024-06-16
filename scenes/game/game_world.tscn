@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dbnohvauy4xkr"]
 
-[ext_resource type="Texture2D" uid="uid://cu7sc8br273lr" path="res://assets/sprites/test.png" id="1_6aow3"]
+[ext_resource type="Texture2D" uid="uid://blixe5g7euqku" path="res://assets/sprites/temmpp.jpg" id="1_0yosk"]
 [ext_resource type="PackedScene" uid="uid://dfnnxm42r1ks0" path="res://scenes/game/characters/player/player.tscn" id="1_u2527"]
 [ext_resource type="Resource" uid="uid://q7ddebftfpf0" path="res://scenes/game/characters/player_1_controls.tres" id="4_0e34k"]
 [ext_resource type="Resource" uid="uid://bxqtn1udveeuw" path="res://scenes/game/characters/player_2_controls.tres" id="5_2j25p"]
@@ -9,7 +9,7 @@
 [node name="GameWorld" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6aow3")
+texture = ExtResource("1_0yosk")
 
 [node name="Player" parent="." instance=ExtResource("1_u2527")]
 controls = ExtResource("4_0e34k")
@@ -20,3 +20,9 @@ controls = ExtResource("5_2j25p")
 
 [node name="NPC" parent="." instance=ExtResource("5_m55pd")]
 position = Vector2(65, -33)
+
+[node name="NPC2" parent="." instance=ExtResource("5_m55pd")]
+position = Vector2(97, 36)
+
+[node name="NPC3" parent="." instance=ExtResource("5_m55pd")]
+position = Vector2(-41, -28)

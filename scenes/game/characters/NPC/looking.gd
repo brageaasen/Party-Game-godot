@@ -2,23 +2,25 @@ extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
-@export var state_countdown : float = 3
+@export var state_countdown : float = 4
 var countdown_variable : float = 1
 
 @export_group("State Behaviour")
-@export var chance_to_wander : float = 0.5
-@export var chance_to_sit_down : float = 0.2
-@export var chance_to_lay_down : float = 0.2
-@export var chance_to_run : float = 0.1
+@export var chance_to_idle : float = 0.2
+@export var chance_to_wander : float = 0.2
+@export var chance_to_lay_down : float = 0.5
+@export var chance_to_run : float = 0
+@export var chance_to_look : float = 0.1
 
 @onready var label = $"../../Label"
 
 func enter(_msg := {}) -> void:
-	label.text = "IDLE"
+	label.text = "LOOKING"
+	
 	# Stop the timer before starting it
 	character.state_timer.stop()
 	# Start timer
-	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
+	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable + chance_to_look)
 	character.state_timer.wait_time = random_countdown
 	character.state_timer.start()
 
@@ -27,14 +29,15 @@ func physics_update(delta):
 
 func change_state():
 	var tolerance = 0.0001
-	var total_chance = chance_to_wander + chance_to_sit_down + chance_to_lay_down + chance_to_run
+	var total_chance = chance_to_idle + chance_to_wander + chance_to_lay_down + chance_to_run + chance_to_look
 	assert(abs(total_chance - 1.0) < tolerance)
 	
 	var actions = [
+		{"chance": chance_to_idle, "action": "Idle"},
 		{"chance": chance_to_wander, "action": "Wander"},
-		{"chance": chance_to_sit_down, "action": "Sitting"},
 		{"chance": chance_to_lay_down, "action": "Laying"},
-		{"chance": chance_to_run, "action": "RunningWander"}
+		{"chance": chance_to_run, "action": "RunningWander"},
+		{"chance": chance_to_look, "action": "Looking"}
 	]
 	
 	var rand_value = randf()  # Generate a random number between 0 and 1
@@ -48,26 +51,24 @@ func change_state():
 			break
 
 func update_animation():
-	var angle = character.raycasts.rotation
-	
 	# Determine the new animation based on the direction angle
 	var new_animation = ""
-	if angle >= -PI/8 and angle < PI/8:
-		new_animation = "idle_r"
-	elif angle >= PI/8 and angle < 3*PI/8:
-		new_animation = "idle_d_r"
-	elif angle >= 3*PI/8 and angle < 5*PI/8:
-		new_animation = "idle_d"
-	elif angle >= 5*PI/8 and angle < 7*PI/8:
-		new_animation = "idle_d_l"
-	elif angle >= -3*PI/8 and angle < -PI/8:
-		new_animation = "idle_u_r"
-	elif angle >= -5*PI/8 and angle < -3*PI/8:
-		new_animation = "idle_u"
-	elif angle >= -7*PI/8 and angle < -5*PI/8:
-		new_animation = "idle_u_l"
+	if character.look_direction >= -PI/8 and character.look_direction < PI/8:
+		new_animation = "looking_r"
+	elif character.look_direction >= PI/8 and character.look_direction < 3*PI/8:
+		new_animation = "looking_d_r"
+	elif character.look_direction >= 3*PI/8 and character.look_direction < 5*PI/8:
+		new_animation = "looking_d"
+	elif character.look_direction >= 5*PI/8 and character.look_direction < 7*PI/8:
+		new_animation = "looking_d_l"
+	elif character.look_direction >= -3*PI/8 and character.look_direction < -PI/8:
+		new_animation = "looking_u_r"
+	elif character.look_direction >= -5*PI/8 and character.look_direction < -3*PI/8:
+		new_animation = "looking_u"
+	elif character.look_direction >= -7*PI/8 and character.look_direction < -5*PI/8:
+		new_animation = "looking_u_l"
 	else:
-		new_animation = "idle_l"
+		new_animation = "looking_l"
 
 	# Get the current frame to preserve the frame progress
 	var current_frame = animation_player.current_animation_position

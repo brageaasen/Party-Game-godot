@@ -2,17 +2,21 @@ extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
-@export var state_countdown : float = 10
+@export var state_countdown : float = 8
 var countdown_variable : float = 3
 
 @export_group("State Behaviour")
-@export var chance_to_idle : float = 0.5
+@export var chance_to_idle : float = 0.8
 @export var chance_to_sit_down : float = 0
 @export var chance_to_lay_down : float = 0
-@export var chance_to_run : float = 0.5
+@export var chance_to_run : float = 0.2
+
+@onready var label = $"../../Label"
 
 func enter(_msg := {}) -> void:
-	print("NPC Entered wander")
+	label.text = "WANDER"
+	# Stop the timer before starting it
+	character.state_timer.stop()
 	# Start timer
 	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
 	character.state_timer.wait_time = random_countdown
@@ -23,7 +27,10 @@ func physics_update(delta):
 	steer(delta)
 
 func change_state():
-	assert(chance_to_idle + chance_to_sit_down + chance_to_lay_down + chance_to_run == 1)
+	var tolerance = 0.0001
+	var total_chance = chance_to_idle + chance_to_sit_down + chance_to_lay_down + chance_to_run
+	assert(abs(total_chance - 1.0) < tolerance)
+	
 	var actions = [
 		{"chance": chance_to_idle, "action": "Idle"},
 		{"chance": chance_to_sit_down, "action": "Sitting"},
@@ -37,6 +44,7 @@ func change_state():
 	for action in actions:
 		cumulative_chance += action["chance"]
 		if rand_value < cumulative_chance:
+			character.last_state = self
 			state_machine.transition_to(action["action"])
 			break
 
@@ -136,7 +144,5 @@ func avoid_obstacles_steering() -> Vector2:
 
 
 func _on_state_timer_timeout():
-	if get_parent().state.name == self.name:
-		print()
-		print("Ran in wander")
+	if get_parent().state.name == self.name and character.state_timer.time_left < 1:
 		change_state()
