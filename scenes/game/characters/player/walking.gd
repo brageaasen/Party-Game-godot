@@ -1,9 +1,9 @@
-extends PlayerState
+extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
 func enter(_msg := {}) -> void:
-	print("entered walk")
+	pass
 
 func physics_update(delta):
 	player_movement(delta)
@@ -11,31 +11,31 @@ func physics_update(delta):
 	change_state()
 
 func change_state():
-	if player.get_input() == Vector2.ZERO:
+	if character.get_input() == Vector2.ZERO:
 		state_machine.transition_to("Idle")
-	if Input.is_action_pressed(player.controls.run):
+	if Input.is_action_pressed(character.controls.run):
 		state_machine.transition_to("Running")
-	if Input.is_action_pressed(player.controls.jump):
+	if Input.is_action_pressed(character.controls.jump):
 		state_machine.transition_to("Jumping")
 
 func player_movement(delta):
-	var player_input = player.get_input()
+	var player_input = character.get_input()
 	
 	if player_input == Vector2.ZERO:
-		if player.velocity.length() > (player.FRICTION * delta):
-			player.velocity -= player.velocity.normalized() * (player.FRICTION * delta)
+		if character.velocity.length() > (character.FRICTION * delta):
+			character.velocity -= character.velocity.normalized() * (character.FRICTION * delta)
 		else:
-			player.velocity = Vector2.ZERO
+			character.velocity = Vector2.ZERO
 	else:
-		player.velocity += (player_input * player.ACCEL * delta)
-		player.velocity = player.velocity.limit_length(player.MAX_WALK_SPEED)
+		character.velocity += (player_input * character.ACCEL * delta)
+		character.velocity = character.velocity.limit_length(character.MAX_WALK_SPEED)
 	
-	player.move_and_slide()
+	character.move_and_slide()
 
 
 func update_animation():
 
-	var angle = player.last_direction.angle()
+	var angle = character.last_direction.angle()
 
 	# Determine the new animation based on the direction angle
 	var new_animation = ""

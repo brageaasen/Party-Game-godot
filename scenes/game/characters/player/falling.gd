@@ -1,4 +1,4 @@
-extends PlayerState
+extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 @onready var collision_shape_2d = $"../../CollisionShape2D"
@@ -10,7 +10,6 @@ var colliders_in_area = 0
 
 func enter(_msg := {}) -> void:
 	# Check for 
-	print("entered fall")
 	update_animation()
 
 func exit() -> void:
@@ -25,30 +24,30 @@ func physics_update(delta):
 
 func change_state():
 	if colliders_in_area == 0 and animation_player.current_animation_position >= animation_player.current_animation_length:
-		if player.velocity == Vector2.ZERO:
+		if character.velocity == Vector2.ZERO:
 			state_machine.transition_to("Idle")
 		else:
 			state_machine.transition_to("Walking")
 
 
 func player_movement(delta):
-	var player_input = player.get_input()
+	var player_input = character.get_input()
 	
 	if player_input == Vector2.ZERO:
-		if player.velocity.length() > (player.FRICTION * delta):
-			player.velocity -= player.velocity.normalized() * (player.FRICTION * delta)
+		if character.velocity.length() > (character.FRICTION * delta):
+			character.velocity -= character.velocity.normalized() * (character.FRICTION * delta)
 		else:
-			player.velocity = Vector2.ZERO
+			character.velocity = Vector2.ZERO
 	else:
-		player.velocity += (player_input * player.ACCEL * delta)
-		player.velocity = player.velocity.limit_length(player.MAX_WALK_SPEED)
+		character.velocity += (player_input * character.ACCEL * delta)
+		character.velocity = character.velocity.limit_length(character.MAX_WALK_SPEED)
 	
-	player.move_and_slide()
+	character.move_and_slide()
 
 
 func update_animation():
 
-	var angle = player.last_direction.angle()
+	var angle = character.last_direction.angle()
 
 	# Determine the new animation based on the direction angle
 	var new_animation = ""

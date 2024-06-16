@@ -2,43 +2,46 @@ extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
+@export var state_countdown : float = 2
+var countdown_variable : float = 1
+
+@export_group("State Behaviour")
+@export var chance_to_wander : float = 0.4
+@export var chance_to_sit_down : float = 0.2
+@export var chance_to_lay_down : float = 0.2
+@export var chance_to_run : float = 0.2
+
 func enter(_msg := {}) -> void:
-	pass
+	print("NPC Entered idle")
+	# Start timer
+	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
+	character.state_timer.wait_time = random_countdown
+	character.state_timer.start()
 
 func physics_update(delta):
-	player_movement(delta)
 	update_animation()
-	change_state()
 
 func change_state():
-	if character.get_input() != Vector2.ZERO:
-		state_machine.transition_to("Walking")
-	if Input.is_action_pressed(character.controls.run):
-		state_machine.transition_to("Running")
-	if Input.is_action_pressed(character.controls.jump):
-		state_machine.transition_to("Jumping")
-	if Input.is_action_pressed(character.controls.sit_down):
-		state_machine.transition_to("Sitting")
-	if Input.is_action_pressed(character.controls.lay_down):
-		state_machine.transition_to("Laying")
-
-func player_movement(delta):
-	var player_input = character.get_input()
+	assert(chance_to_wander + chance_to_sit_down + chance_to_lay_down + chance_to_run == 1)
+	var actions = [
+		{"chance": chance_to_wander, "action": "Wander"},
+		{"chance": chance_to_sit_down, "action": "Sitting"},
+		{"chance": chance_to_lay_down, "action": "Laying"},
+		{"chance": chance_to_run, "action": "RunningWander"}
+	]
 	
-	if player_input == Vector2.ZERO:
-		if character.velocity.length() > (character.FRICTION * delta):
-			character.velocity -= character.velocity.normalized() * (character.FRICTION * delta)
-		else:
-			character.velocity = Vector2.ZERO
-	else:
-		character.velocity += (player_input * character.ACCEL * delta)
-		character.velocity = character.velocity.limit_length(character.MAX_WALK_SPEED)
+	var rand_value = randf()  # Generate a random number between 0 and 1
+	var cumulative_chance = 0.0
 	
-	character.move_and_slide()
+	for action in actions:
+		cumulative_chance += action["chance"]
+		if rand_value < cumulative_chance:
+			state_machine.transition_to(action["action"])
+			break
 
 func update_animation():
-	var angle = character.last_direction.angle()
-
+	var angle = character.raycasts.rotation
+	
 	# Determine the new animation based on the direction angle
 	var new_animation = ""
 	if angle >= -PI/8 and angle < PI/8:
@@ -69,3 +72,10 @@ func update_animation():
 		# Ensure the animation continues playing if it's the same
 		if !animation_player.is_playing():
 			animation_player.play(new_animation)
+
+
+func _on_state_timer_timeout():
+	if get_parent().state.name == self.name:
+		print()
+		print("Ran in idle")
+		change_state()

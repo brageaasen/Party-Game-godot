@@ -1,26 +1,26 @@
-extends PlayerState
+extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
 
 func enter(_msg := {}) -> void:
-	print("entered laying")
+	pass
 
 func physics_update(delta):
 	update_animation()
 	change_state()
 
 func change_state():
-	if player.get_input() != Vector2.ZERO:
+	if character.get_input() != Vector2.ZERO:
 		state_machine.transition_to("Walking")
-	if Input.is_action_pressed(player.controls.run):
+	if Input.is_action_pressed(character.controls.run):
 		state_machine.transition_to("Running")
-	if Input.is_action_pressed(player.controls.jump):
+	if Input.is_action_pressed(character.controls.jump):
 		state_machine.transition_to("Jumping")
-	if Input.is_action_pressed(player.controls.sit_down):
+	if Input.is_action_pressed(character.controls.sit_down):
 		state_machine.transition_to("Sitting")
 
 func update_animation():
-	var angle = player.last_direction.angle()
+	var angle = character.last_direction.angle()
 
 	# Determine the new animation based on the direction angle
 	var new_animation = ""
