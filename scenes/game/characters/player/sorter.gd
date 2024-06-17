@@ -6,6 +6,7 @@ extends Node2D
 # Player identifier
 @export var controls : Resource = null
 
+var grab_offset = Vector2(-10, 10)
 
 # Reference to the currently grabbed object
 var grabbed_object = null
@@ -45,7 +46,7 @@ func update_cursor_position(delta):
 
 func update_grabbed_object_position():
 	if grabbed_object != null:
-		grabbed_object.global_position = cursor.global_position # Update the position of the grabbed object
+		grabbed_object.global_position = cursor.global_position + grab_offset # Update the position of the grabbed object
 
 func grab():
 	if Input.is_action_just_pressed(controls.grab):
@@ -66,14 +67,6 @@ func grab_object():
 	for area in grab_area.get_overlapping_areas():
 		if area.get_parent().is_in_group("grabbable"):
 			var obj = area.get_parent()
-			# Set the boolean (lifted) to true
-			if obj.has_method("set_lifted"):
-				obj.set_lifted(true)
-			# If the grabbed object has a child node named "Lifted" and a node named "StateMachine", run: .transition_to("Lifted") on the "StateMachine" node
-			if obj.has_node("StateMachine"):
-				var state_machine = obj.get_node("StateMachine")
-				if state_machine.has_method("transition_to"):
-					state_machine.transition_to("Lifted")
 			var distance = cursor.position.distance_to(area.get_global_position())
 			if closest_object == null or distance < closest_distance:
 				closest_object = obj
@@ -81,8 +74,16 @@ func grab_object():
 
 	if closest_object != null:
 		grabbed_object = closest_object
-		grabbed_object.position = cursor.position
-		grabbed_object.set_global_position(cursor.position) # Move the object to cursor position
+		grabbed_object.global_position = cursor.global_position + grab_offset # Move the object to the offset position
+		
+		# Set the boolean (lifted) to true
+		if grabbed_object.has_method("set_lifted"):
+			grabbed_object.set_lifted(true)
+		# If the grabbed object has a child node named "Lifted" and a node named "StateMachine", run: .transition_to("Lifted") on the "StateMachine" node
+		if grabbed_object.has_node("StateMachine"):
+			var state_machine = grabbed_object.get_node("StateMachine")
+			if state_machine.has_method("transition_to"):
+				state_machine.transition_to("Lifted")
 
 func release_object():
 	if grabbed_object != null:

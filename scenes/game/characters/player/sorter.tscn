@@ -24,12 +24,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8d0p0"]
-radius = 33.0151
+radius = 16.0312
 
 [node name="Sorter" type="Node2D"]
 script = ExtResource("1_wkdoq")
 
 [node name="Cursor" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_iw4df")
 animation = &"open"
 
@@ -37,7 +38,7 @@ animation = &"open"
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2(0, 4)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_8d0p0")
 
 [connection signal="area_entered" from="GrabArea" to="." method="_on_area_2d_area_entered"]

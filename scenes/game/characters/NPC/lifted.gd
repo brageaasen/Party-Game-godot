@@ -10,6 +10,7 @@ var colliders_in_area = 0
 
 func enter(_msg := {}) -> void:
 	label.text = "LIFTED"
+	collision_shape_2d.disabled = true
 	update_animation()
 
 func exit() -> void:
@@ -24,28 +25,11 @@ func change_state():
 		if character.velocity == Vector2.ZERO:
 			state_machine.transition_to("Idle")
 		else:
-			state_machine.transition_to("Walking")
+			state_machine.transition_to("Wander")
 
 func update_animation():
-	# Determine the new animation based on the direction angle
-	var new_animation = ""
-	if character.look_direction >= -PI/8 and character.look_direction < PI/8:
-		new_animation = "lifted_r"
-	elif character.look_direction >= PI/8 and character.look_direction < 3*PI/8:
-		new_animation = "lifted_d_r"
-	elif character.look_direction >= 3*PI/8 and character.look_direction < 5*PI/8:
-		new_animation = "lifted_d"
-	elif character.look_direction >= 5*PI/8 and character.look_direction < 7*PI/8:
-		new_animation = "lifted_d_l"
-	elif character.look_direction >= -3*PI/8 and character.look_direction < -PI/8:
-		new_animation = "lifted_u_r"
-	elif character.look_direction >= -5*PI/8 and character.look_direction < -3*PI/8:
-		new_animation = "lifted_u"
-	elif character.look_direction >= -7*PI/8 and character.look_direction < -5*PI/8:
-		new_animation = "lifted_u_l"
-	else:
-		new_animation = "lifted_l"
-
+	var new_animation = "lifted_d_l"
+	
 	# Get the current frame to preserve the frame progress
 	var current_frame = animation_player.current_animation_position
 

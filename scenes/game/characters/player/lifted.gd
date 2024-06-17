@@ -25,26 +25,7 @@ func change_state():
 			state_machine.transition_to("Walking")
 
 func update_animation():
-	var angle = character.last_direction.angle()
-
-	# Determine the new animation based on the direction angle
-	var new_animation = ""
-	if angle >= -PI/8 and angle < PI/8:
-		new_animation = "lifted_r"
-	elif angle >= PI/8 and angle < 3*PI/8:
-		new_animation = "lifted_d_r"
-	elif angle >= 3*PI/8 and angle < 5*PI/8:
-		new_animation = "lifted_d"
-	elif angle >= 5*PI/8 and angle < 7*PI/8:
-		new_animation = "lifted_d_l"
-	elif angle >= -3*PI/8 and angle < -PI/8:
-		new_animation = "lifted_u_r"
-	elif angle >= -5*PI/8 and angle < -3*PI/8:
-		new_animation = "lifted_u"
-	elif angle >= -7*PI/8 and angle < -5*PI/8:
-		new_animation = "lifted_u_l"
-	else:
-		new_animation = "lifted_l"
+	var new_animation = "lifted_d_l"
 
 	# Get the current frame to preserve the frame progress
 	var current_frame = animation_player.current_animation_position
