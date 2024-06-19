@@ -111,6 +111,7 @@ func wander_steering() -> Vector2:
 	return desired_velocity - character.velocity
 
 
+# TODO: Make enclosure_zone scale according viewport size
 @export var enclosure_zone : Rect2 = Rect2(0, 0, 200, 200)
 
 func enclosure_steering() -> Vector2:

@@ -12,7 +12,7 @@ var grab_offset = Vector2(-10, 10)
 var grabbed_object = null
 
 # Sensitivity for the cursor movement
-var sensitivity := 400.0
+var sensitivity := 250.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,15 +34,20 @@ func update_cursor_position(delta):
 
 	# Calculate the new position
 	var new_position = cursor.position + move_input * sensitivity * delta
-	
-	# Ensure the cursor stays within the screen bounds
+
+	# Get the screen size and half dimensions
 	var screen_size := get_viewport_rect().size
-	new_position.x = clamp(new_position.x, 0, screen_size.x)
-	new_position.y = clamp(new_position.y, 0, screen_size.y)
-	
+	var quarter_screen_width = screen_size.x / 4
+	var quarter_screen_height = screen_size.y / 4
+
+	# Ensure the cursor stays within the screen bounds, considering the center is (0,0)
+	new_position.x = clamp(new_position.x, -quarter_screen_width, quarter_screen_width)
+	new_position.y = clamp(new_position.y, -quarter_screen_height, quarter_screen_height)
+
 	# Set the new position
 	cursor.position = new_position
 	grab_area.position = new_position # Ensure the grab area moves with the cursor
+
 
 func update_grabbed_object_position():
 	if grabbed_object != null:
