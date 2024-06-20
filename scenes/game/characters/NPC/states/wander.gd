@@ -112,7 +112,7 @@ func wander_steering() -> Vector2:
 
 
 # TODO: Make enclosure_zone scale according viewport size
-@export var enclosure_zone : Rect2 = Rect2(0, 0, 200, 200)
+@export var enclosure_zone : Rect2 = Rect2(0, 0, 2000, 2000)
 
 func enclosure_steering() -> Vector2:
 	var desired_velocity : Vector2 = Vector2.ZERO
@@ -132,13 +132,13 @@ func enclosure_steering() -> Vector2:
 	else :
 		return Vector2.ZERO
 
-var avoid_force : int = 500
+var avoid_force : int = 250
 
 func avoid_obstacles_steering() -> Vector2:
 	for raycast in character.raycasts.get_children():
-		raycast.target_position.x = character.velocity.length()
+		raycast.target_position.x = character.velocity.length() / 2
 		if raycast.is_colliding():
-			var obstacle : PhysicsBody2D = raycast.get_collider()
+			var obstacle = raycast.get_collider()
 			return (character.position + character.velocity - obstacle.position).normalized() * avoid_force
 	
 	return Vector2.ZERO

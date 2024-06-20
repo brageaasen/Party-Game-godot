@@ -27,6 +27,7 @@ animations = [{
 radius = 16.0312
 
 [node name="Sorter" type="Node2D"]
+z_index = 2
 script = ExtResource("1_wkdoq")
 
 [node name="Cursor" type="AnimatedSprite2D" parent="."]

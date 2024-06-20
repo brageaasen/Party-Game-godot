@@ -133,13 +133,13 @@ func enclosure_steering() -> Vector2:
 	else :
 		return Vector2.ZERO
 
-var avoid_force : int = 500
+var avoid_force : int = 250
 
 func avoid_obstacles_steering() -> Vector2:
 	for raycast in character.raycasts.get_children():
-		raycast.target_position.x = character.velocity.length()
+		raycast.target_position.x = character.velocity.length() / 2
 		if raycast.is_colliding():
-			var obstacle : PhysicsBody2D = raycast.get_collider()
+			var obstacle = raycast.get_collider()
 			return (character.position + character.velocity - obstacle.position).normalized() * avoid_force
 	
 	return Vector2.ZERO

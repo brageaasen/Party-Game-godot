@@ -5,7 +5,3 @@
 [node name="Main" type="Node"]
 
 [node name="SortTheCats" parent="." instance=ExtResource("1_lqfxl")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-ignore_rotation = false
-zoom = Vector2(2, 2)
