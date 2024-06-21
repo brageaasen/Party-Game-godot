@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_1fj5y")
-player_index = 1
 move_left = "p2_move_left"
 move_right = "p2_move_right"
 move_up = "p2_move_up"

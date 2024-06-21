@@ -4,9 +4,6 @@ extends Node2D
 func _process(delta):
 	pass
 
-# NPC path: res://scenes/game/characters/NPC/npc.tscn
-# Player path: res://scenes/game/characters/player/player.tscn
-
 # TODO: Get list of current players, dynamically give them resource controllers and resource data
 # Pick one of them and make them the grabber, rest of them gets spawned in as a cat
 # -> Spawned in with an animation of falling from the sky?
@@ -18,18 +15,122 @@ func _process(delta):
 # -> So, only have one fenced location?
 
 # Add dripple/splash effects on weather foliage
+# -> Random lifetime, on lifetime end, spawn splash effect
+
+
+
+# Make hill y sort higher than kittens
 
 # Text announcement before round start who the sorter is, e.g, "Player 1 is the sorter!".
 # And maybe let the players give themselves names so it is easier to distinguish.
 
+# TODO: Add game difficulty (number of NPC's)
+
+@onready var enclosure = $Enclosure
+
+@export var current_players : CurrentPlayers
+@export var npc_count : int = 6
+
+@export var not_caught_score : int = 3
+@export var correct_guess_score : int = 3
+@export var wrong_guess_score : int = 1
+
+
+# TODO: Put in global paths file?
+const npc_scene_path : String = "res://scenes/game/characters/NPC/npc.tscn"
+const player_scene_path : String = "res://scenes/game/characters/player/player.tscn"
+const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.tscn"
+
+
+
+
+func spawn_players():
+	var player_indices = current_players.players.keys()
+	if player_indices.size() == 0:
+		print("No players to spawn.")
+		return
+
+	# Pick a random player to be the sorter
+	var random_index = randi() % player_indices.size()
+	var sorter_index = player_indices[random_index]
+	var sorter_player = current_players.players[sorter_index]
+	# TODO: Make false on round end.
+	sorter_player.is_sorter = true
+
+	# Load the sorter scene
+	var sorter_scene = preload(sorter_scene_path)
+	var sorter_instance = sorter_scene.instantiate()
+	sorter_instance.controls = sorter_player.controls
+
+	# Add the sorter instance to the scene
+	add_child(sorter_instance)
+
+	# Spawn the rest as players
+	var player_scene = preload(player_scene_path)
+	for index in player_indices:
+		if index == sorter_index:
+			continue  # Skip the sorter
+		var player = current_players.players[index]
+		var player_instance = player_scene.instantiate()
+		player_instance.controls = player.controls
+		add_child(player_instance)
+
+func spawn_npcs():
+	var npc_scene = preload(npc_scene_path)
+	for i in range(npc_count):
+		var npc_instance = npc_scene.instantiate()
+		npc_instance.name = "NPC_" + str(i)
+		add_child(npc_instance)
+
+
+# TODO: For each object with collider inside of enclosure, check if it has the name Player or NPC in it.
+# If it has player, score += correct_guess_score, if it is npc, score -= wrong_guess_score
+func calculate_sorter_score():
+	var score = 0
+	
+	# Iterate through all objects currently in the enclosure
+	for body in enclosure.objects_in_enclosure:
+		# Check if the body has a name containing "Player" or "NPC"
+		if body.name.contains("Player"):
+			score += correct_guess_score
+		elif body.name.contains("NPC"):
+			score -= wrong_guess_score
+	
+	# Update the sorter's score
+	for player in current_players.players.values():
+		if player.is_sorter:
+			player.score += score
+			break # Only one sorter
+
+# Function to add score to players not inside the enclosure
+func calculate_player_score():
+	# Iterate through all players in current_players
+	for player in current_players.players.values():
+		if player.is_sorter:
+			continue
+		var player_is_inside = false
+		for body in enclosure.objects_in_enclosure:
+			if body is Player and body.player_data.player_index == player.player_index:
+				player_is_inside = true
+				break
+		# If the player is no	t inside the enclosure, add 3 to their score
+		if not player_is_inside:
+			player.score += not_caught_score
+
 func start_round():
-	# Pick randomly one of the players as the sorter
-	# Spawn in Player's and NPC's
-	pass
+	spawn_players()
+	spawn_npcs()
 
 func end_round():
-	pass
+	var total_score = calculate_sorter_score()
+	print("Sorter Score: ", total_score)
 
+	# Update player scores
+	calculate_player_score()
+
+	# Print updated player scores
+	for player in current_players.players.values():
+		print(player.name, " Score: ", player.score)
 
 
 

@@ -3,6 +3,7 @@ extends Character
 
 # Player identifier
 @export var controls : Resource = null
+@export var player_data : Resource = null
 
 var input : Vector2 = Vector2.ZERO
 

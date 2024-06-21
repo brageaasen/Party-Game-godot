@@ -1,5 +1,9 @@
 class_name PlayerData
 extends Resource
 
-@export var player_index := 0
+@export var player_index : int = 1
 @export var score : int = 0
+@export var name : String = "Player " + str(player_index)
+@export var controls : PlayerControls = null
+
+var is_sorter = false

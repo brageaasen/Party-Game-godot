@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=57 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Script" path="res://scenes/game/round_time.gd" id="2_2bib8"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://w6t0yquyxnef" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water2.png" id="10_oyu63"]
 [ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="11_52dqa"]
 [ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="18_owqm7"]
-[ext_resource type="Script" path="res://scenes/game/enclosure.gd" id="18_uvh1q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbym"]
 texture = ExtResource("2_jphup")
@@ -4229,8 +4228,6 @@ grow_horizontal = 2
 pivot_offset = Vector2(80, 20)
 size_flags_horizontal = 4
 script = ExtResource("2_2bib8")
-round_time_minutes = 0
-round_time_seconds = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/RoundTime"]
 layout_mode = 1
@@ -4266,8 +4263,6 @@ horizontal_alignment = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="BlinkTimer" type="Timer" parent="CanvasLayer/RoundTime"]
 
 [node name="RoundStart" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -4332,7 +4327,7 @@ layer_6/tile_data = PackedInt32Array(-524298, 5, 0, -589833, 1245184, 2, -589832
 layer_7/name = "buildings"
 layer_7/y_sort_enabled = true
 layer_7/z_index = 1
-layer_7/tile_data = PackedInt32Array(262128, 3, 0, 262129, 131075, 2, 196593, 3, 0, 196594, 131075, 2, 131059, 65539, 3, 131060, 65539, 3, 131061, 65539, 3, 131062, 131075, 2, 262138, 3, 2, 262139, 131075, 0, 393211, 131075, 2, 458742, 65539, 3, 458741, 65539, 3, 327664, 196611, 1, 458739, 3, 2, 458740, 65539, 3, 458743, 65539, 3, 458744, 65539, 3, 458745, 131075, 2, 393209, 3, 0, 393210, 65539, 3, 131058, 3, 0, 65526, 3, 0, 65527, 65539, 3, 65528, 65539, 3, 65529, 131075, 0, 131065, 3, 2, 131066, 131075, 0, 196602, 196611, 1, 393200, 3, 2, 393201, 65539, 3, 393202, 65539, 3, 393203, 131075, 0, -524274, 3, 3, -589813, 3, 2, -655349, 131075, 0, -655351, 196611, 2, -720888, 65539, 3, -720887, 131075, 0, -720889, 3, 3, -655350, 3, 3, -589812, 131075, 3, -524273, 65539, 3, -524272, 131075, 0, -458736, 196611, 2, -851958, 393220, 9, -720884, 262148, 9, -655345, 393220, 6, -589810, 983044, 5, -720885, 851972, 6, -655346, 917508, 6, -589808, 917508, 6, -786425, 786436, 6, -655359, 720900, 7, -589830, 589828, 7, 458769, 393220, 6, 589841, 589828, 6, 262161, 720900, 6, 17, 786436, 5, -458735, 786436, 5, -720902, 655364, 5, -589843, 3, 0, -524308, 65539, 3, -524307, 131075, 2, -589842, 65539, 3, -589841, 65539, 3, -589840, 65539, 3, -589839, 65539, 3, -589838, 65539, 3, 327675, 196611, 1)
+layer_7/tile_data = PackedInt32Array(262128, 3, 0, 262129, 131075, 2, 196593, 3, 0, 196594, 131075, 2, 131059, 65539, 3, 131060, 65539, 3, 131061, 65539, 3, 131062, 131075, 2, 262138, 3, 2, 262139, 131075, 0, 393211, 131075, 2, 458742, 65539, 3, 458741, 65539, 3, 327664, 196611, 1, 458739, 3, 2, 458740, 65539, 3, 458743, 65539, 3, 458744, 65539, 3, 458745, 131075, 2, 393209, 3, 0, 393210, 65539, 3, 131058, 3, 0, -65530, 3, 2, -131066, 196611, 1, -196601, 131075, 2, -262137, 3, 0, -262136, 131075, 2, -262133, 3, 2, -262132, 131075, 0, -196596, 3, 2, -196595, 131075, 0, -131059, 196611, 1, -65523, 3, 2, -65522, 131075, 0, 14, 196611, 1, 65550, 196611, 1, 131086, 131075, 2, 131085, 3, 0, 196621, 131075, 2, 196620, 65539, 3, 196619, 65539, 3, 196618, 3, 2, 131081, 65539, 3, 65544, 196611, 1, 8, 131075, 0, 7, 3, 2, -327671, 65539, 3, -327670, 65539, 3, -327669, 131075, 0, -327672, 3, 0, -196602, 3, 0, -65529, 131075, 0, 131082, 131075, 0, 131080, 3, 2, 65526, 3, 0, 65527, 65539, 3, 65528, 65539, 3, 65529, 131075, 0, 131065, 3, 2, 131066, 131075, 0, 196602, 196611, 1, 393200, 3, 2, 393201, 65539, 3, 393202, 65539, 3, 393203, 131075, 0, -524274, 3, 3, -589813, 3, 2, -655349, 131075, 0, -655351, 196611, 2, -720888, 65539, 3, -720887, 131075, 0, -720889, 3, 3, -655350, 3, 3, -589812, 131075, 3, -524273, 65539, 3, -524272, 131075, 0, -458736, 196611, 2, -851958, 393220, 9, -720884, 262148, 9, -655345, 393220, 6, -589810, 983044, 5, -720885, 851972, 6, -655346, 917508, 6, -589808, 917508, 6, -786425, 786436, 6, -655359, 720900, 7, -589830, 589828, 7, 458769, 393220, 6, 589841, 589828, 6, 262161, 720900, 6, 17, 786436, 5, -458735, 786436, 5, -720902, 655364, 5, -589843, 3, 0, -524308, 65539, 3, -524307, 131075, 2, -589842, 65539, 3, -589841, 65539, 3, -589840, 65539, 3, -589839, 65539, 3, -589838, 65539, 3, 327675, 196611, 1)
 layer_8/name = "enviorment"
 layer_8/y_sort_enabled = true
 layer_8/z_index = 1
@@ -4455,15 +4450,6 @@ shape = SubResource("RectangleShape2D_ke5r8")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
-
-[node name="Enclosure" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 3
-script = ExtResource("18_uvh1q")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enclosure"]
-position = Vector2(-237, 75)
-polygon = PackedVector2Array(-11, -11, -11, -21, 6, -21, 6, -37, 22, -37, 22, -54, 86, -54, 86, -70, 132, -70, 132, -53, 147, -53, 148, -20, 163, -20, 163, 8, 132, 8, 132, 24, 39, 25, 39, 9, -11, 9)
 
 [connection signal="round_over" from="CanvasLayer/RoundTime" to="." method="_on_round_time_round_over"]
 [connection signal="timeout" from="CanvasLayer/RoundTime/Timer" to="CanvasLayer/RoundTime" method="_on_timer_timeout"]

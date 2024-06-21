@@ -2893,7 +2893,8 @@ _data = {
 
 [node name="NPC" type="CharacterBody2D" groups=["grabbable"]]
 z_index = 1
-collision_mask = 7
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_4u3ye")
 
 [node name="Area2D" type="Area2D" parent="."]

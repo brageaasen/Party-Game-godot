@@ -1,6 +1,7 @@
 extends Control
 
 @onready var timer = $Timer
+@onready var blink_timer = $BlinkTimer
 
 @export var round_time_minutes: int = 1
 @export var round_time_seconds: int = 30
@@ -20,6 +21,8 @@ func _ready():
 	timer.wait_time = 0.01  # Set timer to tick every 0.01 seconds (10 milliseconds)
 	minutes.visible = false
 	seconds.visible = false
+	blink_timer.wait_time = 0.5  # Set blink timer to tick every 0.5 seconds (500 milliseconds)
+	blink_timer.connect("timeout", _on_blink_timer_timeout)
 
 func _on_timer_timeout():
 	if total_time <= 0:
@@ -40,9 +43,15 @@ func update_timer_display(time_left):
 
 func round_finished():
 	round_over.emit()
+	blink_timer.start()
 
 
 func _on_round_start_start_round():
 	timer.start()
 	minutes.visible = true
 	seconds.visible = true
+
+func _on_blink_timer_timeout():
+	minutes.visible = !minutes.visible
+	seconds.visible = !seconds.visible
+	#m_seconds.visible = !m_seconds.visible
