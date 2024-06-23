@@ -6,9 +6,9 @@ const PLAYER_1_DATA = preload("res://scenes/game/characters/player/player_1_data
 const PLAYER_2_DATA = preload("res://scenes/game/characters/player/player_2_data.tres")
 
 func _init():
-	print("test")
 	add(PLAYER_1_DATA)
 	add(PLAYER_2_DATA)
+	print(players)
 
 var players : Dictionary = { }
 

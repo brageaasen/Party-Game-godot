@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=60 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Script" path="res://scenes/game/round_time.gd" id="2_2bib8"]
@@ -4124,25 +4124,32 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_ryoey")
 
+[sub_resource type="GDScript" id="GDScript_vbhej"]
+
 [sub_resource type="Gradient" id="Gradient_kygd0"]
-offsets = PackedFloat32Array(0.429952, 1)
-colors = PackedColorArray(0.47451, 0.529412, 0.807843, 1, 0.47451, 0.529412, 0.807843, 0.690196)
+colors = PackedColorArray(1, 1, 1, 0.372549, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_415fk"]
 gradient = SubResource("Gradient_kygd0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pnjcq"]
+lifetime_randomness = 0.8
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(475, 1, 1)
-direction = Vector3(-1, 1, 0)
+emission_box_extents = Vector3(350, 1, 1)
+direction = Vector3(-0.3, 1, 0)
 spread = 2.0
 initial_velocity_min = 250.0
 initial_velocity_max = 300.0
 gravity = Vector3(0, 0, 0)
-scale_min = 1.5
-scale_max = 2.0
+scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_415fk")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_olxnu"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 6.4, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfls7"]
 size = Vector2(108, 44)
@@ -4352,14 +4359,24 @@ process_material = SubResource("ParticleProcessMaterial_y05ev")
 lifetime = 8.0
 preprocess = 4.0
 
-[node name="RainFalling" type="GPUParticles2D" parent="TileMap"]
+[node name="Rain" type="Node2D" parent="TileMap"]
+script = SubResource("GDScript_vbhej")
+
+[node name="RainFalling" type="GPUParticles2D" parent="TileMap/Rain"]
 z_index = 10
-position = Vector2(188, -208)
-emitting = false
+position = Vector2(66, -208)
 amount = 200
+sub_emitter = NodePath("../Splash")
 process_material = SubResource("ParticleProcessMaterial_pnjcq")
 lifetime = 2.0
 preprocess = 3.0
+trail_enabled = true
+trail_lifetime = 0.02
+
+[node name="Splash" type="GPUParticles2D" parent="TileMap/Rain"]
+z_index = 1
+amount = 256
+process_material = SubResource("ParticleProcessMaterial_olxnu")
 
 [node name="Collision" type="StaticBody2D" parent="."]
 collision_layer = 4

@@ -73,6 +73,7 @@ func spawn_players():
 		var player = current_players.players[index]
 		var player_instance = player_scene.instantiate()
 		player_instance.controls = player.controls
+		player_instance.player_data = player
 		add_child(player_instance)
 
 func spawn_npcs():
@@ -83,23 +84,22 @@ func spawn_npcs():
 		add_child(npc_instance)
 
 
-# TODO: For each object with collider inside of enclosure, check if it has the name Player or NPC in it.
-# If it has player, score += correct_guess_score, if it is npc, score -= wrong_guess_score
+# Function to add score to the sorter-player
 func calculate_sorter_score():
-	var score = 0
+	var round_score = 0
 	
 	# Iterate through all objects currently in the enclosure
 	for body in enclosure.objects_in_enclosure:
 		# Check if the body has a name containing "Player" or "NPC"
 		if body.name.contains("Player"):
-			score += correct_guess_score
+			round_score += correct_guess_score
 		elif body.name.contains("NPC"):
-			score -= wrong_guess_score
+			round_score -= wrong_guess_score
 	
 	# Update the sorter's score
 	for player in current_players.players.values():
 		if player.is_sorter:
-			player.score += score
+			player.score += round_score
 			break # Only one sorter
 
 # Function to add score to players not inside the enclosure
@@ -113,7 +113,7 @@ func calculate_player_score():
 			if body is Player and body.player_data.player_index == player.player_index:
 				player_is_inside = true
 				break
-		# If the player is no	t inside the enclosure, add 3 to their score
+		# If the player is not inside the enclosure, add 3 to their score
 		if not player_is_inside:
 			player.score += not_caught_score
 
@@ -122,8 +122,8 @@ func start_round():
 	spawn_npcs()
 
 func end_round():
-	var total_score = calculate_sorter_score()
-	print("Sorter Score: ", total_score)
+	# Update sorter score
+	calculate_sorter_score()
 
 	# Update player scores
 	calculate_player_score()
