@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://6iab8pacnp3j"]
+
+[ext_resource type="Texture2D" uid="uid://d1t2tq786ili4" path="res://assets/sprites/rain.png" id="1_hxqmr"]
+[ext_resource type="Texture2D" uid="uid://ch6yxfuhy3iyt" path="res://assets/sprites/rain_drop.png" id="2_cvkkm"]
+
+[sub_resource type="GDScript" id="GDScript_vbhej"]
+
+[sub_resource type="Gradient" id="Gradient_kygd0"]
+colors = PackedColorArray(1, 1, 1, 0.560784, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_415fk"]
+gradient = SubResource("Gradient_kygd0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pnjcq"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(350, 1, 1)
+direction = Vector3(-0.4, 1, 0)
+spread = 2.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_415fk")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fqal2"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_x8a55"]
+colors = PackedColorArray(1, 1, 1, 0.360784, 1, 1, 1, 0.360784)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_euvb6"]
+gradient = SubResource("Gradient_x8a55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_olxnu"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_euvb6")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Rain" type="Node2D"]
+script = SubResource("GDScript_vbhej")
+
+[node name="RainFalling" type="GPUParticles2D" parent="."]
+z_index = 10
+position = Vector2(66, -208)
+emitting = false
+amount = 200
+sub_emitter = NodePath("../Splash")
+process_material = SubResource("ParticleProcessMaterial_pnjcq")
+texture = ExtResource("1_hxqmr")
+lifetime = 2.0
+preprocess = 3.0
+trail_lifetime = 0.02
+
+[node name="Splash" type="GPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("CanvasItemMaterial_fqal2")
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_olxnu")
+texture = ExtResource("2_cvkkm")
+lifetime = 0.7

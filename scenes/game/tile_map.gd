@@ -62,17 +62,17 @@ enum Seasons {
 
 @onready var tile_map = $"."
 @onready var leaves_falling = $LeavesFalling
-@onready var snow_falling = $SnowFalling
+@onready var snow_falling = $Snow/SnowFalling
 @onready var rain_falling = $Rain/RainFalling
 
 func _ready():
 	# Randomly select a season
 	var random_season = Seasons.values()[randi() % Seasons.values().size()]
-	#change_season_textures(random_season)
-	change_season_textures(Seasons.SPRING)
+	change_season_textures(random_season)
 func change_season_textures(season):
 	# Foliage
 	if season == Seasons.FALL:
+		print("fall")
 		leaves_falling.emitting = true
 	elif season == Seasons.WINTER:
 		snow_falling.emitting = true

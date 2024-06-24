@@ -1,7 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://byhucexau6tmj"]
+[gd_scene load_steps=4 format=3 uid="uid://byhucexau6tmj"]
 
+[ext_resource type="PackedScene" uid="uid://cd7htgtqaej64" path="res://scenes/world_environment.tscn" id="1_4ulds"]
 [ext_resource type="PackedScene" uid="uid://dngs5sx0hl8ys" path="res://scenes/game/sort_the_cats.tscn" id="1_lqfxl"]
 
+[sub_resource type="Environment" id="Environment_gxhek"]
+tonemap_white = 16.0
+
 [node name="Main" type="Node"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_4ulds")]
+environment = SubResource("Environment_gxhek")
 
 [node name="SortTheCats" parent="." instance=ExtResource("1_lqfxl")]
