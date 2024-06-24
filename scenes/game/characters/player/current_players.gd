@@ -1,14 +1,9 @@
 class_name CurrentPlayers
 extends Resource
 
-# TODO: Make empty later
-const PLAYER_1_DATA = preload("res://scenes/game/characters/player/player_1_data.tres")
-const PLAYER_2_DATA = preload("res://scenes/game/characters/player/player_2_data.tres")
 
 func _init():
-	add(PLAYER_1_DATA)
-	add(PLAYER_2_DATA)
-	print(players)
+	pass
 
 var players : Dictionary = { }
 

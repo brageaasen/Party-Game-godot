@@ -69,10 +69,10 @@ func _ready():
 	# Randomly select a season
 	var random_season = Seasons.values()[randi() % Seasons.values().size()]
 	change_season_textures(random_season)
+
 func change_season_textures(season):
 	# Foliage
 	if season == Seasons.FALL:
-		print("fall")
 		leaves_falling.emitting = true
 	elif season == Seasons.WINTER:
 		snow_falling.emitting = true
