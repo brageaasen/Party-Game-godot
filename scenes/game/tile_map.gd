@@ -71,6 +71,7 @@ func _ready():
 	change_season_textures(random_season)
 
 func change_season_textures(season):
+	self.season = season
 	# Foliage
 	if season == Seasons.FALL:
 		leaves_falling.emitting = true

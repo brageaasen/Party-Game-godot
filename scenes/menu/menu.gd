@@ -8,17 +8,15 @@ signal change_to_player_select
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_process(true)
 	start_button.grab_focus()
 	animation_player.play("logo_pulse")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func _on_start_button_pressed():
-	main.visible = false
+	set_process(false)
+	self.visible = false
 	emit_signal("change_to_player_select")
 
 
