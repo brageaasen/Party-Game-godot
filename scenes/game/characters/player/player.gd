@@ -1,6 +1,8 @@
 class_name Player
 extends Character
 
+@onready var look_direction = $LookDirection
+
 # Player identifier
 @export var controls : Resource = null
 @export var player_data : Resource = null

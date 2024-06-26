@@ -3,7 +3,7 @@ extends Control
 @onready var back_button = $BackButton
 @onready var main = $"../Main"
 @onready var player_container = $PlayerContainer # The parent node containing player slots in the scene
-@onready var tile_map = $Art/TileMap
+const GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 @export var current_players : Resource # Current players resource
 
@@ -20,8 +20,6 @@ var player_data_paths = {
 # Dictionary to keep track of which player is in which slot
 var player_slots = {}
 
-var button_hold_start = {} # Dictionary to keep track of button hold start times
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(max_players):
@@ -37,15 +35,6 @@ func _process(delta):
 				_add_player(i)
 			elif Input.is_action_just_pressed("p%d_leave" % i):
 				_remove_player(i)
-			if Input.is_action_just_pressed("p%d_hold" % i):
-				button_hold_start[i] = Time.get_ticks_msec()
-			elif Input.is_action_pressed("p%d_hold" % i):
-				if i in button_hold_start and Time.get_ticks_msec() - button_hold_start[i] >= 1000:
-					_on_button_held(i)
-					button_hold_start.erase(i)
-			elif Input.is_action_just_released("p%d_hold" % i):
-				button_hold_start.erase(i)
-
 
 func _add_player(player_index):
 	if player_index in current_players.players:
@@ -105,14 +94,14 @@ func _update_lobby_display():
 		join_button_image.hide()
 		join_button_image.play("press")
 		
-		match tile_map.season:
-			tile_map.Seasons.SUMMER:
+		match GAME_DATA.season:
+			GAME_DATA.Season.SUMMER:
 				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/SUMMER_grass_selected_player.png")
-			tile_map.Seasons.SPRING:
+			GAME_DATA.Season.SPRING:
 				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/SPRING_grass_selected_player.png")
-			tile_map.Seasons.FALL:
+			GAME_DATA.Season.FALL:
 				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/FALL_grass_selected_player.png")
-			tile_map.Seasons.WINTER:
+			GAME_DATA.Season.WINTER:
 				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/WINTER_grass_selected_player.png")
 		player_slot.get_node("Hill").show()
 		
@@ -148,18 +137,15 @@ func _hide_player_slot(slot_index):
 	to_join_label.hide()
 	join_button_image.hide()
 
-func _on_button_held(player_index):
-	emit_signal("change_to_game_settings")
-
 
 func _on_back_button_pressed():
 	set_process(false)
-	self.visible = false
-	main.visible = true
+	self.hide()
+	main.show()
 
 
 func _on_main_change_to_player_select():
 	print("hello")
 	set_process(true)
-	self.visible = true
+	self.show()
 

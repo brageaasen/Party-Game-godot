@@ -2,7 +2,6 @@ class_name Character
 extends CharacterBody2D
 
 @onready var animation_player = $AnimationPlayer
-@onready var look_direction = $LookDirection
 
 @onready var sprite = $Sprite2D
 

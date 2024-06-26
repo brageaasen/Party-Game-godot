@@ -1,8 +1,9 @@
 extends Control
 
 @onready var animation_player = $Art/AnimationPlayer
-@onready var start_button = $VBoxContainer/StartButton
-@onready var main = $"."
+@onready var start_button = $StartMenu/StartButton
+@onready var start_menu = $StartMenu
+@onready var options_menu = $OptionsMenu
 
 signal change_to_player_select
 
@@ -16,9 +17,15 @@ func _ready():
 
 func _on_start_button_pressed():
 	set_process(false)
-	self.visible = false
+	self.hide()
 	emit_signal("change_to_player_select")
+
+
+func _on_options_button_pressed():
+	start_menu.hide()
+	options_menu.show()
 
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+

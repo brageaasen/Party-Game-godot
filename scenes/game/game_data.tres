@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GameData" load_steps=2 format=3 uid="uid://u6w30uf2hbpe"]
+
+[ext_resource type="Script" path="res://scenes/game/game_data.gd" id="1_l1sd4"]
+
+[resource]
+script = ExtResource("1_l1sd4")
+difficulty = 1

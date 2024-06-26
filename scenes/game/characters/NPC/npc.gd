@@ -2,6 +2,7 @@ extends Character
 
 @onready var raycasts = $Raycasts
 @onready var state_timer : Timer = $StateTimer
+var look_direction
 
 var last_state : State
 

@@ -12,7 +12,6 @@ func _ready():
 	start.visible = false
 	sec.text = str(seconds)
 	timer.wait_time = 1.25
-	timer.start()
 
 func _on_timer_timeout():
 	seconds -= 1
@@ -25,3 +24,8 @@ func _on_timer_timeout():
 		start_round.emit()
 	else:
 		sec.text = str(seconds)
+
+
+func _on_tutorial_tutorial_finished():
+	timer.start()
+	self.show()

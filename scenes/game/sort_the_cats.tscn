@@ -1,13 +1,16 @@
-[gd_scene load_steps=59 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=63 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Script" path="res://scenes/game/round_time.gd" id="2_2bib8"]
 [ext_resource type="Script" path="res://scenes/game/round_start.gd" id="2_3da3c"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_xnb40"]
 [ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="3_dpyos"]
+[ext_resource type="Script" path="res://scenes/game/tutorial.gd" id="6_6qp1k"]
+[ext_resource type="Texture2D" uid="uid://dm45fjy1hx4w7" path="res://assets/ui/tutorial/sorter_img.png" id="6_7ksbb"]
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="6_tho8p"]
 [ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="7_3e2kk"]
 [ext_resource type="Texture2D" uid="uid://d0grrqdtjqhua" path="res://assets/sprites/tile_sets/Tilesets/Summer/texture.png" id="7_6kwrm"]
+[ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="7_vm0e0"]
 [ext_resource type="Texture2D" uid="uid://dfrhxjjplwi0g" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/bridge.png" id="8_lwheg"]
 [ext_resource type="Texture2D" uid="uid://bgq5fy8ikly2f" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/fence.png" id="9_wk1wy"]
 [ext_resource type="Texture2D" uid="uid://cxpprrvykml5x" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/props.png" id="10_okoj6"]
@@ -16,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://w6t0yquyxnef" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water2.png" id="13_am74d"]
 [ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="14_dtbsu"]
 [ext_resource type="Texture2D" uid="uid://cfwso1248vjc2" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill.png" id="15_eqh5k"]
+[ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="17_kcxm3"]
 [ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="18_owqm7"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="18_qjexw"]
 [ext_resource type="Script" path="res://scenes/game/enclosure.gd" id="18_uvh1q"]
@@ -2557,6 +2561,7 @@ offset_bottom = 40.0
 [node name="BlinkTimer" type="Timer" parent="CanvasLayer/RoundTime"]
 
 [node name="RoundStart" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -2598,6 +2603,56 @@ theme = ExtResource("3_dpyos")
 
 [node name="Timer" type="Timer" parent="CanvasLayer/RoundStart"]
 
+[node name="Tutorial" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("6_6qp1k")
+
+[node name="HoldDownButton" parent="CanvasLayer/Tutorial" instance=ExtResource("7_vm0e0")]
+signal_to_emit = "tutorial_finished"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Tutorial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -130.0
+offset_right = 85.5
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="CanvasLayer/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dpyos")
+text = ":;:Tutorial:;:"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Tutorial/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_7ksbb")
+expand_mode = 5
+
+[node name="Description" type="Label" parent="CanvasLayer/Tutorial/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dpyos")
+theme_override_font_sizes/font_size = 32
+text = "Hide from the sorter! (square)"
+autowrap_mode = 3
+
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_egwwx")
@@ -2625,6 +2680,7 @@ layer_8/y_sort_enabled = true
 layer_8/z_index = 1
 layer_8/tile_data = PackedInt32Array(196616, 1, 5, 65519, 131073, 1, -524285, 262145, 5, -393206, 262145, 5, 589834, 196609, 5, -196625, 262145, 1, 393199, 458753, 1, 524271, 262145, 0, 589807, 1, 0, 393200, 196609, 0, 524272, 131073, 1, -262159, 458753, 1, 65521, 327681, 0, 458737, 65537, 1, -65550, 458753, 1, 65522, 327681, 1, 524274, 131073, 0, -65549, 393217, 1, 327667, 393217, 0, 262132, 131073, 1, 589812, 65537, 1, 196597, 458753, 0, 327669, 196609, 0, -524298, 131073, 1, -10, 458753, 0, -524297, 196609, 0, 131063, 393217, 1, 196600, 131073, 0, 327672, 327681, 0, -7, 393217, 0, -524294, 131073, 0, -458758, 327681, 0, 327674, 327681, 0, 262140, 131073, 0, 327676, 65537, 1, 262141, 131073, 0, 458749, 458753, 0, 524285, 196609, 1, 196606, 327681, 0, 524286, 196609, 1, 65535, 327681, 0, 327679, 131073, 1, 524287, 196609, 1, 327680, 458753, 1, 393216, 1, 1, -65535, 393217, 1, 327681, 458753, 0, 458753, 1, 1, -65534, 262145, 0, 131074, 196609, 0, 65539, 327681, 0, 196611, 65537, 1, 262147, 458753, 1, 458755, 262145, 0, 524291, 1, 0, 589827, 1, 0, -458748, 327681, 0, -131068, 262145, 1, -65532, 458753, 1, 458756, 65537, 1, -589819, 65537, 0, -327675, 1, 0, -131067, 65537, 1, -65531, 65537, 0, 458758, 196609, 0, 589830, 131073, 0, -589817, 65537, 0, -393209, 393217, 0, 196615, 327681, 1, 393223, 458753, 1, -589816, 131073, 1, -131064, 458753, 0, 458760, 131073, 1, -589815, 327681, 0, -524279, 1, 0, -458743, 327681, 0, -393207, 262145, 0, -131063, 1, 0, 65545, 393217, 1, 262153, 458753, 1, 327689, 458753, 0, 458761, 196609, 0, 524297, 327681, 1, -65526, 196609, 1, 65546, 393217, 1, -458741, 65537, 1, -393205, 262145, 0, -196597, 393217, 0, 11, 262145, 1, 458763, 327681, 0, -458740, 327681, 1, -65524, 65537, 0, 262156, 1, 1, 327692, 196609, 0, 589836, 327681, 1, -458739, 196609, 1, -327666, 65537, 0, 262158, 1, 0, -393201, 458753, 0, -327665, 327681, 1, 262159, 262145, 1, 393231, 393217, 1, 524303, 1, 1, -393200, 327681, 1, -65543, 196609, 1, -393225, 655364, 9, -393215, 720900, 9, -262157, 786436, 9, -196612, 851972, 8, -720894, 786436, 8, -655368, 393220, 3, -524306, 262148, 3, -589841, 393220, 3, -458769, 851972, 3, -327697, 1, 0, -458768, 983044, 2, -393231, 327681, 1, -589838, 786436, 3, -458766, 1, 0, -65554, 655364, 3, -262133, 1, 1, -393218, 655364, 8, -589827, 589828, 8, -196615, 655364, 8, -393228, 720900, 8, -262144, 720900, 8)
 script = ExtResource("7_3e2kk")
+game_data = ExtResource("17_kcxm3")
 
 [node name="LeavesFalling" parent="TileMap" instance=ExtResource("18_owqm7")]
 z_index = 10
@@ -2759,3 +2815,4 @@ zoom = Vector2(2, 2)
 [connection signal="start_round" from="CanvasLayer/RoundStart" to="." method="_on_round_start_start_round"]
 [connection signal="start_round" from="CanvasLayer/RoundStart" to="CanvasLayer/RoundTime" method="_on_round_start_start_round"]
 [connection signal="timeout" from="CanvasLayer/RoundStart/Timer" to="CanvasLayer/RoundStart" method="_on_timer_timeout"]
+[connection signal="tutorial_finished" from="CanvasLayer/Tutorial" to="CanvasLayer/RoundStart" method="_on_tutorial_tutorial_finished"]
