@@ -1,7 +1,25 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b3pn2l5fh3pcb"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b3pn2l5fh3pcb"]
 
 [ext_resource type="FontFile" uid="uid://bcm50fpldkkmv" path="res://assets/ui/fonts/ThaleahFat.ttf" id="1_d75o6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bia7r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l0om"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n2tf2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbhf5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7sgl"]
 
 [resource]
 default_font = ExtResource("1_d75o6")
 default_font_size = 48
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(0.646029, 0.646029, 0.646029, 1)
+Button/colors/font_hover_color = Color(0.647059, 0.647059, 0.647059, 1)
+Button/styles/disabled = SubResource("StyleBoxEmpty_bia7r")
+Button/styles/focus = SubResource("StyleBoxEmpty_4l0om")
+Button/styles/hover = SubResource("StyleBoxEmpty_n2tf2")
+Button/styles/normal = SubResource("StyleBoxEmpty_cbhf5")
+Button/styles/pressed = SubResource("StyleBoxEmpty_j7sgl")

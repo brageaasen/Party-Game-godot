@@ -1,10 +1,11 @@
-[gd_scene load_steps=63 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=64 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Script" path="res://scenes/game/round_time.gd" id="2_2bib8"]
 [ext_resource type="Script" path="res://scenes/game/round_start.gd" id="2_3da3c"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_xnb40"]
 [ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="3_dpyos"]
+[ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="3_pvm54"]
 [ext_resource type="Script" path="res://scenes/game/tutorial.gd" id="6_6qp1k"]
 [ext_resource type="Texture2D" uid="uid://dm45fjy1hx4w7" path="res://assets/ui/tutorial/sorter_img.png" id="6_7ksbb"]
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="6_tho8p"]
@@ -2507,6 +2508,8 @@ script = ExtResource("1_k1mcq")
 current_players = ExtResource("2_xnb40")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CircleTransition" parent="CanvasLayer" instance=ExtResource("3_pvm54")]
 
 [node name="RoundTime" type="Control" parent="CanvasLayer"]
 layout_mode = 3

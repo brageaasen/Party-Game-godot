@@ -27,6 +27,7 @@ func _process(delta):
 # TODO: Add game difficulty (number of NPC's)
 
 @onready var enclosure = $Enclosure
+@onready var circle_transition = $CanvasLayer/CircleTransition
 
 @export var current_players : CurrentPlayers
 @export var npc_count : int = 6
@@ -42,6 +43,9 @@ const player_scene_path : String = "res://scenes/game/characters/player/player.t
 const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.tscn"
 
 
+
+func _ready():
+	circle_transition.get_node("AnimationPlayer").play("open")
 
 
 func spawn_players():

@@ -145,7 +145,6 @@ func _on_back_button_pressed():
 
 
 func _on_main_change_to_player_select():
-	print("hello")
 	set_process(true)
 	self.show()
 

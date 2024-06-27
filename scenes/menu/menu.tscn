@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=54 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="21_cyn4o"]
 [ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="23_gr0kc"]
 [ext_resource type="Script" path="res://scenes/menu/game_settings.gd" id="23_x1n21"]
+[ext_resource type="Script" path="res://scenes/game/screen_shake.gd" id="27_llmq1"]
+[ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="27_nv27j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbym"]
 texture = ExtResource("1_1jpse")
@@ -4224,7 +4226,7 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="Menu" type="CanvasLayer"]
+[node name="Menu" type="Node"]
 
 [node name="Main" type="Control" parent="."]
 layout_mode = 3
@@ -4677,6 +4679,12 @@ offset_right = 125.0
 offset_bottom = 581.0
 text = "Back"
 
+[node name="CircleTransition" parent="." instance=ExtResource("27_nv27j")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("27_llmq1")
+
 [connection signal="change_to_player_select" from="Main" to="PlayerSelectScreen" method="_on_main_change_to_player_select"]
 [connection signal="pressed" from="Main/StartMenu/StartButton" to="Main" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Main/StartMenu/OptionsButton" to="Main" method="_on_options_button_pressed"]
@@ -4687,3 +4695,4 @@ text = "Back"
 [connection signal="pressed" from="PlayerSelectScreen/BackButton" to="PlayerSelectScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="GameSettings/HBoxContainer/EverythingButton" to="GameSettings" method="_on_everything_button_pressed"]
 [connection signal="pressed" from="GameSettings/BackButton" to="GameSettings" method="_on_back_button_pressed"]
+[connection signal="close_finished" from="CircleTransition" to="GameSettings" method="_on_circle_transition_close_finished"]
