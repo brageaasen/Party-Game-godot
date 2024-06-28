@@ -200,6 +200,14 @@ p4_hold={
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":3,"button_index":2,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+p3_grab={
+"deadzone": 0.5,
+"events": []
+}
+p4_grab={
+"deadzone": 0.5,
+"events": []
+}
 
 [layer_names]
 

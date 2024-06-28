@@ -1,7 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://ihlvlxbresmw"]
+[gd_scene load_steps=6 format=3 uid="uid://ihlvlxbresmw"]
 
 [ext_resource type="Script" path="res://scenes/menu/hold_down_button.gd" id="1_posy6"]
+[ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="2_vpv1y"]
+[ext_resource type="Texture2D" uid="uid://wuwwwjc17un0" path="res://assets/ui/loading.png" id="3_g5o5a"]
+
+[sub_resource type="Animation" id="Animation_uo6fu"]
+resource_name = "button_hold"
+length = 1.175
+step = 0.0125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Loading:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9, 0.95, 1, 1.05, 1.075, 1.1, 1.125, 1.1375, 1.15, 1.1625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ikjes"]
+_data = {
+"button_hold": SubResource("Animation_uo6fu")
+}
 
 [node name="HoldDownButton" type="Node2D"]
+z_index = 11
 script = ExtResource("1_posy6")
 signal_to_emit = "change_to_game_settings"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ikjes")
+}
+
+[node name="Symbol" type="Sprite2D" parent="."]
+texture = ExtResource("2_vpv1y")
+hframes = 8
+vframes = 11
+frame = 2
+
+[node name="Loading" type="Sprite2D" parent="."]
+texture = ExtResource("3_g5o5a")
+hframes = 17

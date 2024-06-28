@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=55 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="21_cyn4o"]
 [ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="23_gr0kc"]
 [ext_resource type="Script" path="res://scenes/menu/game_settings.gd" id="23_x1n21"]
+[ext_resource type="PackedScene" uid="uid://chffnq1dswfgw" path="res://scenes/menu/back_option.tscn" id="26_fabrw"]
 [ext_resource type="Script" path="res://scenes/game/screen_shake.gd" id="27_llmq1"]
 [ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="27_nv27j"]
 
@@ -4386,6 +4387,8 @@ script = ExtResource("17_yuje3")
 current_players = ExtResource("18_ytq35")
 
 [node name="HoldDownButton" parent="PlayerSelectScreen" instance=ExtResource("23_gr0kc")]
+position = Vector2(576, 450)
+scale = Vector2(3, 3)
 
 [node name="Art" type="Node2D" parent="PlayerSelectScreen"]
 
@@ -4577,14 +4580,18 @@ position = Vector2(8, 40)
 scale = Vector2(4, 4)
 texture = ExtResource("21_5pym0")
 
-[node name="BackButton" type="Button" parent="PlayerSelectScreen"]
+[node name="BackOption" parent="PlayerSelectScreen" instance=ExtResource("26_fabrw")]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 550.0
-offset_right = 125.0
-offset_bottom = 581.0
-theme = ExtResource("19_2vosj")
-text = "Back"
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 132.0
+offset_top = 547.0
+offset_right = 228.0
+offset_bottom = 591.0
+grow_vertical = 1
 
 [node name="GameSettings" type="Control" parent="."]
 visible = false
@@ -4671,13 +4678,9 @@ layout_mode = 2
 theme = ExtResource("19_2vosj")
 text = "Everything!"
 
-[node name="BackButton" type="Button" parent="GameSettings"]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 550.0
-offset_right = 125.0
-offset_bottom = 581.0
-text = "Back"
+[node name="BackOption" parent="GameSettings" instance=ExtResource("26_fabrw")]
+layout_mode = 1
+grow_vertical = 1
 
 [node name="CircleTransition" parent="." instance=ExtResource("27_nv27j")]
 
@@ -4692,7 +4695,12 @@ script = ExtResource("27_llmq1")
 [connection signal="item_selected" from="Main/OptionsMenu/ItemList" to="Main/OptionsMenu" method="_on_item_list_item_selected"]
 [connection signal="pressed" from="Main/OptionsMenu/BackButton" to="Main/OptionsMenu" method="_on_back_button_pressed"]
 [connection signal="change_to_game_settings" from="PlayerSelectScreen" to="GameSettings" method="_on_player_select_screen_change_to_game_settings"]
-[connection signal="pressed" from="PlayerSelectScreen/BackButton" to="PlayerSelectScreen" method="_on_back_button_pressed"]
+[connection signal="back_button_pressed" from="PlayerSelectScreen/BackOption" to="PlayerSelectScreen" method="_on_back_button_pressed"]
+[connection signal="pressed" from="PlayerSelectScreen/BackOption/BackButton" to="PlayerSelectScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="GameSettings/HBoxContainer/EverythingButton" to="GameSettings" method="_on_everything_button_pressed"]
-[connection signal="pressed" from="GameSettings/BackButton" to="GameSettings" method="_on_back_button_pressed"]
+[connection signal="back_button_pressed" from="GameSettings/BackOption" to="GameSettings" method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameSettings/BackOption/BackButton" to="GameSettings" method="_on_back_button_pressed"]
 [connection signal="close_finished" from="CircleTransition" to="GameSettings" method="_on_circle_transition_close_finished"]
+
+[editable path="PlayerSelectScreen/BackOption"]
+[editable path="GameSettings/BackOption"]

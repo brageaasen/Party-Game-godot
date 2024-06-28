@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://chffnq1dswfgw"]
+
+[ext_resource type="Script" path="res://scenes/menu/back_option.gd" id="1_m2mhy"]
+[ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="2_ast1k"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="3_20dxg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vli1"]
+atlas = ExtResource("2_ast1k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yv80"]
+atlas = ExtResource("2_ast1k")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i15a2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vli1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yv80")
+}],
+"loop": true,
+"name": &"pressed",
+"speed": 1.0
+}]
+
+[node name="BackOption" type="HBoxContainer"]
+anchors_preset = -1
+anchor_left = 0.063
+anchor_top = 0.918
+anchor_right = 0.138
+anchor_bottom = 0.918
+offset_left = 65.424
+offset_top = -43.864
+offset_right = 105.424
+offset_bottom = 0.135986
+grow_vertical = 0
+script = ExtResource("1_m2mhy")
+
+[node name="Circle" type="AnimatedSprite2D" parent="."]
+position = Vector2(-30.576, 21.136)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_i15a2")
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("3_20dxg")
+text = "Back"

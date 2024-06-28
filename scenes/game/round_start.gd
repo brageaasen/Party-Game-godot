@@ -3,6 +3,7 @@ extends Control
 @onready var timer = $Timer
 @onready var sec = $Seconds
 @onready var start = $Start
+@onready var tutorial = $"../Tutorial"
 
 @export var seconds : int = 3
 
@@ -29,3 +30,6 @@ func _on_timer_timeout():
 func _on_tutorial_tutorial_finished():
 	timer.start()
 	self.show()
+	tutorial.hide()
+	tutorial.get_node("HoldDownButton").set_process(false)
+	tutorial.set_process(false)
