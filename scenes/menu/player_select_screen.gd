@@ -1,8 +1,10 @@
 extends Control
 
-@onready var back_button = $BackButton
 @onready var main = $"../Main"
 @onready var player_container = $PlayerContainer # The parent node containing player slots in the scene
+@onready var hold_down_button = $HoldDownButton
+@onready var start_label = $StartLabel
+
 const GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 @export var current_players : Resource # Current players resource
@@ -22,6 +24,11 @@ var player_slots = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Disable start button
+	start_label.hide()
+	hold_down_button.hide()
+	hold_down_button.set_process(false)
+	
 	for i in range(max_players):
 		_hide_player_slot(i)
 	_update_lobby_display()
@@ -29,6 +36,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if current_players.players.size() >= 2:
+		# Enable start button
+		start_label.show()
+		hold_down_button.show()
+		hold_down_button.set_process(true)
+	else:
+		# Disable start button
+		hold_down_button.hide()
+		hold_down_button.set_process(false)
+	
 	if self.visible == true:
 		for i in range(1, max_players + 1):
 			if Input.is_action_just_pressed("p%d_join" % i):
