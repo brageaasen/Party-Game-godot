@@ -1,6 +1,7 @@
-[gd_scene load_steps=80 format=3 uid="uid://cl66hgpewfn1w"]
+[gd_scene load_steps=81 format=3 uid="uid://cl66hgpewfn1w"]
 
 [ext_resource type="Texture2D" uid="uid://bel31dgv415ju" path="res://assets/sprites/characters/brown_4.png" id="1_0adpo"]
+[ext_resource type="Script" path="res://scenes/menu/menu_character.gd" id="1_3015w"]
 [ext_resource type="Texture2D" uid="uid://bapc2hh2garhk" path="res://assets/sprites/shadow_cat_v.png" id="2_sa2r0"]
 [ext_resource type="Texture2D" uid="uid://cse1k44s4a2ny" path="res://assets/sprites/shadow_cat_v_r.png" id="3_oahuk"]
 [ext_resource type="Texture2D" uid="uid://c7ojroxwb4lhe" path="res://assets/sprites/shadow_cat_v_l.png" id="4_bmm1n"]
@@ -2877,19 +2878,20 @@ _data = {
 }
 
 [node name="MenuCharacter" type="Node2D"]
+script = ExtResource("1_3015w")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.12549)
-position = Vector2(5, 8)
+position = Vector2(0, 7)
 scale = Vector2(4, 4)
-texture = ExtResource("4_bmm1n")
+texture = ExtResource("2_sa2r0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("1_0adpo")
 hframes = 32
 vframes = 17
-frame = 523
+frame = 38
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
