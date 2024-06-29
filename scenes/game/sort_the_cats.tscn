@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=70 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Script" path="res://scenes/game/round_time.gd" id="2_2bib8"]
@@ -14,12 +14,18 @@
 [ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="7_vm0e0"]
 [ext_resource type="Texture2D" uid="uid://dfrhxjjplwi0g" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/bridge.png" id="8_lwheg"]
 [ext_resource type="Texture2D" uid="uid://bgq5fy8ikly2f" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/fence.png" id="9_wk1wy"]
+[ext_resource type="Script" path="res://scenes/game/ui/leaderboard.gd" id="10_8kkar"]
 [ext_resource type="Texture2D" uid="uid://cxpprrvykml5x" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/props.png" id="10_okoj6"]
 [ext_resource type="Texture2D" uid="uid://dmooxslb47xhc" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/waterfall - bottom.png" id="11_2gbo0"]
+[ext_resource type="PackedScene" uid="uid://cyqbsaulhju1v" path="res://scenes/game/ui/player_entry.tscn" id="11_dxe8i"]
+[ext_resource type="Texture2D" uid="uid://rn7hb1s8bf12" path="res://assets/ui/leaderboard/silver_card.png" id="12_tbuim"]
 [ext_resource type="Texture2D" uid="uid://egs5e7t8p2iq" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles grass-water.png" id="12_v2mla"]
 [ext_resource type="Texture2D" uid="uid://w6t0yquyxnef" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water2.png" id="13_am74d"]
+[ext_resource type="Texture2D" uid="uid://bj4irhgrgwlpt" path="res://assets/ui/leaderboard/silver_border.png" id="13_c71q2"]
+[ext_resource type="Texture2D" uid="uid://vyjcb62641yk" path="res://assets/ui/leaderboard/bronze_card.png" id="14_ckppf"]
 [ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="14_dtbsu"]
 [ext_resource type="Texture2D" uid="uid://cfwso1248vjc2" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill.png" id="15_eqh5k"]
+[ext_resource type="Texture2D" uid="uid://8tsnhgt0ugru" path="res://assets/ui/leaderboard/bronze_border.png" id="15_ynew6"]
 [ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="17_kcxm3"]
 [ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="18_owqm7"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="18_qjexw"]
@@ -2607,6 +2613,7 @@ theme = ExtResource("3_dpyos")
 [node name="Timer" type="Timer" parent="CanvasLayer/RoundStart"]
 
 [node name="Tutorial" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -2670,6 +2677,67 @@ theme = ExtResource("3_dpyos")
 theme_override_font_sizes/font_size = 32
 text = "Hide from the sorter! (square)"
 autowrap_mode = 3
+
+[node name="Leaderboard" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_8kkar")
+current_players = ExtResource("2_xnb40")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Leaderboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.603922)
+
+[node name="Cards" type="Control" parent="CanvasLayer/Leaderboard"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerEntryGold" parent="CanvasLayer/Leaderboard/Cards" instance=ExtResource("11_dxe8i")]
+layout_mode = 1
+offset_left = 492.0
+offset_right = 620.0
+
+[node name="PlayerEntrySilver" parent="CanvasLayer/Leaderboard/Cards" instance=ExtResource("11_dxe8i")]
+layout_mode = 1
+offset_left = 313.0
+offset_top = 195.0
+offset_right = 441.0
+offset_bottom = 385.0
+
+[node name="Card" parent="CanvasLayer/Leaderboard/Cards/PlayerEntrySilver" index="0"]
+texture = ExtResource("12_tbuim")
+
+[node name="Border" parent="CanvasLayer/Leaderboard/Cards/PlayerEntrySilver" index="1"]
+texture = ExtResource("13_c71q2")
+
+[node name="PlayerEntryBronze" parent="CanvasLayer/Leaderboard/Cards" instance=ExtResource("11_dxe8i")]
+layout_mode = 1
+offset_left = 675.0
+offset_top = 195.0
+offset_right = 803.0
+offset_bottom = 385.0
+
+[node name="Card" parent="CanvasLayer/Leaderboard/Cards/PlayerEntryBronze" index="0"]
+texture = ExtResource("14_ckppf")
+
+[node name="Border" parent="CanvasLayer/Leaderboard/Cards/PlayerEntryBronze" index="1"]
+texture = ExtResource("15_ynew6")
+
+[node name="Characters" type="Control" parent="CanvasLayer/Leaderboard"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -2834,3 +2902,6 @@ zoom = Vector2(2, 2)
 [connection signal="start_round" from="CanvasLayer/RoundStart" to="CanvasLayer/RoundTime" method="_on_round_start_start_round"]
 [connection signal="timeout" from="CanvasLayer/RoundStart/Timer" to="CanvasLayer/RoundStart" method="_on_timer_timeout"]
 [connection signal="tutorial_finished" from="CanvasLayer/Tutorial" to="CanvasLayer/RoundStart" method="_on_tutorial_tutorial_finished"]
+
+[editable path="CanvasLayer/Leaderboard/Cards/PlayerEntrySilver"]
+[editable path="CanvasLayer/Leaderboard/Cards/PlayerEntryBronze"]

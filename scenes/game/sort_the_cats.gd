@@ -29,6 +29,9 @@ func _process(delta):
 @onready var enclosure = $Enclosure
 @onready var circle_transition = $CanvasLayer/CircleTransition
 
+@onready var tutorial = $CanvasLayer/Tutorial
+@onready var leaderboard = $CanvasLayer/Leaderboard
+
 @export var current_players : CurrentPlayers
 @export var npc_count : int = 6
 
@@ -46,6 +49,7 @@ const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.t
 
 func _ready():
 	circle_transition.get_node("AnimationPlayer").play("open")
+	tutorial.show()
 
 
 func spawn_players():
@@ -135,6 +139,8 @@ func end_round():
 	# Print updated player scores
 	for player in current_players.players.values():
 		print(player.name, " Score: ", player.score)
+	
+	leaderboard.show()
 
 
 

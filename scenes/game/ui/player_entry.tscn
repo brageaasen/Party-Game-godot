@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyqbsaulhju1v"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/player_entry.gd" id="1_4clhq"]
+[ext_resource type="Texture2D" uid="uid://ctpg20wxafwd" path="res://assets/ui/leaderboard/gold_card.png" id="1_vtmdt"]
+[ext_resource type="Texture2D" uid="uid://c1gk0710levcr" path="res://assets/ui/leaderboard/gold_border.png" id="2_4q1vq"]
+[ext_resource type="Texture2D" uid="uid://qk18ntodohu4" path="res://assets/ui/leaderboard/test.png" id="3_4xmsr"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="4_tf8f1"]
+
+[node name="PlayerEntry" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 105.0
+offset_right = 64.0
+offset_bottom = 295.0
+grow_horizontal = 2
+size_flags_vertical = 4
+script = ExtResource("1_4clhq")
+
+[node name="Card" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vtmdt")
+stretch_mode = 2
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 23.5
+offset_top = 31.0
+offset_right = 103.5
+offset_bottom = 87.0
+texture = ExtResource("2_4q1vq")
+stretch_mode = 3
+
+[node name="Portrait" type="TextureRect" parent="Border"]
+layout_mode = 2
+offset_left = -52.5
+offset_top = 6.0
+offset_right = 40.5
+offset_bottom = 24.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_4xmsr")
+stretch_mode = 3
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+offset_left = 23.5
+offset_top = 90.0
+offset_right = 103.5
+offset_bottom = 105.0
+theme = ExtResource("4_tf8f1")
+theme_override_font_sizes/font_size = 16
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 2
+offset_left = 23.5
+offset_top = 122.0
+offset_right = 103.5
+offset_bottom = 137.0
+theme = ExtResource("4_tf8f1")
+theme_override_font_sizes/font_size = 16
+text = "Score: 0"
+horizontal_alignment = 1

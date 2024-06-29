@@ -6,52 +6,87 @@ extends Node2D
 var look_directions : Array = ["d", "d_l", "d_r"]
 var possible_animations : Array = ["idle", "looking", "laying", "sitting"]
 
+# Define possible transitions between states
+var transitions : Dictionary = {
+	"idle": ["sitting", "laying"],
+	"sitting": ["idle", "laying", "looking"],
+	"laying": ["idle"],
+	"looking": ["idle", "sitting", "laying"]
+}
+
 # Variables to store the chosen direction and the current animation index
 var chosen_direction : String
-var current_animation_index : int = 0
+var current_animation : String = "idle"
 var time_to_next_animation : float = 0
 var time_to_next_direction_change : float = 0
+
+# Indicates if we're waiting for the current animation to finish before changing direction
+var waiting_for_animation_to_finish : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_random_sprite()
+	
 	# Randomly choose a direction once
 	chosen_direction = look_directions[randi() % look_directions.size()]
 	# Set the initial time to the next animation
-	time_to_next_animation = randf_range(6, 10)
+	time_to_next_animation = randf_range(0, 3)
 	# Set the initial time to the next direction change
 	time_to_next_direction_change = randf_range(10, 15)
 	# Start with the first animation
 	_play_animation()
 
+	# Connect the animation finished signal
+	animation_player.connect("animation_finished", _on_animation_finished)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if waiting_for_animation_to_finish:
+		return
+
 	# Decrease the time to the next animation
 	time_to_next_animation -= delta
 	# Decrease the time to the next direction change
 	time_to_next_direction_change -= delta
 
-	if time_to_next_animation <= 0:
-		# Update the animation index
-		current_animation_index = (current_animation_index + 1) % possible_animations.size()
-		# Play the next animation
-		_play_animation()
+	if time_to_next_animation <= 0 and not waiting_for_animation_to_finish:
+		_select_next_animation()
 		# Reset the timer with a new random time
-		time_to_next_animation = randf_range(6, 10)
+		time_to_next_animation = randf_range(4, 8)
 
-	if time_to_next_direction_change <= 0:
-		# Randomly choose a new direction
-		chosen_direction = look_directions[randi() % look_directions.size()]
-		# Play the current animation with the new direction
-		_play_animation()
-		# Reset the timer with a new random time
-		time_to_next_direction_change = randf_range(10, 15)
+	if time_to_next_direction_change <= 0 and not waiting_for_animation_to_finish:
+		waiting_for_animation_to_finish = true
+
+# Function to select the next animation
+func _select_next_animation():
+	# Select the next animation based on the current animation and its possible transitions
+	var next_animations = transitions[current_animation]
+	var next_animation = next_animations[randi() % next_animations.size()]
+	# Ensure we don't transition to the same animation in the same direction
+	while next_animation == current_animation:
+		next_animation = next_animations[randi() % next_animations.size()]
+	current_animation = next_animation
+	_play_animation()
 
 # Function to play the current animation
 func _play_animation():
-	var animation_name = possible_animations[current_animation_index] + "_" + chosen_direction
+	var animation_name = current_animation + "_" + chosen_direction
 	animation_player.play(animation_name)
 
+# Called when the current animation finishes
+func _on_animation_finished(animation_name):
+	if waiting_for_animation_to_finish:
+		# Allow some time before changing direction and starting the next animation
+		await(get_tree().create_timer(time_to_next_animation).timeout)
+		# Change the direction and play the current animation with the new direction
+		chosen_direction = look_directions[randi() % look_directions.size()]
+		waiting_for_animation_to_finish = false
+		time_to_next_direction_change = randf_range(10, 15)
+		_select_next_animation()
+	else:
+		# Allow some time before starting the next animation
+		await(get_tree().create_timer(time_to_next_animation).timeout)
+		_select_next_animation()
 
 func load_random_sprite():
 	var dir = DirAccess.open("res://assets/sprites/characters/")
