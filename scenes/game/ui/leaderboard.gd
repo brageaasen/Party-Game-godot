@@ -12,10 +12,6 @@ enum CardType {
 	BRONZE,
 }
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	update_leaderboard()
-
 # Updates the leaderboard
 func update_leaderboard():
 	if not current_players:
@@ -35,10 +31,13 @@ func update_leaderboard():
 
 # Helper function to sort players by score in descending order
 func _sort_by_score_desc(a, b):
-	return b.score - a.score
+	return a.score > b.score
 
 # Helper function to update a card with player data
 func _update_card(card: Control, player: PlayerData, card_type: CardType):
+	print("updated card")
 	card.set_card_type(card_type)
 	card.set_card_name(player.name)
+	print("new score: ", player.score)
+	print()
 	card.set_card_score(player.score)

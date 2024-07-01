@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfstqfpltux06"]
+
+[ext_resource type="Script" path="res://scenes/game/tutorial.gd" id="1_f5tew"]
+[ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="2_ths85"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="3_s258b"]
+[ext_resource type="Texture2D" uid="uid://dm45fjy1hx4w7" path="res://assets/ui/tutorial/sorter_img.png" id="4_t0gai"]
+
+[node name="Tutorial" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_f5tew")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -556.0
+offset_top = -304.0
+offset_right = 556.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.603922)
+
+[node name="HoldDownButton" parent="." instance=ExtResource("2_ths85")]
+position = Vector2(0, 240)
+scale = Vector2(3, 3)
+signal_to_emit = "tutorial_finished"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.5
+offset_top = -158.0
+offset_right = 118.5
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_s258b")
+text = ":;:Tutorial:;:"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_t0gai")
+expand_mode = 5
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_s258b")
+theme_override_font_sizes/font_size = 32
+text = "Hide from the sorter! (square)"
+autowrap_mode = 3

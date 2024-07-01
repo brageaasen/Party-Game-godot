@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://baq8t8ly00ypf"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/round_time.gd" id="1_j5bn4"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="2_kj6yk"]
+
+[node name="RoundTime" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 40.0
+grow_horizontal = 2
+pivot_offset = Vector2(80, 20)
+size_flags_horizontal = 4
+script = ExtResource("1_j5bn4")
+round_time_minutes = 0
+round_time_seconds = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Minutes" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kj6yk")
+text = "1:"
+horizontal_alignment = 1
+
+[node name="Seconds" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kj6yk")
+text = "30"
+horizontal_alignment = 1
+
+[node name="MSeconds" type="Label" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_kj6yk")
+text = "00"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RoundOver" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BlinkTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

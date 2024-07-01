@@ -43,6 +43,7 @@ func _process(delta):
 		hold_down_button.set_process(true)
 	else:
 		# Disable start button
+		start_label.hide()
 		hold_down_button.hide()
 		hold_down_button.set_process(false)
 	

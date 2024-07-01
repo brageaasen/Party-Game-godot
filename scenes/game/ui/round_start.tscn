@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqpf43lj4tav7"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/round_start.gd" id="1_7mg35"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="2_44813"]
+
+[node name="RoundStart" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 80)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_7mg35")
+
+[node name="Start" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(62, 22)
+theme = ExtResource("2_44813")
+text = "Start!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seconds" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_44813")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

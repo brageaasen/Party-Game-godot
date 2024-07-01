@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy23hqo5v3e8p"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/leaderboard.gd" id="1_77cyb"]
+[ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_bruhe"]
+[ext_resource type="PackedScene" uid="uid://cyqbsaulhju1v" path="res://scenes/game/ui/player_entry.tscn" id="3_tfups"]
+[ext_resource type="Texture2D" uid="uid://rn7hb1s8bf12" path="res://assets/ui/leaderboard/silver_card.png" id="4_aul58"]
+[ext_resource type="Texture2D" uid="uid://bj4irhgrgwlpt" path="res://assets/ui/leaderboard/silver_border.png" id="5_7ru1m"]
+[ext_resource type="Texture2D" uid="uid://vyjcb62641yk" path="res://assets/ui/leaderboard/bronze_card.png" id="6_v1ngu"]
+[ext_resource type="Texture2D" uid="uid://8tsnhgt0ugru" path="res://assets/ui/leaderboard/bronze_border.png" id="7_bawlq"]
+
+[node name="Leaderboard" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_77cyb")
+current_players = ExtResource("2_bruhe")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.603922)
+
+[node name="Cards" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerEntryGold" parent="Cards" instance=ExtResource("3_tfups")]
+layout_mode = 1
+offset_left = 492.0
+offset_right = 620.0
+
+[node name="PlayerEntrySilver" parent="Cards" instance=ExtResource("3_tfups")]
+layout_mode = 1
+offset_left = 313.0
+offset_top = 195.0
+offset_right = 441.0
+offset_bottom = 385.0
+
+[node name="Card" parent="Cards/PlayerEntrySilver" index="0"]
+texture = ExtResource("4_aul58")
+
+[node name="Border" parent="Cards/PlayerEntrySilver" index="1"]
+texture = ExtResource("5_7ru1m")
+
+[node name="PlayerEntryBronze" parent="Cards" instance=ExtResource("3_tfups")]
+layout_mode = 1
+offset_left = 675.0
+offset_top = 195.0
+offset_right = 803.0
+offset_bottom = 385.0
+
+[node name="Card" parent="Cards/PlayerEntryBronze" index="0"]
+texture = ExtResource("6_v1ngu")
+
+[node name="Border" parent="Cards/PlayerEntryBronze" index="1"]
+texture = ExtResource("7_bawlq")
+
+[node name="Characters" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[editable path="Cards/PlayerEntrySilver"]
+[editable path="Cards/PlayerEntryBronze"]

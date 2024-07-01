@@ -1,31 +1,27 @@
-[gd_scene load_steps=64 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=38 format=3 uid="uid://bg3wumagcblab"]
 
-[ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
-[ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_xnb40"]
-[ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="3_pvm54"]
-[ext_resource type="PackedScene" uid="uid://baq8t8ly00ypf" path="res://scenes/game/ui/round_time.tscn" id="4_7lsgf"]
-[ext_resource type="PackedScene" uid="uid://cqpf43lj4tav7" path="res://scenes/game/ui/round_start.tscn" id="5_a7mt7"]
-[ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="6_tho8p"]
-[ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="7_3e2kk"]
-[ext_resource type="Texture2D" uid="uid://d0grrqdtjqhua" path="res://assets/sprites/tile_sets/Tilesets/Summer/texture.png" id="7_6kwrm"]
-[ext_resource type="PackedScene" uid="uid://cfstqfpltux06" path="res://scenes/game/ui/tutorial.tscn" id="7_kto2p"]
-[ext_resource type="Texture2D" uid="uid://dfrhxjjplwi0g" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/bridge.png" id="8_lwheg"]
-[ext_resource type="PackedScene" uid="uid://dy23hqo5v3e8p" path="res://scenes/game/ui/leaderboard.tscn" id="8_sdw8y"]
-[ext_resource type="Texture2D" uid="uid://bgq5fy8ikly2f" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/fence.png" id="9_wk1wy"]
-[ext_resource type="Texture2D" uid="uid://cxpprrvykml5x" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/props.png" id="10_okoj6"]
-[ext_resource type="Texture2D" uid="uid://dmooxslb47xhc" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/waterfall - bottom.png" id="11_2gbo0"]
-[ext_resource type="Texture2D" uid="uid://egs5e7t8p2iq" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles grass-water.png" id="12_v2mla"]
-[ext_resource type="Texture2D" uid="uid://w6t0yquyxnef" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water2.png" id="13_am74d"]
-[ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="14_dtbsu"]
-[ext_resource type="Texture2D" uid="uid://cfwso1248vjc2" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill.png" id="15_eqh5k"]
-[ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="17_kcxm3"]
-[ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="18_owqm7"]
-[ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="18_qjexw"]
-[ext_resource type="Script" path="res://scenes/game/enclosure.gd" id="18_uvh1q"]
-[ext_resource type="Script" path="res://scenes/game/spawn_area.gd" id="23_mqngj"]
+[ext_resource type="PackedScene" uid="uid://baq8t8ly00ypf" path="res://scenes/game/ui/round_time.tscn" id="2_yc270"]
+[ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="3_nom4l"]
+[ext_resource type="PackedScene" uid="uid://cqpf43lj4tav7" path="res://scenes/game/ui/round_start.tscn" id="3_sdxfi"]
+[ext_resource type="PackedScene" uid="uid://cfstqfpltux06" path="res://scenes/game/ui/tutorial.tscn" id="7_sl2u4"]
+[ext_resource type="PackedScene" uid="uid://dy23hqo5v3e8p" path="res://scenes/game/ui/leaderboard.tscn" id="8_obajd"]
+[ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="9_ikrma"]
+[ext_resource type="Texture2D" uid="uid://d0grrqdtjqhua" path="res://assets/sprites/tile_sets/Tilesets/Summer/texture.png" id="10_beltn"]
+[ext_resource type="Texture2D" uid="uid://dfrhxjjplwi0g" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/bridge.png" id="11_xyxg2"]
+[ext_resource type="Texture2D" uid="uid://bgq5fy8ikly2f" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/fence.png" id="12_0e04y"]
+[ext_resource type="Texture2D" uid="uid://cxpprrvykml5x" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/props.png" id="13_x6vwd"]
+[ext_resource type="Texture2D" uid="uid://dmooxslb47xhc" path="res://assets/sprites/tile_sets/Tilesets/Summer/extras/waterfall - bottom.png" id="14_8h8pf"]
+[ext_resource type="Texture2D" uid="uid://egs5e7t8p2iq" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles grass-water.png" id="15_kkxu4"]
+[ext_resource type="Texture2D" uid="uid://w6t0yquyxnef" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water2.png" id="16_20ih5"]
+[ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="17_j608a"]
+[ext_resource type="Texture2D" uid="uid://cfwso1248vjc2" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill.png" id="18_0a0w6"]
+[ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="19_hoebm"]
+[ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="20_l2fgt"]
+[ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="21_7hsjl"]
+[ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="22_fm5pt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnqq6"]
-texture = ExtResource("6_tho8p")
+texture = ExtResource("9_ikrma")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -739,7 +735,7 @@ texture = ExtResource("6_tho8p")
 8:14/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ork3t"]
-texture = ExtResource("7_6kwrm")
+texture = ExtResource("10_beltn")
 0:0/0 = 0
 0:0/0/y_sort_origin = -10
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -906,7 +902,7 @@ texture = ExtResource("7_6kwrm")
 7:5/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6btor"]
-texture = ExtResource("8_lwheg")
+texture = ExtResource("11_xyxg2")
 0:0/size_in_atlas = Vector2i(3, 2)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -924,7 +920,7 @@ texture = ExtResource("8_lwheg")
 5:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0fb0b"]
-texture = ExtResource("9_wk1wy")
+texture = ExtResource("12_0e04y")
 0:0/0 = 0
 0:0/0/y_sort_origin = -3
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -997,7 +993,7 @@ texture = ExtResource("9_wk1wy")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.01693, -0.0496063, -1.01693, -5.97756, 0.967322, -5.97756, 1.01693, -0.0248032)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_danvn"]
-texture = ExtResource("10_okoj6")
+texture = ExtResource("13_x6vwd")
 0:0/size_in_atlas = Vector2i(2, 3)
 0:0/0 = 0
 0:0/0/y_sort_origin = 16
@@ -1365,7 +1361,7 @@ texture = ExtResource("10_okoj6")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.5, 19.125, -0.125, 20.25, 1.25, 19, 3.75, 20.125, 5.125, 18.25, 2.625, 16.375, -1.5, 15.875)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_30k7f"]
-texture = ExtResource("11_2gbo0")
+texture = ExtResource("14_8h8pf")
 0:0/size_in_atlas = Vector2i(3, 2)
 0:0/animation_columns = 1
 0:0/animation_frame_0/duration = 0.1
@@ -1378,7 +1374,7 @@ texture = ExtResource("11_2gbo0")
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bbo5g"]
-texture = ExtResource("12_v2mla")
+texture = ExtResource("15_kkxu4")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1627,7 +1623,7 @@ texture = ExtResource("12_v2mla")
 8:9/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8g5r0"]
-texture = ExtResource("13_am74d")
+texture = ExtResource("16_20ih5")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1876,7 +1872,7 @@ texture = ExtResource("13_am74d")
 8:9/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xaavj"]
-texture = ExtResource("14_dtbsu")
+texture = ExtResource("17_j608a")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -2125,7 +2121,7 @@ texture = ExtResource("14_dtbsu")
 8:9/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2ipi"]
-texture = ExtResource("15_eqh5k")
+texture = ExtResource("18_0a0w6")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -2438,88 +2434,21 @@ color_ramp = SubResource("GradientTexture1D_acj2n")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfls7"]
 size = Vector2(108, 44)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xtve"]
-size = Vector2(44, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_elr6h"]
-size = Vector2(140, 45)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q438"]
-size = Vector2(76, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3urss"]
-size = Vector2(42, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kj5p2"]
-size = Vector2(15, 26)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dec8a"]
-size = Vector2(109, 44)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xriec"]
-size = Vector2(61, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d43ck"]
-size = Vector2(61, 7)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqt36"]
-size = Vector2(428, 37)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1g2j"]
-size = Vector2(76, 18)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlxmr"]
-size = Vector2(30, 22)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_chj7f"]
-size = Vector2(72, 51)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7jbu"]
-size = Vector2(20, 360)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6e3d"]
-size = Vector2(613, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1t38b"]
-size = Vector2(28, 63)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ro4x"]
-size = Vector2(20, 193)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sio1n"]
-size = Vector2(36, 65)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2n3wl"]
-size = Vector2(64, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5hoh"]
-size = Vector2(16, 35)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2ap8"]
-size = Vector2(34, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke5r8"]
-size = Vector2(87, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6d5f5"]
-size = Vector2(578, 346)
-
-[node name="SortTheCats" type="Node2D"]
+[node name="CatTag" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_k1mcq")
-current_players = ExtResource("2_xnb40")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CircleTransition" parent="CanvasLayer" instance=ExtResource("3_pvm54")]
+[node name="CircleTransition" parent="CanvasLayer" instance=ExtResource("3_nom4l")]
 
-[node name="RoundTime" parent="CanvasLayer" instance=ExtResource("4_7lsgf")]
+[node name="RoundTime" parent="CanvasLayer" instance=ExtResource("2_yc270")]
+visible = false
 
-[node name="RoundStart" parent="CanvasLayer" instance=ExtResource("5_a7mt7")]
+[node name="RoundStart" parent="CanvasLayer" instance=ExtResource("3_sdxfi")]
 
-[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("7_kto2p")]
+[node name="Tutorial" parent="CanvasLayer" instance=ExtResource("7_sl2u4")]
 
-[node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("8_sdw8y")]
+[node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("8_obajd")]
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -2547,14 +2476,14 @@ layer_8/name = "enviorment"
 layer_8/y_sort_enabled = true
 layer_8/z_index = 1
 layer_8/tile_data = PackedInt32Array(196616, 1, 5, 65519, 131073, 1, -524285, 262145, 5, -393206, 262145, 5, 589834, 196609, 5, -196625, 262145, 1, 393199, 458753, 1, 524271, 262145, 0, 589807, 1, 0, 393200, 196609, 0, 524272, 131073, 1, -262159, 458753, 1, 65521, 327681, 0, 458737, 65537, 1, -65550, 458753, 1, 65522, 327681, 1, 524274, 131073, 0, -65549, 393217, 1, 327667, 393217, 0, 262132, 131073, 1, 589812, 65537, 1, 196597, 458753, 0, 327669, 196609, 0, -524298, 131073, 1, -10, 458753, 0, -524297, 196609, 0, 131063, 393217, 1, 196600, 131073, 0, 327672, 327681, 0, -7, 393217, 0, -524294, 131073, 0, -458758, 327681, 0, 327674, 327681, 0, 262140, 131073, 0, 327676, 65537, 1, 262141, 131073, 0, 458749, 458753, 0, 524285, 196609, 1, 196606, 327681, 0, 524286, 196609, 1, 65535, 327681, 0, 327679, 131073, 1, 524287, 196609, 1, 327680, 458753, 1, 393216, 1, 1, -65535, 393217, 1, 327681, 458753, 0, 458753, 1, 1, -65534, 262145, 0, 131074, 196609, 0, 65539, 327681, 0, 196611, 65537, 1, 262147, 458753, 1, 458755, 262145, 0, 524291, 1, 0, 589827, 1, 0, -458748, 327681, 0, -131068, 262145, 1, -65532, 458753, 1, 458756, 65537, 1, -589819, 65537, 0, -327675, 1, 0, -131067, 65537, 1, -65531, 65537, 0, 458758, 196609, 0, 589830, 131073, 0, -589817, 65537, 0, -393209, 393217, 0, 196615, 327681, 1, 393223, 458753, 1, -589816, 131073, 1, -131064, 458753, 0, 458760, 131073, 1, -589815, 327681, 0, -524279, 1, 0, -458743, 327681, 0, -393207, 262145, 0, -131063, 1, 0, 65545, 393217, 1, 262153, 458753, 1, 327689, 458753, 0, 458761, 196609, 0, 524297, 327681, 1, -65526, 196609, 1, 65546, 393217, 1, -458741, 65537, 1, -393205, 262145, 0, -196597, 393217, 0, 11, 262145, 1, 458763, 327681, 0, -458740, 327681, 1, -65524, 65537, 0, 262156, 1, 1, 327692, 196609, 0, 589836, 327681, 1, -458739, 196609, 1, -327666, 65537, 0, 262158, 1, 0, -393201, 458753, 0, -327665, 327681, 1, 262159, 262145, 1, 393231, 393217, 1, 524303, 1, 1, -393200, 327681, 1, -65543, 196609, 1, -393225, 655364, 9, -393215, 720900, 9, -262157, 786436, 9, -196612, 851972, 8, -720894, 786436, 8, -655368, 393220, 3, -524306, 262148, 3, -589841, 393220, 3, -458769, 851972, 3, -327697, 1, 0, -458768, 983044, 2, -393231, 327681, 1, -589838, 786436, 3, -458766, 1, 0, -65554, 655364, 3, -262133, 1, 1, -393218, 655364, 8, -589827, 589828, 8, -196615, 655364, 8, -393228, 720900, 8, -262144, 720900, 8)
-script = ExtResource("7_3e2kk")
-game_data = ExtResource("17_kcxm3")
+script = ExtResource("19_hoebm")
+game_data = ExtResource("20_l2fgt")
 
-[node name="LeavesFalling" parent="TileMap" instance=ExtResource("18_owqm7")]
+[node name="LeavesFalling" parent="TileMap" instance=ExtResource("21_7hsjl")]
 z_index = 10
 emitting = false
 
-[node name="Rain" parent="TileMap" instance=ExtResource("18_qjexw")]
+[node name="Rain" parent="TileMap" instance=ExtResource("22_fm5pt")]
 
 [node name="Snow" type="Node2D" parent="TileMap"]
 
@@ -2582,111 +2511,5 @@ collision_mask = 3
 position = Vector2(-160, -79)
 shape = SubResource("RectangleShape2D_vfls7")
 
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-176, -49.5)
-shape = SubResource("RectangleShape2D_7xtve")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-48, -64.5)
-shape = SubResource("RectangleShape2D_elr6h")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-64, -34.5)
-shape = SubResource("RectangleShape2D_2q438")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-64, -19)
-shape = SubResource("RectangleShape2D_3urss")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="Collision"]
-position = Vector2(46.5, -72)
-shape = SubResource("RectangleShape2D_kj5p2")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-15.5, -81)
-shape = SubResource("RectangleShape2D_dec8a")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-23.5, -115)
-shape = SubResource("RectangleShape2D_xriec")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-23.5, -151.5)
-shape = SubResource("RectangleShape2D_d43ck")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision"]
-position = Vector2(82, -173.5)
-shape = SubResource("RectangleShape2D_dqt36")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-160, -110)
-shape = SubResource("RectangleShape2D_v1g2j")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-168, -130)
-shape = SubResource("RectangleShape2D_vlxmr")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-168, -166.5)
-shape = SubResource("RectangleShape2D_chj7f")
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-301, 4)
-shape = SubResource("RectangleShape2D_k7jbu")
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-4.5, 174)
-shape = SubResource("RectangleShape2D_j6e3d")
-
-[node name="CollisionShape2D16" type="CollisionShape2D" parent="Collision"]
-position = Vector2(274, 132.5)
-shape = SubResource("RectangleShape2D_1t38b")
-
-[node name="CollisionShape2D17" type="CollisionShape2D" parent="Collision"]
-position = Vector2(286, 4.5)
-shape = SubResource("RectangleShape2D_0ro4x")
-
-[node name="CollisionShape2D18" type="CollisionShape2D" parent="Collision"]
-position = Vector2(278, -124.5)
-shape = SubResource("RectangleShape2D_sio1n")
-
-[node name="CollisionShape2D19" type="CollisionShape2D" parent="Collision"]
-position = Vector2(228, -133)
-shape = SubResource("RectangleShape2D_2n3wl")
-
-[node name="CollisionShape2D20" type="CollisionShape2D" parent="Collision"]
-position = Vector2(188, -141.5)
-shape = SubResource("RectangleShape2D_l5hoh")
-
-[node name="CollisionShape2D21" type="CollisionShape2D" parent="Collision"]
-position = Vector2(165, -151)
-shape = SubResource("RectangleShape2D_t2ap8")
-
-[node name="CollisionShape2D22" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-247.5, -166)
-shape = SubResource("RectangleShape2D_ke5r8")
-
-[node name="Enclosure" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 3
-script = ExtResource("18_uvh1q")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enclosure"]
-position = Vector2(-237, 75)
-polygon = PackedVector2Array(-11, -11, -11, -21, 6, -21, 6, -37, 22, -37, 22, -54, 86, -54, 86, -70, 132, -70, 132, -53, 147, -53, 148, -20, 163, -20, 163, 8, 132, 8, 132, 24, 39, 25, 39, 9, -11, 9)
-
-[node name="SpawnArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("23_mqngj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
-position = Vector2(-8, -1)
-shape = SubResource("RectangleShape2D_6d5f5")
-
 [node name="MainCamera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
-
-[connection signal="round_over" from="CanvasLayer/RoundTime" to="." method="_on_round_time_round_over"]
-[connection signal="start_round" from="CanvasLayer/RoundStart" to="." method="_on_round_start_start_round"]
-[connection signal="tutorial_finished" from="CanvasLayer/Tutorial" to="CanvasLayer/RoundStart" method="_on_tutorial_tutorial_finished"]

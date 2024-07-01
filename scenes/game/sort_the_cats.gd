@@ -35,6 +35,8 @@ func _process(delta):
 @export var current_players : CurrentPlayers
 @export var npc_count : int = 6
 
+@onready var spawn_area = $SpawnArea
+
 @export var not_caught_score : int = 3
 @export var correct_guess_score : int = 3
 @export var wrong_guess_score : int = 1
@@ -70,8 +72,13 @@ func spawn_players():
 	var sorter_instance = sorter_scene.instantiate()
 	sorter_instance.controls = sorter_player.controls
 
-	# Add the sorter instance to the scene
-	add_child(sorter_instance)
+	# Get a valid spawn position for the sorter
+	var sorter_spawn_position = spawn_area.get_random_valid_spawn_position()
+	if sorter_spawn_position:
+		sorter_instance.position = sorter_spawn_position
+		add_child(sorter_instance)
+	else:
+		print("Could not find a valid spawn position for sorter")
 
 	# Spawn the rest as players
 	var player_scene = preload(player_scene_path)
@@ -82,14 +89,27 @@ func spawn_players():
 		var player_instance = player_scene.instantiate()
 		player_instance.controls = player.controls
 		player_instance.player_data = player
-		add_child(player_instance)
+
+		# Get a valid spawn position for the player
+		var player_spawn_position = spawn_area.get_random_valid_spawn_position()
+		if player_spawn_position:
+			player_instance.position = player_spawn_position
+			add_child(player_instance)
+		else:
+			print("Could not find a valid spawn position for player", player.name)
 
 func spawn_npcs():
 	var npc_scene = preload(npc_scene_path)
 	for i in range(npc_count):
 		var npc_instance = npc_scene.instantiate()
 		npc_instance.name = "NPC_" + str(i)
-		add_child(npc_instance)
+
+		var spawn_position = spawn_area.get_random_valid_spawn_position()
+		if spawn_position:
+			npc_instance.position = spawn_position
+			add_child(npc_instance)
+		else:
+			print("Could not find a valid spawn position for NPC", i)
 
 
 # Function to add score to the sorter-player
@@ -140,6 +160,7 @@ func end_round():
 	for player in current_players.players.values():
 		print(player.name, " Score: ", player.score)
 	
+	leaderboard.update_leaderboard()
 	leaderboard.show()
 
 
