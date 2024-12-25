@@ -2,7 +2,7 @@ extends Control
 
 @onready var start_menu = $"../StartMenu"
 @onready var item_list : ItemList = $ItemList
-const GAME_DATA = preload("res://scenes/game/game_data.tres")
+var GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 func _ready():
 	# Select "Random!" option on launch
