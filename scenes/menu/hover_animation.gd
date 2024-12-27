@@ -1,65 +1,44 @@
 extends TextureRect
 
 # Assign your two textures in the Inspector
-@export var hover_0 : Texture
-@export var hover_1 : Texture
-@export var default_texture : Texture  # Texture to display when not hovering
+@export var hover_0 : Texture  # Texture to display when hovering
+@export var hover_1 : Texture  # Texture to display when holding
 
-var is_hovering = false
-var current_image = 1
-var timer = 0.0
-const SWITCH_INTERVAL = 1.0  # Switch every second
+var is_hovering = false  # Track if the mouse is hovering over the button
+var is_pressed = false  # Track if the mouse button is held down on this button
 
 func _ready():
-	# Set the initial texture to the default (non-hover)
-	texture = default_texture  
+	# Set the initial texture to empty
+	texture = hover_0  
 
-	# Signals are connected as in the original script
+	# Connect signals from the parent button
 	var button = get_parent()
 	button.connect("mouse_entered", _on_mouse_entered)
 	button.connect("mouse_exited", _on_mouse_exited)
-	button.connect("focus_entered", _on_focus_entered)
-	button.connect("focus_exited", _on_focus_exited)
-
-func _process(delta):
-	# Update the timer regardless of hover state
-	timer += delta
-	if timer >= SWITCH_INTERVAL:
-		timer = 0
-		_toggle_image()
-
-	# Set texture based on hover state
-	if is_hovering:
-		_apply_hover_image()
-	else:
-		texture = default_texture
+	button.connect("pressed", _on_pressed)
+	button.connect("released", _on_released)
 
 func _on_mouse_entered():
 	is_hovering = true
+	_update_texture()  # Update immediately on hover
 
 func _on_mouse_exited():
-	# Stop hover only if not focused
-	if !has_focus():
-		is_hovering = false
+	is_hovering = false
+	_update_texture()  # Update immediately on hover exit
 
-func _on_focus_entered():
-	is_hovering = true
+func _on_pressed():
+	is_pressed = true
+	_update_texture()  # Update immediately on press
 
-func _on_focus_exited():
-	# Stop hover only if the mouse isn't hovering
-	if !is_hovering:
-		is_hovering = false
+func _on_released():
+	is_pressed = false
+	_update_texture()  # Update immediately on release
 
-func _toggle_image():
-	# Toggle between hover_0 and hover_1 textures
-	if current_image == 1:
-		current_image = 2
+func _update_texture():
+	# Update the texture based on hover and press state
+	if is_pressed:
+		texture = hover_1  # Show hover_1 when pressed
+	elif is_hovering:
+		texture = hover_0  # Show hover_0 when hovering
 	else:
-		current_image = 1
-
-func _apply_hover_image():
-	# Apply the appropriate hover texture based on current_image
-	if current_image == 1:
-		texture = hover_0
-	else:
-		texture = hover_1
+		texture = null  # Hide the texture if not hovered

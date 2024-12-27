@@ -2799,6 +2799,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_nocqr")
 
 [node name="Art" type="Node2D" parent="Main"]
@@ -2892,7 +2893,10 @@ theme = ExtResource("19_2vosj")
 text = "Start"
 
 [node name="HoverAnimation" parent="Main/StartMenu/StartButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 0
+layout_mode = 1
+offset_top = -2.0
+offset_right = 180.0
+offset_bottom = 45.0
 
 [node name="OptionsButton" type="Button" parent="Main/StartMenu"]
 layout_mode = 2
@@ -2900,7 +2904,10 @@ theme = ExtResource("19_2vosj")
 text = "Options"
 
 [node name="HoverAnimation" parent="Main/StartMenu/OptionsButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 0
+layout_mode = 1
+offset_top = -2.0
+offset_right = 180.0
+offset_bottom = 45.0
 
 [node name="QuitButton" type="Button" parent="Main/StartMenu"]
 layout_mode = 2
@@ -2910,6 +2917,9 @@ text = "Quit"
 
 [node name="HoverAnimation" parent="Main/StartMenu/QuitButton" instance=ExtResource("20_kj4xe")]
 layout_mode = 0
+offset_top = -2.0
+offset_right = 180.0
+offset_bottom = 45.0
 
 [node name="OptionsMenu" type="Control" parent="Main"]
 visible = false
@@ -2941,10 +2951,13 @@ item_4/text = "Spring"
 layout_mode = 0
 offset_left = 80.0
 offset_top = 550.0
-offset_right = 184.0
-offset_bottom = 602.0
+offset_right = 260.0
+offset_bottom = 594.0
 theme = ExtResource("19_2vosj")
 text = "Back"
+
+[node name="HoverAnimation" parent="Main/OptionsMenu/BackButton" instance=ExtResource("20_kj4xe")]
+layout_mode = 0
 
 [node name="PlayerSelectScreen" type="Control" parent="."]
 visible = false

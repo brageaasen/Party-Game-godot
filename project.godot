@@ -20,6 +20,7 @@ run/custom_image="res://assets/sprites/cursors/mouse1.png"
 
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/cursors/mouse1.png"
+mouse_cursor/custom_image_hotspot=Vector2(32, 16)
 
 [input]
 
