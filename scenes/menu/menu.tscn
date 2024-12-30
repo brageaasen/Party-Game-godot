@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=68 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -25,6 +25,7 @@
 [ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="19_2vosj"]
 [ext_resource type="Script" path="res://scenes/menu/options_menu.gd" id="19_23as4"]
 [ext_resource type="PackedScene" uid="uid://dk1ibpbubhp0d" path="res://scenes/menu/hover_animation.tscn" id="20_kj4xe"]
+[ext_resource type="Script" path="res://scenes/menu/remove_focus.gd" id="21_4d07r"]
 [ext_resource type="Texture2D" uid="uid://bcooyhtrsyins" path="res://assets/ui/player_select/SUMMER_grass_selected_player.png" id="21_5pym0"]
 [ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="21_cyn4o"]
 [ext_resource type="Script" path="res://scenes/menu/options_selection.gd" id="22_aqyl3"]
@@ -2955,23 +2956,25 @@ libraries = {
 }
 
 [node name="StartMenu" type="VBoxContainer" parent="Main"]
-visible = false
 layout_mode = 0
 offset_left = 150.0
 offset_top = 325.0
 offset_right = 330.0
 offset_bottom = 475.0
 theme = ExtResource("19_2vosj")
+script = ExtResource("21_4d07r")
 
 [node name="Start" type="Control" parent="Main/StartMenu"]
 custom_minimum_size = Vector2(0, 43)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="StartButton" type="Button" parent="Main/StartMenu/Start"]
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 44.0
 focus_neighbor_top = NodePath("../../Quit/QuitButton")
+mouse_filter = 1
 theme = ExtResource("19_2vosj")
 text = "Start"
 
@@ -2984,11 +2987,13 @@ offset_bottom = 45.0
 [node name="Options" type="Control" parent="Main/StartMenu"]
 custom_minimum_size = Vector2(0, 43)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="OptionsButton" type="Button" parent="Main/StartMenu/Options"]
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 44.0
+mouse_filter = 1
 theme = ExtResource("19_2vosj")
 text = "Options"
 
@@ -3001,12 +3006,15 @@ offset_bottom = 45.0
 [node name="Quit" type="Control" parent="Main/StartMenu"]
 custom_minimum_size = Vector2(0, 43)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Start")
+mouse_filter = 1
 
 [node name="QuitButton" type="Button" parent="Main/StartMenu/Quit"]
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 44.0
 focus_neighbor_bottom = NodePath("../../Start/StartButton")
+mouse_filter = 1
 theme = ExtResource("19_2vosj")
 text = "Quit"
 
@@ -3017,6 +3025,7 @@ offset_right = 180.0
 offset_bottom = 45.0
 
 [node name="OptionsMenu" type="Control" parent="Main"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3028,15 +3037,15 @@ script = ExtResource("19_23as4")
 
 [node name="OptionsSelection" type="Control" parent="Main/OptionsMenu"]
 anchors_preset = 0
-offset_left = 112.63
-offset_top = 377.0
-offset_right = 362.63
-offset_bottom = 422.0
+offset_left = 92.0
+offset_top = 376.0
+offset_right = 392.0
+offset_bottom = 421.0
 script = ExtResource("22_aqyl3")
 
 [node name="Random" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 24.0
+layout_mode = 0
+offset_right = 153.0
 offset_bottom = 44.0
 mouse_filter = 2
 theme = ExtResource("19_2vosj")

@@ -68,6 +68,7 @@ func _on_game_data_field_changed(field_name, new_value):
 	if field_name == "season":
 		# If season changes, update the tilemap and emitters
 		change_season_textures(new_value)
+		print(new_value)
 
 # Define the emitting states for each season
 var season_effects = {
@@ -78,33 +79,30 @@ var season_effects = {
 }
 
 func change_season_textures(new_season):
-	game_data.season = new_season
-	
-	## Foliage
-	# Get the effects for the current season
-	var effects = season_effects.get(new_season, {})
+	if new_season == GameData.Season.RANDOM:
+		# Handle random season by picking one at random
+		new_season = random_season()
 
-	# Loop through the emitters and set their emitting property
+	# Update the season in game_data
+	game_data.season = new_season
+
+	# Update emitters for the season
+	var effects = season_effects.get(new_season, {})
 	for emitter_name in effects.keys():
 		var emitter = get_node(emitter_name) # Dynamically access the emitter
 		if emitter:
 			emitter.emitting = effects[emitter_name]
 		else:
 			print("Emitter not found:", emitter_name)
-	
-	var count = 0
-	var season_key = GameData.Season.values()[game_data.season]  # Map the integer to the enum key
-	
-	if season_key == 0:
-		# Random Season, don't change season in menu
-		return
-	
-	if not SEASON_TEXTURES.has(season_key):
-		print("Error: Season key not found in SEASON_TEXTURES:", season_key)
+
+	# Update textures for the season
+	if not SEASON_TEXTURES.has(new_season):
+		print("Error: Season key not found in SEASON_TEXTURES:", new_season)
 		return
 
-	for key in SEASON_TEXTURES[season_key]:
-		var texture_path = SEASON_TEXTURES[game_data.season][key]
+	var count = 0
+	for key in SEASON_TEXTURES[new_season]:
+		var texture_path = SEASON_TEXTURES[new_season][key]
 		var texture = load(texture_path)
 		if texture:
 			if tile_map.tile_set.has_source(count):
@@ -114,6 +112,7 @@ func change_season_textures(new_season):
 			count += 1
 		else:
 			print("Error loading texture:", texture_path)
+
 
 func random_season():
 	# Get all enum values and filter out the first one (Season.RANDOM)
