@@ -2880,6 +2880,7 @@ libraries = {
 }
 
 [node name="StartMenu" type="VBoxContainer" parent="Main"]
+visible = false
 layout_mode = 0
 offset_left = 150.0
 offset_top = 325.0
@@ -2941,7 +2942,6 @@ offset_right = 180.0
 offset_bottom = 45.0
 
 [node name="OptionsMenu" type="Control" parent="Main"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2952,46 +2952,70 @@ script = ExtResource("19_23as4")
 
 [node name="OptionsSelection" type="Control" parent="Main/OptionsMenu"]
 anchors_preset = 0
-offset_left = 220.0
-offset_top = 377.0
-offset_right = 220.0
-offset_bottom = 377.0
+offset_left = 200.0
+offset_right = 240.0
+offset_bottom = 40.0
 script = ExtResource("22_aqyl3")
+scale_focused = null
+scale_unfocused = null
+unfocused_alpha = null
+spacing = null
+starting_index = null
 
 [node name="Random" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
 offset_right = 24.0
 offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
-text = "Random!"
+text = "R"
 
 [node name="Summer" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
-offset_right = 144.0
+offset_left = 28.0
+offset_right = 76.0
 offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
-text = "Summer"
+text = "Su"
 
 [node name="Fall" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
-offset_right = 96.0
+offset_left = 80.0
+offset_right = 104.0
 offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
-text = "Fall"
+text = "F"
 
 [node name="Winter" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
-offset_right = 126.0
+offset_left = 108.0
+offset_right = 132.0
 offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
-text = "Winter"
+text = "W"
 
 [node name="Spring" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
-offset_right = 129.0
+offset_left = 136.0
+offset_right = 184.0
 offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
-text = "Spring"
+text = "Sp"
+
+[node name="ItemList" type="ItemList" parent="Main/OptionsMenu"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 306.0
+offset_right = 374.0
+offset_bottom = 558.0
+theme = ExtResource("19_2vosj")
+allow_reselect = true
+allow_search = false
+item_count = 5
+item_0/text = "Random!"
+item_1/text = "Summer"
+item_2/text = "Fall"
+item_3/text = "Winter"
+item_4/text = "Spring"
 
 [node name="BackButton" type="Button" parent="Main/OptionsMenu"]
 layout_mode = 0
@@ -3320,6 +3344,7 @@ script = ExtResource("27_llmq1")
 [connection signal="pressed" from="Main/StartMenu/Start/StartButton" to="Main" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Main/StartMenu/Options/OptionsButton" to="Main" method="_on_options_button_pressed"]
 [connection signal="pressed" from="Main/StartMenu/Quit/QuitButton" to="Main" method="_on_quit_button_pressed"]
+[connection signal="item_selected" from="Main/OptionsMenu/ItemList" to="Main/OptionsMenu" method="_on_item_list_item_selected"]
 [connection signal="pressed" from="Main/OptionsMenu/BackButton" to="Main/OptionsMenu" method="_on_back_button_pressed"]
 [connection signal="change_to_game_settings" from="PlayerSelectScreen" to="GameSettings" method="_on_player_select_screen_change_to_game_settings"]
 [connection signal="back_button_pressed" from="PlayerSelectScreen/BackOption" to="PlayerSelectScreen" method="_on_back_button_pressed"]

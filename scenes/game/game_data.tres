@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_l1sd4")
 difficulty = 1
+season = 1

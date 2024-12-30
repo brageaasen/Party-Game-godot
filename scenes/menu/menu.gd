@@ -1,7 +1,7 @@
 extends Control
 
 @onready var animation_player = $Art/AnimationPlayer
-@onready var start_button = $StartMenu/StartButton
+@onready var start_button = $StartMenu/Start/StartButton
 @onready var start_menu = $StartMenu
 @onready var options_menu = $OptionsMenu
 @onready var camera_2d = $"../Camera2D"

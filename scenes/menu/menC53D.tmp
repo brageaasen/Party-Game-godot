@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=70 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -16,16 +16,17 @@
 [ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="11_sp23x"]
 [ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="12_nvvo6"]
 [ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="13_8s2vi"]
+[ext_resource type="Texture2D" uid="uid://kbaqe50o6mk2" path="res://assets/sprites/leaf.png" id="14_ucqps"]
+[ext_resource type="Texture2D" uid="uid://d1t2tq786ili4" path="res://assets/sprites/rain.png" id="15_nae10"]
 [ext_resource type="Texture2D" uid="uid://c86l03l6y11kg" path="res://assets/ui/logo_purr.png" id="16_klxmh"]
+[ext_resource type="Texture2D" uid="uid://ch6yxfuhy3iyt" path="res://assets/sprites/rain_drop.png" id="16_w2rj1"]
 [ext_resource type="Texture2D" uid="uid://cs8mh2by6vjv3" path="res://assets/ui/logo_rest.png" id="17_blbpm"]
 [ext_resource type="Script" path="res://scenes/menu/player_select_screen.gd" id="17_yuje3"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="18_ytq35"]
 [ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="19_2vosj"]
 [ext_resource type="Script" path="res://scenes/menu/options_menu.gd" id="19_23as4"]
-[ext_resource type="PackedScene" uid="uid://dk1ibpbubhp0d" path="res://scenes/menu/hover_animation.tscn" id="20_kj4xe"]
 [ext_resource type="Texture2D" uid="uid://bcooyhtrsyins" path="res://assets/ui/player_select/SUMMER_grass_selected_player.png" id="21_5pym0"]
 [ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="21_cyn4o"]
-[ext_resource type="Script" path="res://scenes/menu/options_selection.gd" id="22_aqyl3"]
 [ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="23_gr0kc"]
 [ext_resource type="Script" path="res://scenes/menu/game_settings.gd" id="23_x1n21"]
 [ext_resource type="PackedScene" uid="uid://chffnq1dswfgw" path="res://scenes/menu/back_option.tscn" id="26_fabrw"]
@@ -2681,6 +2682,76 @@ sources/7 = SubResource("TileSetAtlasSource_lxmwk")
 sources/8 = SubResource("TileSetAtlasSource_i8be2")
 sources/9 = SubResource("TileSetAtlasSource_nhk1c")
 
+[sub_resource type="Curve" id="Curve_hxdso"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 27.2477), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pare6"]
+curve = SubResource("Curve_hxdso")
+
+[sub_resource type="Curve" id="Curve_co1hu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.659341), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oayxg"]
+curve = SubResource("Curve_co1hu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hj4ub"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(70, 1, 1)
+angle_max = 84.8
+angle_curve = SubResource("CurveTexture_pare6")
+gravity = Vector3(100, 98, 0)
+linear_accel_max = 4.32
+scale_curve = SubResource("CurveTexture_oayxg")
+turbulence_noise_strength = 0.5
+turbulence_noise_speed_random = 0.14
+turbulence_influence_min = 0.005
+turbulence_influence_max = 0.069
+
+[sub_resource type="Gradient" id="Gradient_kygd0"]
+colors = PackedColorArray(1, 1, 1, 0.560784, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_415fk"]
+gradient = SubResource("Gradient_kygd0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7msfj"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 1, 1)
+direction = Vector3(-0.4, 1, 0)
+spread = 2.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_415fk")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fqal2"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_x8a55"]
+colors = PackedColorArray(1, 1, 1, 0.360784, 1, 1, 1, 0.360784)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_euvb6"]
+gradient = SubResource("Gradient_x8a55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_olxnu"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_euvb6")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
 [sub_resource type="Gradient" id="Gradient_10ba7"]
 colors = PackedColorArray(1, 1, 1, 1, 0.847059, 0.847059, 0.847059, 1)
 
@@ -2800,7 +2871,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("1_nocqr")
 
 [node name="Art" type="Node2D" parent="Main"]
@@ -2832,19 +2902,47 @@ layer_8/tile_data = PackedInt32Array(524301, 1, 1, 65550, 393217, 1, 393232, 131
 script = ExtResource("11_sp23x")
 game_data = ExtResource("13_8s2vi")
 
-[node name="LeavesFalling" parent="Main/Art/TileMap" instance=ExtResource("12_nvvo6")]
+[node name="LeavesFalling" type="GPUParticles2D" parent="Main/Art/TileMap"]
 z_index = 10
-position = Vector2(8, -2)
+position = Vector2(70.25, -15)
+scale = Vector2(4, 4)
 emitting = false
+process_material = SubResource("ParticleProcessMaterial_hj4ub")
+texture = ExtResource("14_ucqps")
+lifetime = 4.0
+preprocess = 4.0
 
-[node name="Rain" parent="Main/Art/TileMap" instance=ExtResource("1_idx4l")]
+[node name="Rain" type="Node2D" parent="Main/Art/TileMap"]
+
+[node name="RainFalling" type="GPUParticles2D" parent="Main/Art/TileMap/Rain"]
+z_index = 10
+position = Vector2(157.75, 160.25)
+scale = Vector2(4, 4)
+emitting = false
+amount = 200
+sub_emitter = NodePath("../Splash")
+process_material = SubResource("ParticleProcessMaterial_7msfj")
+texture = ExtResource("15_nae10")
+lifetime = 2.0
+preprocess = 3.0
+trail_lifetime = 0.02
+
+[node name="Splash" type="GPUParticles2D" parent="Main/Art/TileMap/Rain"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_fqal2")
+scale = Vector2(4, 4)
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_olxnu")
+texture = ExtResource("16_w2rj1")
+lifetime = 0.7
 
 [node name="Snow" type="Node2D" parent="Main/Art/TileMap"]
 
 [node name="SnowFalling" type="GPUParticles2D" parent="Main/Art/TileMap/Snow"]
 z_index = 10
-position = Vector2(96, -183)
-emitting = false
+position = Vector2(96, 13.25)
+scale = Vector2(4, 4)
 amount = 50
 sub_emitter = NodePath("../Impact")
 process_material = SubResource("ParticleProcessMaterial_x4sak")
@@ -2853,6 +2951,7 @@ preprocess = 4.0
 
 [node name="Impact" type="GPUParticles2D" parent="Main/Art/TileMap/Snow"]
 z_index = 1
+scale = Vector2(4, 4)
 emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_kvcg5")
@@ -2881,64 +2980,27 @@ libraries = {
 
 [node name="StartMenu" type="VBoxContainer" parent="Main"]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 325.0
-offset_right = 330.0
-offset_bottom = 475.0
-theme = ExtResource("19_2vosj")
+offset_left = 200.0
+offset_top = 350.0
+offset_right = 270.0
+offset_bottom = 451.0
 
-[node name="Start" type="Control" parent="Main/StartMenu"]
-custom_minimum_size = Vector2(0, 43)
+[node name="StartButton" type="Button" parent="Main/StartMenu"]
 layout_mode = 2
-
-[node name="StartButton" type="Button" parent="Main/StartMenu/Start"]
-layout_mode = 2
-offset_right = 180.0
-offset_bottom = 44.0
-focus_neighbor_top = NodePath("../../Quit/QuitButton")
+focus_neighbor_top = NodePath("../QuitButton")
 theme = ExtResource("19_2vosj")
 text = "Start"
 
-[node name="HoverAnimation" parent="Main/StartMenu/Start/StartButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 1
-offset_top = -2.0
-offset_right = 180.0
-offset_bottom = 45.0
-
-[node name="Options" type="Control" parent="Main/StartMenu"]
-custom_minimum_size = Vector2(0, 43)
+[node name="OptionsButton" type="Button" parent="Main/StartMenu"]
 layout_mode = 2
-
-[node name="OptionsButton" type="Button" parent="Main/StartMenu/Options"]
-layout_mode = 2
-offset_right = 180.0
-offset_bottom = 44.0
 theme = ExtResource("19_2vosj")
 text = "Options"
 
-[node name="HoverAnimation" parent="Main/StartMenu/Options/OptionsButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 1
-offset_top = -2.0
-offset_right = 180.0
-offset_bottom = 45.0
-
-[node name="Quit" type="Control" parent="Main/StartMenu"]
-custom_minimum_size = Vector2(0, 43)
+[node name="QuitButton" type="Button" parent="Main/StartMenu"]
 layout_mode = 2
-
-[node name="QuitButton" type="Button" parent="Main/StartMenu/Quit"]
-layout_mode = 2
-offset_right = 180.0
-offset_bottom = 44.0
-focus_neighbor_bottom = NodePath("../../Start/StartButton")
+focus_neighbor_bottom = NodePath("../StartButton")
 theme = ExtResource("19_2vosj")
 text = "Quit"
-
-[node name="HoverAnimation" parent="Main/StartMenu/Quit/QuitButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 0
-offset_top = -2.0
-offset_right = 180.0
-offset_bottom = 45.0
 
 [node name="OptionsMenu" type="Control" parent="Main"]
 visible = false
@@ -2950,60 +3012,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("19_23as4")
 
-[node name="OptionsSelection" type="Control" parent="Main/OptionsMenu"]
-anchors_preset = 0
-offset_left = 220.0
-offset_top = 377.0
-offset_right = 220.0
-offset_bottom = 377.0
-script = ExtResource("22_aqyl3")
-
-[node name="Random" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 24.0
-offset_bottom = 44.0
+[node name="ItemList" type="ItemList" parent="Main/OptionsMenu"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 306.0
+offset_right = 374.0
+offset_bottom = 558.0
 theme = ExtResource("19_2vosj")
-text = "Random!"
-
-[node name="Summer" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 144.0
-offset_bottom = 44.0
-theme = ExtResource("19_2vosj")
-text = "Summer"
-
-[node name="Fall" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 96.0
-offset_bottom = 44.0
-theme = ExtResource("19_2vosj")
-text = "Fall"
-
-[node name="Winter" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 126.0
-offset_bottom = 44.0
-theme = ExtResource("19_2vosj")
-text = "Winter"
-
-[node name="Spring" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
-layout_mode = 2
-offset_right = 129.0
-offset_bottom = 44.0
-theme = ExtResource("19_2vosj")
-text = "Spring"
+allow_reselect = true
+allow_search = false
+item_count = 5
+item_0/text = "Random!"
+item_1/text = "Summer"
+item_2/text = "Fall"
+item_3/text = "Winter"
+item_4/text = "Spring"
 
 [node name="BackButton" type="Button" parent="Main/OptionsMenu"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 550.0
-offset_right = 260.0
-offset_bottom = 594.0
+offset_right = 184.0
+offset_bottom = 602.0
 theme = ExtResource("19_2vosj")
 text = "Back"
-
-[node name="HoverAnimation" parent="Main/OptionsMenu/BackButton" instance=ExtResource("20_kj4xe")]
-layout_mode = 0
 
 [node name="PlayerSelectScreen" type="Control" parent="."]
 visible = false
@@ -3317,9 +3349,11 @@ position = Vector2(576, 324)
 script = ExtResource("27_llmq1")
 
 [connection signal="change_to_player_select" from="Main" to="PlayerSelectScreen" method="_on_main_change_to_player_select"]
-[connection signal="pressed" from="Main/StartMenu/Start/StartButton" to="Main" method="_on_start_button_pressed"]
-[connection signal="pressed" from="Main/StartMenu/Options/OptionsButton" to="Main" method="_on_options_button_pressed"]
-[connection signal="pressed" from="Main/StartMenu/Quit/QuitButton" to="Main" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Main/StartMenu/StartButton" to="Main" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Main/StartMenu/OptionsButton" to="Main" method="_on_options_button_pressed"]
+[connection signal="pressed" from="Main/StartMenu/QuitButton" to="Main" method="_on_quit_button_pressed"]
+[connection signal="change_tilemap_season" from="Main/OptionsMenu" to="Main/Art/TileMap" method="_on_change_tilemap_season"]
+[connection signal="item_selected" from="Main/OptionsMenu/ItemList" to="Main/OptionsMenu" method="_on_item_list_item_selected"]
 [connection signal="pressed" from="Main/OptionsMenu/BackButton" to="Main/OptionsMenu" method="_on_back_button_pressed"]
 [connection signal="change_to_game_settings" from="PlayerSelectScreen" to="GameSettings" method="_on_player_select_screen_change_to_game_settings"]
 [connection signal="back_button_pressed" from="PlayerSelectScreen/BackOption" to="PlayerSelectScreen" method="_on_back_button_pressed"]

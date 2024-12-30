@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpsf64fpkqls3"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/player_board_entry.gd" id="1_qyqt8"]
+[ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="2_xmw6p"]
+
+[node name="PlayerBoardEntry" type="HBoxContainer"]
+script = ExtResource("1_qyqt8")
+
+[node name="Portrait" type="TextureRect" parent="."]
+layout_direction = 2
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_xmw6p")
+theme_override_font_sizes/font_size = 16
+text = "Test"
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_xmw6p")
+theme_override_font_sizes/font_size = 16
+text = "Score: 0
+"
