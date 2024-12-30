@@ -8,8 +8,12 @@ extends Control
 @export var animation_duration = 0.1  # Duration of the animation
 
 var current_index = 0  # Index of the currently focused button
-
 signal index_changed(index)
+
+@export var drag_sensitivity: float = 100.0  # Threshold in pixels
+var is_dragging = false
+var drag_start_position = 0.0
+var has_moved = false  # Prevent multiple moves per click
 
 func _ready():
 	# Set the initial index for the center button
@@ -22,18 +26,15 @@ func _ready():
 	# Ensure the center button grabs focus after setup
 	call_deferred("_force_center_focus")
 
-
 func _force_center_focus():
 	var center_button = get_child(current_index)
 	center_button.grab_focus()
-
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_left"):
 		move_selection(-1)
 	elif Input.is_action_just_pressed("ui_right"):
 		move_selection(1)
-
 
 func move_selection(direction: int):
 	# Allow input only if the node is visible
@@ -44,9 +45,8 @@ func move_selection(direction: int):
 	current_index = (current_index + direction) % total_buttons
 	if current_index < 0:
 		current_index += total_buttons
-		
-	emit_signal("index_changed", current_index)
 
+	emit_signal("index_changed", current_index)
 
 	# Update button states with animation
 	update_button_states(true)
@@ -54,6 +54,31 @@ func move_selection(direction: int):
 	# Ensure the center button grabs focus
 	get_child(current_index).grab_focus()
 
+
+func _gui_input(event):
+	if event is InputEventMouseButton:
+		# Start dragging
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			is_dragging = true
+			has_moved = false  # Reset move flag on new click
+			drag_start_position = event.position.x
+		# Stop dragging
+		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			is_dragging = false
+	elif event is InputEventMouseMotion and is_dragging:
+		# Prevent multiple moves per click
+		if has_moved:
+			return
+
+		# Detect drag direction
+		var delta = event.position.x - drag_start_position
+		if abs(delta) > drag_sensitivity:  # Use the sensitivity variable
+			if delta > 0:
+				move_selection(-1)
+			else:
+				move_selection(1)
+			has_moved = true  # Mark as moved to prevent further moves
+			drag_start_position = event.position.x  # Update drag position
 
 func update_button_states(animated: bool):
 	var total_buttons = get_child_count()

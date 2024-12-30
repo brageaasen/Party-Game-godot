@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=57 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -16,9 +16,7 @@
 [ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="11_sp23x"]
 [ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="12_nvvo6"]
 [ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="13_8s2vi"]
-[ext_resource type="Texture2D" uid="uid://d1t2tq786ili4" path="res://assets/sprites/rain.png" id="15_0nlm2"]
 [ext_resource type="Texture2D" uid="uid://c86l03l6y11kg" path="res://assets/ui/logo_purr.png" id="16_klxmh"]
-[ext_resource type="Texture2D" uid="uid://ch6yxfuhy3iyt" path="res://assets/sprites/rain_drop.png" id="16_pf7rh"]
 [ext_resource type="Texture2D" uid="uid://cs8mh2by6vjv3" path="res://assets/ui/logo_rest.png" id="17_blbpm"]
 [ext_resource type="Script" path="res://scenes/menu/player_select_screen.gd" id="17_yuje3"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="18_ytq35"]
@@ -2683,51 +2681,6 @@ sources/7 = SubResource("TileSetAtlasSource_lxmwk")
 sources/8 = SubResource("TileSetAtlasSource_i8be2")
 sources/9 = SubResource("TileSetAtlasSource_nhk1c")
 
-[sub_resource type="GDScript" id="GDScript_vbhej"]
-
-[sub_resource type="Gradient" id="Gradient_kygd0"]
-colors = PackedColorArray(1, 1, 1, 0.560784, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_415fk"]
-gradient = SubResource("Gradient_kygd0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pnjcq"]
-lifetime_randomness = 0.8
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(350, 1, 1)
-direction = Vector3(-0.4, 1, 0)
-spread = 2.0
-initial_velocity_min = 250.0
-initial_velocity_max = 300.0
-gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 3.0
-color_ramp = SubResource("GradientTexture1D_415fk")
-sub_emitter_mode = 2
-sub_emitter_amount_at_end = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fqal2"]
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="Gradient_x8a55"]
-colors = PackedColorArray(1, 1, 1, 0.360784, 1, 1, 1, 0.360784)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_euvb6"]
-gradient = SubResource("Gradient_x8a55")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_olxnu"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 3.0
-color_ramp = SubResource("GradientTexture1D_euvb6")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
-
 [sub_resource type="Gradient" id="Gradient_10ba7"]
 colors = PackedColorArray(1, 1, 1, 1, 0.847059, 0.847059, 0.847059, 1)
 
@@ -2744,8 +2697,7 @@ spread = 20.0
 initial_velocity_min = 50.0
 initial_velocity_max = 70.0
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 4.0
+scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_ryoey")
 sub_emitter_mode = 2
 sub_emitter_amount_at_end = 1
@@ -2759,8 +2711,6 @@ gradient = SubResource("Gradient_4k4ey")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvcg5"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_min = 4.0
-scale_max = 4.0
 color_ramp = SubResource("GradientTexture1D_2dqpk")
 
 [sub_resource type="Animation" id="Animation_turti"]
@@ -2884,50 +2834,25 @@ game_data = ExtResource("13_8s2vi")
 
 [node name="LeavesFalling" parent="Main/Art/TileMap" instance=ExtResource("12_nvvo6")]
 z_index = 10
-position = Vector2(8, -34.75)
+position = Vector2(8, -2)
 emitting = false
 
-[node name="Rain" type="Node2D" parent="Main/Art/TileMap"]
-script = SubResource("GDScript_vbhej")
-
-[node name="RainFalling" type="GPUParticles2D" parent="Main/Art/TileMap/Rain"]
-z_index = 10
-position = Vector2(72.5, -33.75)
-emitting = false
-amount = 200
-sub_emitter = NodePath("../Splash")
-process_material = SubResource("ParticleProcessMaterial_pnjcq")
-texture = ExtResource("15_0nlm2")
-lifetime = 2.0
-preprocess = 3.0
-trail_lifetime = 0.02
-
-[node name="Splash" type="GPUParticles2D" parent="Main/Art/TileMap/Rain"]
-z_index = 1
-material = SubResource("CanvasItemMaterial_fqal2")
-position = Vector2(6.5, 174.25)
-emitting = false
-amount = 12
-process_material = SubResource("ParticleProcessMaterial_olxnu")
-texture = ExtResource("16_pf7rh")
-lifetime = 0.7
+[node name="Rain" parent="Main/Art/TileMap" instance=ExtResource("1_idx4l")]
 
 [node name="Snow" type="Node2D" parent="Main/Art/TileMap"]
-position = Vector2(-67.25, 109.5)
 
 [node name="SnowFalling" type="GPUParticles2D" parent="Main/Art/TileMap/Snow"]
 z_index = 10
-position = Vector2(250.75, -135)
+position = Vector2(96, -183)
 emitting = false
 amount = 50
 sub_emitter = NodePath("../Impact")
 process_material = SubResource("ParticleProcessMaterial_x4sak")
-lifetime = 6.0
+lifetime = 8.0
 preprocess = 4.0
 
 [node name="Impact" type="GPUParticles2D" parent="Main/Art/TileMap/Snow"]
 z_index = 1
-position = Vector2(209.25, -80.75)
 emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_kvcg5")
@@ -2955,7 +2880,6 @@ libraries = {
 }
 
 [node name="StartMenu" type="VBoxContainer" parent="Main"]
-visible = false
 layout_mode = 0
 offset_left = 150.0
 offset_top = 325.0
@@ -3017,28 +2941,27 @@ offset_right = 180.0
 offset_bottom = 45.0
 
 [node name="OptionsMenu" type="Control" parent="Main"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("19_23as4")
 
 [node name="OptionsSelection" type="Control" parent="Main/OptionsMenu"]
 anchors_preset = 0
-offset_left = 112.63
+offset_left = 220.0
 offset_top = 377.0
-offset_right = 362.63
-offset_bottom = 422.0
+offset_right = 220.0
+offset_bottom = 377.0
 script = ExtResource("22_aqyl3")
 
 [node name="Random" type="Button" parent="Main/OptionsMenu/OptionsSelection"]
 layout_mode = 2
 offset_right = 24.0
 offset_bottom = 44.0
-mouse_filter = 2
 theme = ExtResource("19_2vosj")
 text = "Random!"
 
@@ -3046,7 +2969,6 @@ text = "Random!"
 layout_mode = 2
 offset_right = 144.0
 offset_bottom = 44.0
-mouse_filter = 2
 theme = ExtResource("19_2vosj")
 text = "Summer"
 
@@ -3054,7 +2976,6 @@ text = "Summer"
 layout_mode = 2
 offset_right = 96.0
 offset_bottom = 44.0
-mouse_filter = 2
 theme = ExtResource("19_2vosj")
 text = "Fall"
 
@@ -3062,7 +2983,6 @@ text = "Fall"
 layout_mode = 2
 offset_right = 126.0
 offset_bottom = 44.0
-mouse_filter = 2
 theme = ExtResource("19_2vosj")
 text = "Winter"
 
@@ -3070,7 +2990,6 @@ text = "Winter"
 layout_mode = 2
 offset_right = 129.0
 offset_bottom = 44.0
-mouse_filter = 2
 theme = ExtResource("19_2vosj")
 text = "Spring"
 

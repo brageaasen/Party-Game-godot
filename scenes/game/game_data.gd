@@ -1,8 +1,20 @@
 class_name GameData
 extends Resource
 
-@export var difficulty : Difficulty = Difficulty.NORMAL
-@export var season : Season = Season.SUMMER
+# Signal to notify changes in fields
+signal field_changed(field_name, new_value)
+
+@export var difficulty: Difficulty = Difficulty.NORMAL:
+	set(value):
+		if difficulty != value:
+			difficulty = value
+			emit_signal("field_changed", "difficulty", value)
+
+@export var season: Season = Season.SUMMER:
+	set(value):
+		if season != value:
+			season = value
+			emit_signal("field_changed", "season", value)
 
 enum Difficulty {
 	EASY,

@@ -58,27 +58,52 @@ const SEASON_TEXTURES = {
 
 @export var game_data : GameData
 
-func _process(delta):
-	#print(game_data.season)
-	if game_data.season == game_data.Season.RANDOM:
-		# Randomly select a season
-		change_season_textures(random_season())
-	else:
-		# Change to player chosen season
-		change_season_textures(game_data.season)
+func _ready():
+	# Connect to the game_data signal
+	game_data.connect("field_changed", _on_game_data_field_changed)
+	# Initialize the current season
+	_on_game_data_field_changed("season", game_data.season)
+
+func _on_game_data_field_changed(field_name, new_value):
+	if field_name == "season":
+		# If season changes, update the tilemap and emitters
+		change_season_textures(new_value)
+
+# Define the emitting states for each season
+var season_effects = {
+	GameData.Season.SUMMER: { "LeavesFalling": false, "Snow/SnowFalling": false, "Rain/RainFalling": false },
+	GameData.Season.FALL:   { "LeavesFalling": true,  "Snow/SnowFalling": false, "Rain/RainFalling": false },
+	GameData.Season.WINTER: { "LeavesFalling": false, "Snow/SnowFalling": true,  "Rain/RainFalling": false },
+	GameData.Season.SPRING: { "LeavesFalling": false, "Snow/SnowFalling": false, "Rain/RainFalling": true }
+}
 
 func change_season_textures(new_season):
 	game_data.season = new_season
-	# Foliage
-	if new_season == game_data.Season.FALL:
-		leaves_falling.emitting = true
-	elif new_season == game_data.Season.WINTER:
-		snow_falling.emitting = true
-	elif new_season == game_data.Season.SPRING:
-		rain_falling.emitting = true
+	
+	## Foliage
+	# Get the effects for the current season
+	var effects = season_effects.get(new_season, {})
+
+	# Loop through the emitters and set their emitting property
+	for emitter_name in effects.keys():
+		var emitter = get_node(emitter_name) # Dynamically access the emitter
+		if emitter:
+			emitter.emitting = effects[emitter_name]
+		else:
+			print("Emitter not found:", emitter_name)
 	
 	var count = 0
-	for key in SEASON_TEXTURES[game_data.season]:
+	var season_key = GameData.Season.values()[game_data.season]  # Map the integer to the enum key
+	
+	if season_key == 0:
+		# Random Season, don't change season in menu
+		return
+	
+	if not SEASON_TEXTURES.has(season_key):
+		print("Error: Season key not found in SEASON_TEXTURES:", season_key)
+		return
+
+	for key in SEASON_TEXTURES[season_key]:
 		var texture_path = SEASON_TEXTURES[game_data.season][key]
 		var texture = load(texture_path)
 		if texture:
