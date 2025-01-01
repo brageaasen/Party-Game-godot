@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=71 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -34,6 +34,9 @@
 [ext_resource type="PackedScene" uid="uid://chffnq1dswfgw" path="res://scenes/menu/back_option.tscn" id="26_fabrw"]
 [ext_resource type="Script" path="res://scenes/game/screen_shake.gd" id="27_llmq1"]
 [ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="27_nv27j"]
+[ext_resource type="Texture2D" uid="uid://dbe44gibc1b17" path="res://assets/ui/player_select/bridge/bridge_side.png" id="32_h1744"]
+[ext_resource type="Texture2D" uid="uid://csllqkkvkb7na" path="res://assets/ui/player_select/bridge/bridge_side_stop.png" id="33_kcf1r"]
+[ext_resource type="Texture2D" uid="uid://chckg760d6oe8" path="res://assets/ui/player_select/bridge/bridge_down_short.png" id="34_ec8r6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbym"]
 texture = ExtResource("1_1jpse")
@@ -3107,16 +3110,16 @@ script = ExtResource("17_yuje3")
 current_players = ExtResource("18_ytq35")
 
 [node name="HoldDownButton" parent="PlayerSelectScreen" instance=ExtResource("23_gr0kc")]
-position = Vector2(576, 450)
+position = Vector2(576, 324)
 scale = Vector2(3, 3)
 
 [node name="StartLabel" type="Label" parent="PlayerSelectScreen"]
 z_index = 10
 layout_mode = 0
 offset_left = 521.0
-offset_top = 477.0
+offset_top = 351.0
 offset_right = 635.0
-offset_bottom = 521.0
+offset_bottom = 395.0
 theme = ExtResource("19_2vosj")
 text = "Start"
 
@@ -3132,9 +3135,7 @@ layer_1/name = "water"
 layer_1/tile_data = PackedInt32Array(-65538, 0, 1610612740, -2, 0, 1610612740, 65534, 0, 1610612740, 131070, 0, 1610612740, 196606, 0, 1610612740, 262142, 0, 1610612740, 327678, 0, 1610612740, 393214, 0, 1610612740, 458750, 0, 1610612740, 524286, 0, 1610612740, 589822, 0, 1610612740, 655358, 0, 1610612740, -65537, 0, 1610612740, -1, 0, 1610612740, 65535, 0, 1610612740, 131071, 0, 1610612740, 196607, 0, 1610612740, 262143, 0, 1610612740, 327679, 0, 1610612740, 393215, 0, 1610612740, 458751, 0, 1610612740, 524287, 0, 1610612740, 589823, 0, 1610612740, 655359, 0, 1610612740, -131072, 0, 1610612740, -65536, 0, 1610612740, 0, 0, 1610612740, 65536, 0, 1610612740, 131072, 0, 1610612740, 196608, 0, 1610612740, 262144, 0, 1610612740, 327680, 0, 1610612740, 393216, 0, 1610612740, 458752, 0, 1610612740, 524288, 0, 1610612740, 589824, 0, 1610612740, -131071, 0, 1610612740, -65535, 0, 1610612740, 1, 0, 1610612740, 65537, 0, 1610612740, 131073, 0, 1610612740, 196609, 0, 1610612740, 262145, 0, 1610612740, 327681, 0, 1610612740, 393217, 0, 1610612740, 458753, 0, 1610612740, 524289, 0, 1610612740, 589825, 0, 1610612740, -131070, 0, 1610612740, -65534, 0, 1610612740, 2, 0, 1610612740, 65538, 0, 1610612740, 131074, 0, 1610612740, 196610, 0, 1610612740, 262146, 0, 1610612740, 327682, 0, 1610612740, 393218, 0, 1610612740, 458754, 0, 1610612740, 524290, 0, 1610612740, 589826, 0, 1610612740, -131069, 0, 1610612740, -65533, 0, 1610612740, 3, 0, 1610612740, 65539, 0, 1610612740, 131075, 0, 1610612740, 196611, 0, 1610612740, 262147, 0, 1610612740, 327683, 0, 1610612740, 393219, 0, 1610612740, 458755, 0, 1610612740, 524291, 0, 1610612740, 589827, 0, 1610612740, -131068, 0, 1610612740, -65532, 0, 1610612740, 4, 0, 1610612740, 65540, 0, 1610612740, 131076, 0, 1610612740, 196612, 0, 1610612740, 262148, 0, 1610612740, 327684, 0, 1610612740, 393220, 0, 1610612740, 458756, 0, 1610612740, 524292, 0, 1610612740, 589828, 0, 1610612740, -131067, 0, 1610612740, -65531, 0, 1610612740, 5, 0, 1610612740, 65541, 0, 1610612740, 131077, 0, 1610612740, 196613, 0, 1610612740, 262149, 0, 1610612740, 327685, 0, 1610612740, 393221, 0, 1610612740, 458757, 0, 1610612740, 524293, 0, 1610612740, 589829, 0, 1610612740, -131066, 0, 1610612740, -65530, 0, 1610612740, 6, 0, 1610612740, 65542, 0, 1610612740, 131078, 0, 1610612740, 196614, 0, 1610612740, 262150, 0, 1610612740, 327686, 0, 1610612740, 393222, 0, 1610612740, 458758, 0, 1610612740, 524294, 0, 1610612740, 589830, 0, 1610612740, -131065, 0, 1610612740, -65529, 0, 1610612740, 7, 0, 1610612740, 65543, 0, 1610612740, 131079, 0, 1610612740, 196615, 0, 1610612740, 262151, 0, 1610612740, 327687, 0, 1610612740, 393223, 0, 1610612740, 458759, 0, 1610612740, 524295, 0, 1610612740, 589831, 0, 1610612740, -131064, 0, 1610612740, -65528, 0, 1610612740, 8, 0, 1610612740, 65544, 0, 1610612740, 131080, 0, 1610612740, 196616, 0, 1610612740, 262152, 0, 1610612740, 327688, 0, 1610612740, 393224, 0, 1610612740, 458760, 0, 1610612740, 524296, 0, 1610612740, 589832, 0, 1610612740, -131063, 0, 1610612740, -65527, 0, 1610612740, 9, 0, 1610612740, 65545, 0, 1610612740, 131081, 0, 1610612740, 196617, 0, 1610612740, 262153, 0, 1610612740, 327689, 0, 1610612740, 393225, 0, 1610612740, 458761, 0, 1610612740, 524297, 0, 1610612740, 589833, 0, 1610612740, -131062, 0, 1610612740, -65526, 0, 1610612740, 10, 0, 1610612740, 65546, 0, 1610612740, 131082, 0, 1610612740, 196618, 0, 1610612740, 262154, 0, 1610612740, 327690, 0, 1610612740, 393226, 0, 1610612740, 458762, 0, 1610612740, 524298, 0, 1610612740, 589834, 0, 1610612740, -131061, 0, 1610612740, -65525, 0, 1610612740, 11, 0, 1610612740, 65547, 0, 1610612740, 131083, 0, 1610612740, 196619, 0, 1610612740, 262155, 0, 1610612740, 327691, 0, 1610612740, 393227, 0, 1610612740, 458763, 0, 1610612740, 524299, 0, 1610612740, 589835, 0, 1610612740, -131060, 0, 1610612740, -65524, 0, 1610612740, 12, 0, 1610612740, 65548, 0, 1610612740, 131084, 0, 1610612740, 196620, 0, 1610612740, 262156, 0, 1610612740, 327692, 0, 1610612740, 393228, 0, 1610612740, 458764, 0, 1610612740, 524300, 0, 1610612740, 589836, 0, 1610612740, -131059, 0, 1610612740, -65523, 0, 1610612740, 13, 0, 1610612740, 65549, 0, 1610612740, 131085, 0, 1610612740, 196621, 0, 1610612740, 262157, 0, 1610612740, 327693, 0, 1610612740, 393229, 0, 1610612740, 458765, 0, 1610612740, 524301, 0, 1610612740, 589837, 0, 1610612740, -131058, 0, 1610612740, -65522, 0, 1610612740, 14, 0, 1610612740, 65550, 0, 1610612740, 131086, 0, 1610612740, 196622, 0, 1610612740, 262158, 0, 1610612740, 327694, 0, 1610612740, 393230, 0, 1610612740, 458766, 0, 1610612740, 524302, 0, 1610612740, 589838, 0, 1610612740, -131057, 0, 1610612740, -65521, 0, 1610612740, 15, 0, 1610612740, 65551, 0, 1610612740, 131087, 0, 1610612740, 196623, 0, 1610612740, 262159, 0, 1610612740, 327695, 0, 1610612740, 393231, 0, 1610612740, 458767, 0, 1610612740, 524303, 0, 1610612740, 589839, 0, 1610612740, -131075, 0, 1610612740, -65539, 0, 1610612740, -3, 0, 1610612740, 65533, 0, 1610612740, 131069, 0, 1610612740, 196605, 0, 1610612740, 262141, 0, 1610612740, 327677, 0, 1610612740, 393213, 0, 1610612740, 458749, 0, 1610612740, 524285, 0, 1610612740, 589821, 0, 1610612740, 655357, 0, 1610612740, -131074, 0, 1610612740, -131073, 0, 1610612740, -196608, 0, 1610612740, -196607, 0, 1610612740, -196606, 0, 1610612740, -196605, 0, 1610612740, -196604, 0, 1610612740, -196603, 0, 1610612740, -196602, 0, 1610612740, -196601, 0, 1610612740, -196600, 0, 1610612740, -196599, 0, 1610612740, -196598, 0, 1610612740, -196597, 0, 1610612740, -196596, 0, 1610612740, -196595, 0, 1610612740, -196594, 0, 1610612740, -196593, 0, 1610612740, -196592, 0, 1610612740, -131056, 0, 1610612740, -65520, 0, 1610612740, 16, 0, 1610612740, 65552, 0, 1610612740, 131088, 0, 1610612740, 196624, 0, 1610612740, 262160, 0, 1610612740, 327696, 0, 1610612740, 393232, 0, 1610612740, 458768, 0, 1610612740, 524304, 0, 1610612740, 589840, 0, 1610612740, -327686, 0, 1610612740, -262150, 0, 1610612740, -196614, 0, 1610612740, -131078, 0, 1610612740, -65542, 0, 1610612740, -6, 0, 1610612740, 65530, 0, 1610612740, 131066, 0, 1610612740, 196602, 0, 1610612740, 262138, 0, 1610612740, 327674, 0, 1610612740, 393210, 0, 1610612740, 458746, 0, 1610612740, 524282, 0, 1610612740, 589818, 0, 1610612740, 655354, 0, 1610612740, 720890, 0, 1610612740, 786426, 0, 1610612740, 851962, 0, 1610612740, -327685, 0, 1610612740, -262149, 0, 1610612740, -196613, 0, 1610612740, -131077, 0, 1610612740, -65541, 0, 1610612740, -5, 0, 1610612740, 65531, 0, 1610612740, 131067, 0, 1610612740, 196603, 0, 1610612740, 262139, 0, 1610612740, 327675, 0, 1610612740, 393211, 0, 1610612740, 458747, 0, 1610612740, 524283, 0, 1610612740, 589819, 0, 1610612740, 655355, 0, 1610612740, 720891, 0, 1610612740, 786427, 0, 1610612740, 851963, 0, 1610612740, -327684, 0, 1610612740, -262148, 0, 1610612740, -196612, 0, 1610612740, -131076, 0, 1610612740, -65540, 0, 1610612740, -4, 0, 1610612740, 65532, 0, 1610612740, 131068, 0, 1610612740, 196604, 0, 1610612740, 262140, 0, 1610612740, 327676, 0, 1610612740, 393212, 0, 1610612740, 458748, 0, 1610612740, 524284, 0, 1610612740, 589820, 0, 1610612740, 655356, 0, 1610612740, 720892, 0, 1610612740, 786428, 0, 1610612740, 851964, 0, 1610612740, -327683, 0, 1610612740, -262147, 0, 1610612740, -196611, 0, 1610612740, 720893, 0, 1610612740, 786429, 0, 1610612740, 851965, 0, 1610612740, -327682, 0, 1610612740, -262146, 0, 1610612740, -196610, 0, 1610612740, 720894, 0, 1610612740, 786430, 0, 1610612740, 851966, 0, 1610612740, -327681, 0, 1610612740, -262145, 0, 1610612740, -196609, 0, 1610612740, 720895, 0, 1610612740, 786431, 0, 1610612740, 851967, 0, 1610612740, -393216, 0, 1610612740, -327680, 0, 1610612740, -262144, 0, 1610612740, 655360, 0, 1610612740, 720896, 0, 1610612740, 786432, 0, 1610612740, -393215, 0, 1610612740, -327679, 0, 1610612740, -262143, 0, 1610612740, 655361, 0, 1610612740, 720897, 0, 1610612740, 786433, 0, 1610612740, -393214, 0, 1610612740, -327678, 0, 1610612740, -262142, 0, 1610612740, 655362, 0, 1610612740, 720898, 0, 1610612740, 786434, 0, 1610612740, -393213, 0, 1610612740, -327677, 0, 1610612740, -262141, 0, 1610612740, 655363, 0, 1610612740, 720899, 0, 1610612740, 786435, 0, 1610612740, -393212, 0, 1610612740, -327676, 0, 1610612740, -262140, 0, 1610612740, 655364, 0, 1610612740, 720900, 0, 1610612740, 786436, 0, 1610612740, -393211, 0, 1610612740, -327675, 0, 1610612740, -262139, 0, 1610612740, 655365, 0, 1610612740, 720901, 0, 1610612740, 786437, 0, 1610612740, -393210, 0, 1610612740, -327674, 0, 1610612740, -262138, 0, 1610612740, 655366, 0, 1610612740, 720902, 0, 1610612740, 786438, 0, 1610612740, -393209, 0, 1610612740, -327673, 0, 1610612740, -262137, 0, 1610612740, 655367, 0, 1610612740, 720903, 0, 1610612740, 786439, 0, 1610612740, -393208, 0, 1610612740, -327672, 0, 1610612740, -262136, 0, 1610612740, 655368, 0, 1610612740, 720904, 0, 1610612740, 786440, 0, 1610612740, -393207, 0, 1610612740, -327671, 0, 1610612740, -262135, 0, 1610612740, 655369, 0, 1610612740, 720905, 0, 1610612740, 786441, 0, 1610612740, -393206, 0, 1610612740, -327670, 0, 1610612740, -262134, 0, 1610612740, 655370, 0, 1610612740, 720906, 0, 1610612740, 786442, 0, 1610612740, -393205, 0, 1610612740, -327669, 0, 1610612740, -262133, 0, 1610612740, 655371, 0, 1610612740, 720907, 0, 1610612740, 786443, 0, 1610612740, -393204, 0, 1610612740, -327668, 0, 1610612740, -262132, 0, 1610612740, 655372, 0, 1610612740, 720908, 0, 1610612740, 786444, 0, 1610612740, -393203, 0, 1610612740, -327667, 0, 1610612740, -262131, 0, 1610612740, 655373, 0, 1610612740, 720909, 0, 1610612740, 786445, 0, 1610612740, -393202, 0, 1610612740, -327666, 0, 1610612740, -262130, 0, 1610612740, 655374, 0, 1610612740, 720910, 0, 1610612740, 786446, 0, 1610612740, -393201, 0, 1610612740, -327665, 0, 1610612740, -262129, 0, 1610612740, 655375, 0, 1610612740, 720911, 0, 1610612740, 786447, 0, 1610612740, -393200, 0, 1610612740, -327664, 0, 1610612740, -262128, 0, 1610612740, 655376, 0, 1610612740, 720912, 0, 1610612740, 786448, 0, 1610612740, -393199, 0, 1610612740, -327663, 0, 1610612740, -262127, 0, 1610612740, -196591, 0, 1610612740, -131055, 0, 1610612740, -65519, 0, 1610612740, 17, 0, 1610612740, 65553, 0, 1610612740, 131089, 0, 1610612740, 196625, 0, 1610612740, 262161, 0, 1610612740, 327697, 0, 1610612740, 393233, 0, 1610612740, 458769, 0, 1610612740, 524305, 0, 1610612740, 589841, 0, 1610612740, 655377, 0, 1610612740, 720913, 0, 1610612740, 786449, 0, 1610612740, -393198, 0, 1610612740, -327662, 0, 1610612740, -262126, 0, 1610612740, -196590, 0, 1610612740, -131054, 0, 1610612740, -65518, 0, 1610612740, 18, 0, 1610612740, 65554, 0, 1610612740, 131090, 0, 1610612740, 196626, 0, 1610612740, 262162, 0, 1610612740, 327698, 0, 1610612740, 393234, 0, 1610612740, 458770, 0, 1610612740, 524306, 0, 1610612740, 589842, 0, 1610612740, 655378, 0, 1610612740, 720914, 0, 1610612740, 786450, 0, 1610612740, -393197, 0, 1610612740, -327661, 0, 1610612740, -262125, 0, 1610612740, -196589, 0, 1610612740, -131053, 0, 1610612740, -65517, 0, 1610612740, 19, 0, 1610612740, 65555, 0, 1610612740, 131091, 0, 1610612740, 196627, 0, 1610612740, 262163, 0, 1610612740, 327699, 0, 1610612740, 393235, 0, 1610612740, 458771, 0, 1610612740, 524307, 0, 1610612740, 589843, 0, 1610612740, 655379, 0, 1610612740, 720915, 0, 1610612740, 786451, 0, 1610612740)
 layer_2/name = "water2"
 layer_3/name = "bridge"
-layer_3/tile_data = PackedInt32Array(131076, 2, 0, 131082, 196610, 0, 131079, 196610, 0, 131085, 2, 0)
 layer_4/name = "grass"
-layer_4/tile_data = PackedInt32Array(65537, 720896, 5, 131073, 720896, 6, 196609, 720896, 7, 262145, 720896, 8, 65538, 786432, 5, 131074, 786432, 6, 196610, 786432, 7, 262146, 786432, 8, 65539, 851968, 5, 131075, 851968, 6, 196611, 851968, 7, 262147, 851968, 8, 65550, 720896, 5, 131086, 720896, 6, 196622, 720896, 7, 262158, 720896, 8, 65551, 786432, 5, 131087, 786432, 6, 196623, 786432, 7, 262159, 786432, 8, 65552, 851968, 5, 131088, 851968, 6, 196624, 851968, 7, 262160, 851968, 8, 65541, 720896, 5, 131077, 720896, 6, 196613, 720896, 7, 262149, 720896, 8, 65542, 786432, 5, 131078, 786432, 6, 196614, 786432, 7, 262150, 786432, 8, 65543, 851968, 5, 131079, 851968, 6, 196615, 851968, 7, 262151, 851968, 8, 65546, 720896, 5, 131082, 720896, 6, 196618, 720896, 7, 262154, 720896, 8, 65547, 786432, 5, 131083, 786432, 6, 196619, 786432, 7, 262155, 786432, 8, 65548, 851968, 5, 131084, 851968, 6, 196620, 851968, 7, 262156, 851968, 8)
 layer_5/name = "hill2"
 layer_6/name = "hill"
 layer_7/name = "buildings"
@@ -3178,9 +3179,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 132.0
+offset_left = 555.0
 offset_top = 547.0
-offset_right = 228.0
+offset_right = 651.0
 offset_bottom = 591.0
 grow_vertical = 1
 
@@ -3188,33 +3189,37 @@ grow_vertical = 1
 frame_progress = 0.0956393
 
 [node name="PlayerContainer" type="HBoxContainer" parent="PlayerSelectScreen"]
-layout_mode = 0
-offset_left = 152.0
-offset_top = 152.0
-offset_right = 192.0
-offset_bottom = 192.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(578, 324)
 
 [node name="MenuCharacter" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
+position = Vector2(152, 154)
+scale = Vector2(0.75, 0.75)
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
 offset_left = -74.0
-offset_top = 136.0
+offset_top = -157.333
 offset_right = 97.0
-offset_bottom = 180.0
+offset_bottom = -113.333
 theme = ExtResource("19_2vosj")
 text = "Test"
 
 [node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
 offset_left = -61.0
-offset_top = 178.0
+offset_top = -115.333
 offset_right = 80.0
-offset_bottom = 222.0
+offset_bottom = -71.3333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
 [node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
-position = Vector2(8, 152)
+position = Vector2(8, -141.333)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_grd6o")
 animation = &"press"
@@ -3225,28 +3230,34 @@ position = Vector2(8, 40)
 scale = Vector2(4, 4)
 texture = ExtResource("21_5pym0")
 
+[node name="BridgeRight" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+position = Vector2(137, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("32_h1744")
+
 [node name="MenuCharacter2" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
-position = Vector2(256, 0)
+position = Vector2(346, 154)
+scale = Vector2(0.75, 0.75)
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter2"]
 offset_left = -72.0
-offset_top = 136.0
+offset_top = -157.333
 offset_right = 99.0
-offset_bottom = 180.0
+offset_bottom = -113.333
 theme = ExtResource("19_2vosj")
 text = "Test"
 
 [node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter2"]
 offset_left = -60.0
-offset_top = 178.0
+offset_top = -115.333
 offset_right = 81.0
-offset_bottom = 222.0
+offset_bottom = -71.3333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
 [node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter2"]
-position = Vector2(9, 152)
+position = Vector2(9, -141.333)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_llsf3")
 animation = &"press"
@@ -3257,28 +3268,34 @@ position = Vector2(8, 40)
 scale = Vector2(4, 4)
 texture = ExtResource("21_5pym0")
 
+[node name="BridgeDoubleRight" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter2"]
+position = Vector2(161.333, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("33_kcf1r")
+
 [node name="MenuCharacter3" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
-position = Vector2(576, 0)
+position = Vector2(576, 154)
+scale = Vector2(0.75, 0.75)
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter3"]
 offset_left = -72.0
-offset_top = 136.0
+offset_top = -157.333
 offset_right = 99.0
-offset_bottom = 180.0
+offset_bottom = -113.333
 theme = ExtResource("19_2vosj")
 text = "Test"
 
 [node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter3"]
 offset_left = -60.0
-offset_top = 178.0
+offset_top = -115.333
 offset_right = 81.0
-offset_bottom = 222.0
+offset_bottom = -71.3333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
 [node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter3"]
-position = Vector2(9, 152)
+position = Vector2(9, -141.333)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_llsf3")
 animation = &"press"
@@ -3291,26 +3308,27 @@ texture = ExtResource("21_5pym0")
 
 [node name="MenuCharacter4" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
-position = Vector2(832, 0)
+position = Vector2(806, 154)
+scale = Vector2(0.75, 0.75)
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
 offset_left = -71.0
-offset_top = 136.0
+offset_top = -157.333
 offset_right = 100.0
-offset_bottom = 180.0
+offset_bottom = -113.333
 theme = ExtResource("19_2vosj")
 text = "Test"
 
 [node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
 offset_left = -60.0
-offset_top = 178.0
+offset_top = -115.333
 offset_right = 81.0
-offset_bottom = 222.0
+offset_bottom = -71.3333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
 [node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
-position = Vector2(9, 152)
+position = Vector2(9, -141.333)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_llsf3")
 animation = &"press"
@@ -3320,6 +3338,214 @@ z_index = -1
 position = Vector2(8, 40)
 scale = Vector2(4, 4)
 texture = ExtResource("21_5pym0")
+
+[node name="BridgeDoubleLeft" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
+position = Vector2(-145.333, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("33_kcf1r")
+flip_h = true
+
+[node name="MenuCharacter5" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+z_index = 1
+position = Vector2(1000, 154)
+scale = Vector2(0.75, 0.75)
+
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
+offset_left = -71.0
+offset_top = -157.333
+offset_right = 100.0
+offset_bottom = -113.333
+theme = ExtResource("19_2vosj")
+text = "Test"
+
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
+offset_left = -60.0
+offset_top = -115.333
+offset_right = 81.0
+offset_bottom = -71.3333
+theme = ExtResource("19_2vosj")
+text = "To Join"
+
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
+position = Vector2(9, -141.333)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_llsf3")
+animation = &"press"
+
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
+z_index = -1
+position = Vector2(8, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("21_5pym0")
+
+[node name="BridgeLeft" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
+position = Vector2(-121.333, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("32_h1744")
+
+[node name="MenuCharacter6" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+z_index = 1
+position = Vector2(152, 389)
+scale = Vector2(0.75, 0.75)
+
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+offset_left = -74.0
+offset_top = 136.0
+offset_right = 97.0
+offset_bottom = 180.0
+theme = ExtResource("19_2vosj")
+text = "Test"
+
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+offset_left = -61.0
+offset_top = 178.0
+offset_right = 80.0
+offset_bottom = 222.0
+theme = ExtResource("19_2vosj")
+text = "To Join"
+
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+position = Vector2(8, 152)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_grd6o")
+animation = &"press"
+
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+z_index = -1
+position = Vector2(8, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("21_5pym0")
+
+[node name="BridgeRight" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+position = Vector2(137, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("32_h1744")
+
+[node name="BridgeUp" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
+position = Vector2(10, -138)
+scale = Vector2(4, 4)
+texture = ExtResource("34_ec8r6")
+
+[node name="MenuCharacter7" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+z_index = 1
+position = Vector2(346, 389)
+scale = Vector2(0.75, 0.75)
+
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
+offset_left = -71.0
+offset_top = 136.0
+offset_right = 100.0
+offset_bottom = 180.0
+theme = ExtResource("19_2vosj")
+text = "Test"
+
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
+offset_left = -60.0
+offset_top = 178.0
+offset_right = 81.0
+offset_bottom = 222.0
+theme = ExtResource("19_2vosj")
+text = "To Join"
+
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
+position = Vector2(9, 152)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_llsf3")
+animation = &"press"
+
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
+z_index = -1
+position = Vector2(8, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("21_5pym0")
+
+[node name="BridgeUp" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
+position = Vector2(9.33334, -138)
+scale = Vector2(4, 4)
+texture = ExtResource("34_ec8r6")
+flip_h = true
+
+[node name="MenuCharacter8" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+z_index = 1
+position = Vector2(806, 389)
+scale = Vector2(0.75, 0.75)
+
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
+offset_left = -71.0
+offset_top = 136.0
+offset_right = 100.0
+offset_bottom = 180.0
+theme = ExtResource("19_2vosj")
+text = "Test"
+
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
+offset_left = -60.0
+offset_top = 178.0
+offset_right = 81.0
+offset_bottom = 222.0
+theme = ExtResource("19_2vosj")
+text = "To Join"
+
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
+position = Vector2(9, 152)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_llsf3")
+animation = &"press"
+
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
+z_index = -1
+position = Vector2(8, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("21_5pym0")
+
+[node name="BridgeUp" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
+position = Vector2(9.33331, -138)
+scale = Vector2(4, 4)
+texture = ExtResource("34_ec8r6")
+
+[node name="MenuCharacter9" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+z_index = 1
+position = Vector2(1000, 389)
+scale = Vector2(0.75, 0.75)
+
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+offset_left = -71.0
+offset_top = 136.0
+offset_right = 100.0
+offset_bottom = 180.0
+theme = ExtResource("19_2vosj")
+text = "Test"
+
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+offset_left = -60.0
+offset_top = 178.0
+offset_right = 81.0
+offset_bottom = 222.0
+theme = ExtResource("19_2vosj")
+text = "To Join"
+
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+position = Vector2(9, 152)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_llsf3")
+animation = &"press"
+
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+z_index = -1
+position = Vector2(8, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("21_5pym0")
+
+[node name="BridgeLeft" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+position = Vector2(-121.333, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("32_h1744")
+
+[node name="BridgeUp" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
+position = Vector2(9.33335, -138)
+scale = Vector2(4, 4)
+texture = ExtResource("34_ec8r6")
+flip_h = true
 
 [node name="GameSettings" type="Control" parent="."]
 visible = false
