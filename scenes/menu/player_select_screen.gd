@@ -4,8 +4,9 @@ extends Control
 @onready var player_container = $PlayerContainer # The parent node containing player slots in the scene
 @onready var hold_down_button = $HoldDownButton
 @onready var start_label = $StartLabel
+@onready var back_option = $BackOption
 
-const GAME_DATA = preload("res://scenes/game/game_data.tres")
+var GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 @export var current_players : Resource # Current players resource
 
@@ -24,6 +25,9 @@ var player_slots = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var back_button = back_option.get_node("BackButton")
+	back_button.connect("back_button_pressed", _on_back_button_pressed)
+	
 	# Disable start button
 	start_label.hide()
 	hold_down_button.hide()
@@ -86,23 +90,40 @@ func _remove_player(player_index):
 	
 	_update_lobby_display()
 
+var SEASON_HILL_TEXTURES = {
+	GAME_DATA.Season.SUMMER: "res://assets/ui/player_select/SUMMER_grass_selected_player.png",
+	GAME_DATA.Season.SPRING: "res://assets/ui/player_select/SPRING_grass_selected_player.png",
+	GAME_DATA.Season.FALL:   "res://assets/ui/player_select/FALL_grass_selected_player.png",
+	GAME_DATA.Season.WINTER: "res://assets/ui/player_select/WINTER_grass_selected_player.png"
+}
+
+func _update_hill_texture(hill: Sprite2D):
+	if SEASON_HILL_TEXTURES.has(GAME_DATA.season):
+		hill.texture = load(SEASON_HILL_TEXTURES[GAME_DATA.season])
+		hill.visible = true
+		print("Hill texture updated to:", SEASON_HILL_TEXTURES[GAME_DATA.season])
+	else:
+		print("Invalid season for hill texture:", GAME_DATA.season)
+		hill.visible = false  # Hide hill if no valid texture
+
 
 func _update_lobby_display():
 	# Hide all player slots initially
 	for i in range(max_players):
 		_hide_player_slot(i)
-	
 
 	# Show players in their assigned slots
 	for player_index in player_slots.keys():
 		var slot_index = player_slots[player_index]
 		var player_slot = player_container.get_child(slot_index)
 		var player_sprite = player_slot.get_node("Sprite2D")
+		var player_hill = player_slot.get_node("Hill")
 		var player_shadow = player_slot.get_node("Shadow")
 		var player_name = player_slot.get_node("PlayerName")
 		var to_join_label = player_slot.get_node("ToJoin")
 		var join_button_image = player_slot.get_node("JoinButton")
 		
+		# Then update player visuals
 		player_slot.show()
 		player_sprite.show()
 		player_shadow.show()
@@ -112,24 +133,17 @@ func _update_lobby_display():
 		join_button_image.hide()
 		join_button_image.play("press")
 		
-		match GAME_DATA.season:
-			GAME_DATA.Season.SUMMER:
-				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/SUMMER_grass_selected_player.png")
-			GAME_DATA.Season.SPRING:
-				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/SPRING_grass_selected_player.png")
-			GAME_DATA.Season.FALL:
-				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/FALL_grass_selected_player.png")
-			GAME_DATA.Season.WINTER:
-				player_slot.get_node("Hill").texture = preload("res://assets/ui/player_select/WINTER_grass_selected_player.png")
-		player_slot.get_node("Hill").show()
-		
-	# Show "To Join" label and button image for empty slots
+		# Update hill texture for a specific player slot
+		_update_hill_texture(player_hill)
+
+	
+	# Handle empty slots
 	for i in range(max_players):
 		if i not in player_slots.values():
 			var player_slot = player_container.get_child(i)
+			var player_hill = player_slot.get_node("Hill")
 			var player_sprite = player_slot.get_node("Sprite2D")
 			var player_shadow = player_slot.get_node("Shadow")
-			var player_hill = player_slot.get_node("Hill")
 			var player_name = player_slot.get_node("PlayerName")
 			var to_join_label = player_slot.get_node("ToJoin")
 			var join_button_image = player_slot.get_node("JoinButton")
@@ -142,6 +156,7 @@ func _update_lobby_display():
 			to_join_label.show()
 			join_button_image.show()
 			join_button_image.play("press")
+
 		
 
 func _hide_player_slot(slot_index):
@@ -160,8 +175,14 @@ func _on_back_button_pressed():
 	set_process(false)
 	self.hide()
 	main.show()
+	
+	# Disable child processing explicitly
+	back_option.set_process(false)
 
 
 func _on_main_change_to_player_select():
 	set_process(true)
 	self.show()
+	
+	# Enable child processing explicitly
+	back_option.set_process(true)

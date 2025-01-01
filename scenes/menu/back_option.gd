@@ -5,10 +5,27 @@ extends HBoxContainer
 
 signal back_button_pressed
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var back_actions = ["p1_back", "p2_back", "p3_back", "p4_back"]
+
 func _process(delta):
-	if Input.is_action_pressed("p1_back") or Input.is_action_pressed("p2_back") or Input.is_action_pressed("p3_back") or Input.is_action_pressed("p4_back"):
+	# Skip processing if BackOption or its parent is not visible
+	if not is_visible_in_tree():
+		return
+	
+	if _is_any_action_pressed(back_actions):
 		circle.play("pressed")
-	elif Input.is_action_just_released("p1_back") or Input.is_action_just_released("p2_back") or Input.is_action_just_released("p3_back") or Input.is_action_just_released("p4_back"):
+	elif _is_any_action_just_released(back_actions):
 		circle.play("default")
 		emit_signal("back_button_pressed")
+
+func _is_any_action_pressed(actions: Array) -> bool:
+	for action in actions:
+		if Input.is_action_pressed(action):
+			return true
+	return false
+
+func _is_any_action_just_released(actions: Array) -> bool:
+	for action in actions:
+		if Input.is_action_just_released(action):
+			return true
+	return false

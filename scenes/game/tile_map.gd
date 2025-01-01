@@ -68,7 +68,6 @@ func _on_game_data_field_changed(field_name, new_value):
 	if field_name == "season":
 		# If season changes, update the tilemap and emitters
 		change_season_textures(new_value)
-		print(new_value)
 
 # Define the emitting states for each season
 var season_effects = {
@@ -89,9 +88,11 @@ func change_season_textures(new_season):
 	# Update emitters for the season
 	var effects = season_effects.get(new_season, {})
 	for emitter_name in effects.keys():
-		var emitter = get_node(emitter_name) # Dynamically access the emitter
+		var emitter = get_node(emitter_name)  # Dynamically access the emitter
 		if emitter:
-			emitter.emitting = effects[emitter_name]
+			var should_emit = effects[emitter_name]
+			emitter.emitting = should_emit  # Enable/disable emitting
+			emitter.visible = should_emit  # Enable/disable visibility
 		else:
 			print("Emitter not found:", emitter_name)
 
