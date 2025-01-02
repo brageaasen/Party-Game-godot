@@ -4,6 +4,9 @@ extends Resource
 # Signal to notify changes in fields
 signal field_changed(field_name, new_value)
 
+
+const max_players = 9
+
 @export var difficulty: Difficulty = Difficulty.NORMAL:
 	set(value):
 		if difficulty != value:

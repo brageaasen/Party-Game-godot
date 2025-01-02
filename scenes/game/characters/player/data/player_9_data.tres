@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=3 format=3 uid="uid://drisxwpe4on0b"]
+
+[ext_resource type="Script" path="res://scenes/game/characters/player/data/player_data.gd" id="1_qgs8o"]
+[ext_resource type="Resource" uid="uid://dkhw56gugnejh" path="res://scenes/game/characters/player/controls/player_9_controls.tres" id="1_uo14c"]
+
+[resource]
+script = ExtResource("1_qgs8o")
+player_index = 9
+score = 0
+name = "Player 9"
+controls = ExtResource("1_uo14c")

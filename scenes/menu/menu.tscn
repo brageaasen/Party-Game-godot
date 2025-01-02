@@ -3214,7 +3214,7 @@ text = "Test"
 offset_left = -61.0
 offset_top = -115.333
 offset_right = 80.0
-offset_bottom = -71.3333
+offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
@@ -3252,7 +3252,7 @@ text = "Test"
 offset_left = -60.0
 offset_top = -115.333
 offset_right = 81.0
-offset_bottom = -71.3333
+offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
@@ -3290,7 +3290,7 @@ text = "Test"
 offset_left = -60.0
 offset_top = -115.333
 offset_right = 81.0
-offset_bottom = -71.3333
+offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
@@ -3320,10 +3320,10 @@ theme = ExtResource("19_2vosj")
 text = "Test"
 
 [node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
-offset_left = -60.0
+offset_left = -60.0004
 offset_top = -115.333
-offset_right = 81.0
-offset_bottom = -71.3333
+offset_right = 80.9996
+offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
@@ -3362,7 +3362,7 @@ text = "Test"
 offset_left = -60.0
 offset_top = -115.333
 offset_right = 81.0
-offset_bottom = -71.3333
+offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 

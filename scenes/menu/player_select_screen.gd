@@ -12,12 +12,16 @@ var GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 signal change_to_game_settings
 
-var max_players = 4
 var player_data_paths = {
 	1 : "res://scenes/game/characters/player/data/player_1_data.tres",
 	2 : "res://scenes/game/characters/player/data/player_2_data.tres",
 	3 : "res://scenes/game/characters/player/data/player_3_data.tres",
 	4 : "res://scenes/game/characters/player/data/player_4_data.tres",
+	5 : "res://scenes/game/characters/player/data/player_5_data.tres",
+	6 : "res://scenes/game/characters/player/data/player_6_data.tres",
+	7 : "res://scenes/game/characters/player/data/player_7_data.tres",
+	8 : "res://scenes/game/characters/player/data/player_8_data.tres",
+	9 : "res://scenes/game/characters/player/data/player_9_data.tres",
 }
 
 # Dictionary to keep track of which player is in which slot
@@ -33,7 +37,7 @@ func _ready():
 	hold_down_button.hide()
 	hold_down_button.set_process(false)
 	
-	for i in range(max_players):
+	for i in range(GAME_DATA.max_players):
 		_hide_player_slot(i)
 	_update_lobby_display()
 
@@ -52,7 +56,7 @@ func _process(delta):
 		hold_down_button.set_process(false)
 	
 	if self.visible == true:
-		for i in range(1, max_players + 1):
+		for i in range(1, GAME_DATA.max_players + 1):
 			if Input.is_action_just_pressed("p%d_join" % i):
 				_add_player(i)
 			elif Input.is_action_just_pressed("p%d_leave" % i):
@@ -90,26 +94,40 @@ func _remove_player(player_index):
 	
 	_update_lobby_display()
 
-var SEASON_HILL_TEXTURES = {
+var SEASON_HILL_TEXTURES_SELECTED = {
 	GAME_DATA.Season.SUMMER: "res://assets/ui/player_select/SUMMER_grass_selected_player.png",
 	GAME_DATA.Season.SPRING: "res://assets/ui/player_select/SPRING_grass_selected_player.png",
 	GAME_DATA.Season.FALL:   "res://assets/ui/player_select/FALL_grass_selected_player.png",
 	GAME_DATA.Season.WINTER: "res://assets/ui/player_select/WINTER_grass_selected_player.png"
 }
 
-func _update_hill_texture(hill: Sprite2D):
-	if SEASON_HILL_TEXTURES.has(GAME_DATA.season):
-		hill.texture = load(SEASON_HILL_TEXTURES[GAME_DATA.season])
-		hill.visible = true
-		print("Hill texture updated to:", SEASON_HILL_TEXTURES[GAME_DATA.season])
+var SEASON_HILL_TEXTURES_DE_SELECTED = {
+	GAME_DATA.Season.SUMMER: "res://assets/ui/player_select/SUMMER_grass_de_selected_player.png",
+	GAME_DATA.Season.SPRING: "res://assets/ui/player_select/SPRING_grass_de_selected_player.png",
+	GAME_DATA.Season.FALL:   "res://assets/ui/player_select/FALL_grass_de_selected_player.png",
+	GAME_DATA.Season.WINTER: "res://assets/ui/player_select/WINTER_grass_de_selected_player.png"
+}
+
+func _update_hill_texture(hill: Sprite2D, is_player_joined: bool):
+	if is_player_joined:
+		if SEASON_HILL_TEXTURES_SELECTED.has(GAME_DATA.season):
+			hill.texture = load(SEASON_HILL_TEXTURES_SELECTED[GAME_DATA.season])
+			print("Hill texture updated to (selected):", SEASON_HILL_TEXTURES_SELECTED[GAME_DATA.season])
+		else:
+			print("Invalid season for selected hill texture:", GAME_DATA.season)
 	else:
-		print("Invalid season for hill texture:", GAME_DATA.season)
-		hill.visible = false  # Hide hill if no valid texture
+		if SEASON_HILL_TEXTURES_DE_SELECTED.has(GAME_DATA.season):
+			hill.texture = load(SEASON_HILL_TEXTURES_DE_SELECTED[GAME_DATA.season])
+			print("Hill texture updated to (de-selected):", SEASON_HILL_TEXTURES_DE_SELECTED[GAME_DATA.season])
+		else:
+			print("Invalid season for de-selected hill texture:", GAME_DATA.season)
+	hill.visible = true
+
 
 
 func _update_lobby_display():
 	# Hide all player slots initially
-	for i in range(max_players):
+	for i in range(GAME_DATA.max_players):
 		_hide_player_slot(i)
 
 	# Show players in their assigned slots
@@ -123,7 +141,7 @@ func _update_lobby_display():
 		var to_join_label = player_slot.get_node("ToJoin")
 		var join_button_image = player_slot.get_node("JoinButton")
 		
-		# Then update player visuals
+		# Update player visuals for joined players
 		player_slot.show()
 		player_sprite.show()
 		player_shadow.show()
@@ -133,12 +151,11 @@ func _update_lobby_display():
 		join_button_image.hide()
 		join_button_image.play("press")
 		
-		# Update hill texture for a specific player slot
-		_update_hill_texture(player_hill)
-
+		# Update hill texture to selected for joined players
+		_update_hill_texture(player_hill, true)
 	
-	# Handle empty slots
-	for i in range(max_players):
+	# Handle empty slots (not joined players)
+	for i in range(GAME_DATA.max_players):
 		if i not in player_slots.values():
 			var player_slot = player_container.get_child(i)
 			var player_hill = player_slot.get_node("Hill")
@@ -151,7 +168,31 @@ func _update_lobby_display():
 			player_slot.show()
 			player_sprite.hide()
 			player_shadow.hide()
-			player_hill.hide()
+			player_hill.show()
+			player_name.hide()
+			to_join_label.show()
+			join_button_image.show()
+			join_button_image.play("press")
+			
+			# Update hill texture to de-selected for not joined players
+			_update_hill_texture(player_hill, false)
+
+
+	
+	# Handle empty slots
+	for i in range(GAME_DATA.max_players):
+		if i not in player_slots.values():
+			var player_slot = player_container.get_child(i)
+			var player_hill = player_slot.get_node("Hill")
+			var player_sprite = player_slot.get_node("Sprite2D")
+			var player_shadow = player_slot.get_node("Shadow")
+			var player_name = player_slot.get_node("PlayerName")
+			var to_join_label = player_slot.get_node("ToJoin")
+			var join_button_image = player_slot.get_node("JoinButton")
+
+			player_slot.show()
+			player_sprite.hide()
+			player_shadow.hide()
 			player_name.hide()
 			to_join_label.show()
 			join_button_image.show()
