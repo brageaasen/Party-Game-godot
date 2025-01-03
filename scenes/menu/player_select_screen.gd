@@ -2,6 +2,7 @@ extends Control
 
 @onready var main = $"../Main"
 @onready var player_container = $PlayerContainer # The parent node containing player slots in the scene
+@onready var character_grid = $CharacterSelectionContainer  # The character selection grid
 @onready var hold_down_button = $HoldDownButton
 @onready var start_label = $StartLabel
 @onready var back_option = $BackOption
@@ -112,13 +113,11 @@ func _update_hill_texture(hill: Sprite2D, is_player_joined: bool):
 	if is_player_joined:
 		if SEASON_HILL_TEXTURES_SELECTED.has(GAME_DATA.season):
 			hill.texture = load(SEASON_HILL_TEXTURES_SELECTED[GAME_DATA.season])
-			print("Hill texture updated to (selected):", SEASON_HILL_TEXTURES_SELECTED[GAME_DATA.season])
 		else:
 			print("Invalid season for selected hill texture:", GAME_DATA.season)
 	else:
 		if SEASON_HILL_TEXTURES_DE_SELECTED.has(GAME_DATA.season):
 			hill.texture = load(SEASON_HILL_TEXTURES_DE_SELECTED[GAME_DATA.season])
-			print("Hill texture updated to (de-selected):", SEASON_HILL_TEXTURES_DE_SELECTED[GAME_DATA.season])
 		else:
 			print("Invalid season for de-selected hill texture:", GAME_DATA.season)
 	hill.visible = true
@@ -145,8 +144,8 @@ func _update_lobby_display():
 		player_slot.show()
 		player_sprite.show()
 		player_shadow.show()
-		player_name.show()
 		player_name.text = current_players.players[player_index].name
+		player_name.show()
 		to_join_label.hide()
 		join_button_image.hide()
 		join_button_image.play("press")
@@ -170,6 +169,7 @@ func _update_lobby_display():
 			player_shadow.hide()
 			player_hill.show()
 			player_name.hide()
+			print(player_name.text)
 			to_join_label.show()
 			join_button_image.show()
 			join_button_image.play("press")

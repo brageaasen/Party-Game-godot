@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=96 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -37,6 +37,31 @@
 [ext_resource type="Texture2D" uid="uid://dbe44gibc1b17" path="res://assets/ui/player_select/bridge/bridge_side.png" id="32_h1744"]
 [ext_resource type="Texture2D" uid="uid://csllqkkvkb7na" path="res://assets/ui/player_select/bridge/bridge_side_stop.png" id="33_kcf1r"]
 [ext_resource type="Texture2D" uid="uid://chckg760d6oe8" path="res://assets/ui/player_select/bridge/bridge_down_short.png" id="34_ec8r6"]
+[ext_resource type="Script" path="res://scenes/menu/character_selection_container.gd" id="35_yws6f"]
+[ext_resource type="Texture2D" uid="uid://ch0hjnqmhra54" path="res://assets/player_select/character_icons/black.png" id="36_bxrug"]
+[ext_resource type="Texture2D" uid="uid://cw4op4ufmr0sj" path="res://assets/player_select/character_icons/blue.png" id="37_i1gnm"]
+[ext_resource type="Texture2D" uid="uid://birs7tyo7badp" path="res://assets/player_select/character_icons/brown.png" id="38_7wcnl"]
+[ext_resource type="Texture2D" uid="uid://dbn2jn3unj2te" path="res://assets/player_select/character_icons/calico.png" id="39_y6von"]
+[ext_resource type="Texture2D" uid="uid://b7071gvg5ha16" path="res://assets/player_select/character_icons/cotton_candy_blue.png" id="40_pd6tn"]
+[ext_resource type="Texture2D" uid="uid://dd2ksuj2140ql" path="res://assets/player_select/character_icons/cotton_candy_pink.png" id="41_p8p1n"]
+[ext_resource type="Texture2D" uid="uid://2gjlkyf8swhe" path="res://assets/player_select/character_icons/creme.png" id="42_ym121"]
+[ext_resource type="Texture2D" uid="uid://b1l4kel2cvvev" path="res://assets/player_select/character_icons/dark.png" id="43_1dtt0"]
+[ext_resource type="Texture2D" uid="uid://cgh1gjlo5i6qs" path="res://assets/player_select/character_icons/game_boy.png" id="44_m5yws"]
+[ext_resource type="Texture2D" uid="uid://b8tc8tdcjiarq" path="res://assets/player_select/character_icons/ghost.png" id="45_aqe7u"]
+[ext_resource type="Texture2D" uid="uid://b8do81k3y4rdd" path="res://assets/player_select/character_icons/gold.png" id="46_51v2y"]
+[ext_resource type="Texture2D" uid="uid://bng5euxgmny03" path="res://assets/player_select/character_icons/grey.png" id="47_5ydd5"]
+[ext_resource type="Texture2D" uid="uid://b1mguu7fyk4vw" path="res://assets/player_select/character_icons/hairless.png" id="48_bnlq0"]
+[ext_resource type="Texture2D" uid="uid://cafi4pxcpnyg6" path="res://assets/player_select/character_icons/indigo.png" id="49_gm0gi"]
+[ext_resource type="Texture2D" uid="uid://dng16n0ropqua" path="res://assets/player_select/character_icons/orange.png" id="50_6skq1"]
+[ext_resource type="Texture2D" uid="uid://dkhxj47cdjy1x" path="res://assets/player_select/character_icons/peach.png" id="51_be67h"]
+[ext_resource type="Texture2D" uid="uid://cbsmq7vxjctvn" path="res://assets/player_select/character_icons/pink.png" id="52_c2e5j"]
+[ext_resource type="Texture2D" uid="uid://bgwyjdrkx0mt8" path="res://assets/player_select/character_icons/radioactive.png" id="53_fafqf"]
+[ext_resource type="Texture2D" uid="uid://bpmstb6l8f3lc" path="res://assets/player_select/character_icons/red.png" id="54_2ij5r"]
+[ext_resource type="Texture2D" uid="uid://dt3k30ltce074" path="res://assets/player_select/character_icons/seal_point.png" id="55_nstcv"]
+[ext_resource type="Texture2D" uid="uid://cpmn3cw647exk" path="res://assets/player_select/character_icons/teal.png" id="56_ss52q"]
+[ext_resource type="Texture2D" uid="uid://tdfx4iebqa5a" path="res://assets/player_select/character_icons/white.png" id="57_78a1y"]
+[ext_resource type="Texture2D" uid="uid://dj5e2tj6nb3ow" path="res://assets/player_select/character_icons/white_grey.png" id="58_2jfyj"]
+[ext_resource type="Texture2D" uid="uid://c0pw3mb62ca7f" path="res://assets/player_select/character_icons/yellow.png" id="59_5ijyu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odbym"]
 texture = ExtResource("1_1jpse")
@@ -2848,6 +2873,7 @@ animations = [{
 [node name="Menu" type="Node"]
 
 [node name="Main" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3099,7 +3125,6 @@ text = "Back"
 layout_mode = 0
 
 [node name="PlayerSelectScreen" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3197,12 +3222,12 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(578, 324)
 
-[node name="MenuCharacter" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
+[node name="MenuCharacter1" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
 position = Vector2(152, 154)
 scale = Vector2(0.75, 0.75)
 
-[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+[node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 offset_left = -74.0
 offset_top = -157.333
 offset_right = 97.0
@@ -3210,7 +3235,7 @@ offset_bottom = -113.333
 theme = ExtResource("19_2vosj")
 text = "Test"
 
-[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+[node name="ToJoin" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 offset_left = -61.0
 offset_top = -115.333
 offset_right = 80.0
@@ -3218,19 +3243,19 @@ offset_bottom = -71.333
 theme = ExtResource("19_2vosj")
 text = "To Join"
 
-[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+[node name="JoinButton" type="AnimatedSprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 position = Vector2(8, -141.333)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_grd6o")
 animation = &"press"
 
-[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+[node name="Hill" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 z_index = -1
 position = Vector2(8, 40)
 scale = Vector2(4, 4)
 texture = ExtResource("21_5pym0")
 
-[node name="BridgeRight" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter"]
+[node name="BridgeRight" type="Sprite2D" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 position = Vector2(137, 20)
 scale = Vector2(4, 4)
 texture = ExtResource("32_h1744")
@@ -3546,6 +3571,112 @@ position = Vector2(9.33335, -138)
 scale = Vector2(4, 4)
 texture = ExtResource("34_ec8r6")
 flip_h = true
+
+[node name="CharacterSelectionContainer" type="GridContainer" parent="PlayerSelectScreen"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 403.0
+offset_right = 532.0
+offset_bottom = 455.0
+scale = Vector2(3, 3)
+columns = 6
+script = ExtResource("35_yws6f")
+
+[node name="Black" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("36_bxrug")
+
+[node name="Blue" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("37_i1gnm")
+
+[node name="Brown" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("38_7wcnl")
+
+[node name="Calico" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("39_y6von")
+
+[node name="CottonCandyBlue" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("40_pd6tn")
+
+[node name="CottonCandyPink" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("41_p8p1n")
+
+[node name="Creme" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("42_ym121")
+
+[node name="Dark" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("43_1dtt0")
+
+[node name="GameBoy" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("44_m5yws")
+
+[node name="Ghost" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("45_aqe7u")
+
+[node name="Gold" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("46_51v2y")
+
+[node name="Grey" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("47_5ydd5")
+
+[node name="Hairless" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("48_bnlq0")
+
+[node name="Indigo" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("49_gm0gi")
+
+[node name="Orange" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("50_6skq1")
+
+[node name="Peach" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("51_be67h")
+
+[node name="Pink" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("52_c2e5j")
+
+[node name="Radioactive" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("53_fafqf")
+
+[node name="Red" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("54_2ij5r")
+
+[node name="SealPoint" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("55_nstcv")
+
+[node name="Teal" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("56_ss52q")
+
+[node name="White" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("57_78a1y")
+
+[node name="WhiteGrey" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("58_2jfyj")
+
+[node name="Yellow" type="TextureRect" parent="PlayerSelectScreen/CharacterSelectionContainer"]
+layout_mode = 2
+texture = ExtResource("59_5ijyu")
 
 [node name="GameSettings" type="Control" parent="."]
 visible = false
