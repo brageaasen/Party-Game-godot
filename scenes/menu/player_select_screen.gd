@@ -1,8 +1,6 @@
 extends Control
 
 @onready var main = $"../Main"
-@onready var player_container = $PlayerContainer # The parent node containing player slots in the scene
-@onready var character_grid = $CharacterSelectionContainer  # The character selection grid
 @onready var hold_down_button = $HoldDownButton
 @onready var start_label = $StartLabel
 @onready var back_option = $BackOption
@@ -25,10 +23,10 @@ var player_data_paths = {
 	9 : "res://scenes/game/characters/player/data/player_9_data.tres",
 }
 
-# Dictionary to keep track of which player is in which slot
-var player_slots = {}
+@onready var player_container = $PlayerContainer  # Container for player slots
+@onready var cursor_container = $CharacterSelection/Cursors  # Container for all cursors
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	var back_button = back_option.get_node("BackButton")
 	back_button.connect("back_button_pressed", _on_back_button_pressed)
@@ -41,7 +39,55 @@ func _ready():
 	for i in range(GAME_DATA.max_players):
 		_hide_player_slot(i)
 	_update_lobby_display()
+	
+	current_players.connect("added_player", _on_player_added)
+	current_players.connect("removed_player", _on_player_removed)
+	
+	# Connect cursor signals to handle character selection and deselection
+	for cursor in cursor_container.get_children():
+		cursor.connect("character_selected", _on_character_selected)
+		cursor.connect("character_deselected", _on_character_deselected)
 
+	# Update cursors based on current players
+	_update_cursors()
+
+func _on_player_added(player_index, player_name):
+	print("Player added signal received for index:", player_index, "name:", player_name)
+	_update_cursors()  # Update cursors dynamically
+
+func _on_player_removed(player_index):
+	print("Player removed signal received for index:", player_index)
+	_update_cursors()  # Update cursors dynamically
+
+
+func _update_cursors():
+	# Debug: Print the current players
+	print("Current players:", current_players.players)
+
+	# Make cursors visible only for joined players
+	for cursor in cursor_container.get_children():
+		cursor.visible = cursor.current_player in current_players.players.keys()
+		print("Cursor for player", cursor.current_player, "visibility set to", cursor.visible)
+
+
+
+func _on_character_selected(player_index, sprite_path):
+	# Update the sprite of the player's selected MenuCharacter
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	sprite_node.texture = load(sprite_path as String)
+	print("Player", player_index, "selected character:", sprite_path)
+
+func _on_character_deselected(player_index):
+	# Reset the player's sprite
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	sprite_node.texture = null
+	print("Player", player_index, "deselected their character.")
+
+
+# Dictionary to keep track of which player is in which slot
+var player_slots = {}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
