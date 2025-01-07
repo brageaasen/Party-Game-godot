@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=107 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -34,20 +34,29 @@
 [ext_resource type="PackedScene" uid="uid://chffnq1dswfgw" path="res://scenes/menu/back_option.tscn" id="26_fabrw"]
 [ext_resource type="Script" path="res://scenes/game/screen_shake.gd" id="27_llmq1"]
 [ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="27_nv27j"]
+[ext_resource type="Resource" uid="uid://36ppynbriqfv" path="res://scenes/game/characters/player/data/player_1_data.tres" id="30_lr4tc"]
 [ext_resource type="Texture2D" uid="uid://dbe44gibc1b17" path="res://assets/ui/player_select/bridge/bridge_side.png" id="32_h1744"]
 [ext_resource type="Texture2D" uid="uid://csllqkkvkb7na" path="res://assets/ui/player_select/bridge/bridge_side_stop.png" id="33_kcf1r"]
 [ext_resource type="Texture2D" uid="uid://chckg760d6oe8" path="res://assets/ui/player_select/bridge/bridge_down_short.png" id="34_ec8r6"]
+[ext_resource type="Resource" uid="uid://cwyjpeq5ab8si" path="res://scenes/game/characters/player/data/player_2_data.tres" id="34_iqi7i"]
 [ext_resource type="Texture2D" uid="uid://da1m0kyskxkgb" path="res://assets/player_select/selection_cursor.png" id="35_gevbd"]
 [ext_resource type="Script" path="res://scenes/menu/character_selection.gd" id="35_yx0bm"]
 [ext_resource type="Texture2D" uid="uid://ch0hjnqmhra54" path="res://assets/player_select/character_icons/black.png" id="36_bxrug"]
+[ext_resource type="Resource" uid="uid://dthn37icn73u" path="res://scenes/game/characters/player/data/player_3_data.tres" id="36_h86e5"]
 [ext_resource type="Script" path="res://scenes/menu/character_selection_cursor.gd" id="36_y0d8v"]
+[ext_resource type="Resource" uid="uid://2dcan0fb3d4u" path="res://scenes/game/characters/player/data/player_4_data.tres" id="37_2ldmc"]
 [ext_resource type="Texture2D" uid="uid://cw4op4ufmr0sj" path="res://assets/player_select/character_icons/blue.png" id="37_i1gnm"]
 [ext_resource type="Texture2D" uid="uid://birs7tyo7badp" path="res://assets/player_select/character_icons/brown.png" id="38_7wcnl"]
+[ext_resource type="Resource" uid="uid://c5s1accaj2oic" path="res://scenes/game/characters/player/data/player_5_data.tres" id="38_tefta"]
+[ext_resource type="Resource" uid="uid://c8ch73mv3awi7" path="res://scenes/game/characters/player/data/player_6_data.tres" id="39_glahk"]
 [ext_resource type="Texture2D" uid="uid://dbn2jn3unj2te" path="res://assets/player_select/character_icons/calico.png" id="39_y6von"]
 [ext_resource type="Texture2D" uid="uid://b7071gvg5ha16" path="res://assets/player_select/character_icons/cotton_candy_blue.png" id="40_pd6tn"]
+[ext_resource type="Resource" uid="uid://eiwyf3pdeey1" path="res://scenes/game/characters/player/data/player_7_data.tres" id="41_mstb3"]
 [ext_resource type="Texture2D" uid="uid://dd2ksuj2140ql" path="res://assets/player_select/character_icons/cotton_candy_pink.png" id="41_p8p1n"]
+[ext_resource type="Resource" uid="uid://b1kuamjghtdqq" path="res://scenes/game/characters/player/data/player_8_data.tres" id="42_jflyh"]
 [ext_resource type="Texture2D" uid="uid://2gjlkyf8swhe" path="res://assets/player_select/character_icons/creme.png" id="42_ym121"]
 [ext_resource type="Texture2D" uid="uid://b1l4kel2cvvev" path="res://assets/player_select/character_icons/dark.png" id="43_1dtt0"]
+[ext_resource type="Resource" uid="uid://drisxwpe4on0b" path="res://scenes/game/characters/player/data/player_9_data.tres" id="43_v3gjt"]
 [ext_resource type="Texture2D" uid="uid://cgh1gjlo5i6qs" path="res://assets/player_select/character_icons/game_boy.png" id="44_m5yws"]
 [ext_resource type="Texture2D" uid="uid://b8tc8tdcjiarq" path="res://assets/player_select/character_icons/ghost.png" id="45_aqe7u"]
 [ext_resource type="Texture2D" uid="uid://b8do81k3y4rdd" path="res://assets/player_select/character_icons/gold.png" id="46_51v2y"]
@@ -3228,6 +3237,7 @@ pivot_offset = Vector2(578, 324)
 z_index = 1
 position = Vector2(152, 154)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("30_lr4tc")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter1"]
 offset_left = -74.0
@@ -3266,6 +3276,7 @@ texture = ExtResource("32_h1744")
 z_index = 1
 position = Vector2(346, 154)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("34_iqi7i")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter2"]
 offset_left = -72.0
@@ -3304,6 +3315,7 @@ texture = ExtResource("33_kcf1r")
 z_index = 1
 position = Vector2(576, 154)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("36_h86e5")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter3"]
 offset_left = -72.0
@@ -3337,6 +3349,7 @@ texture = ExtResource("21_5pym0")
 z_index = 1
 position = Vector2(806, 154)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("37_2ldmc")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter4"]
 offset_left = -71.0
@@ -3376,6 +3389,7 @@ flip_h = true
 z_index = 1
 position = Vector2(1000, 154)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("38_tefta")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter5"]
 offset_left = -71.0
@@ -3414,6 +3428,7 @@ texture = ExtResource("32_h1744")
 z_index = 1
 position = Vector2(152, 389)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("39_glahk")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter6"]
 offset_left = -74.0
@@ -3457,6 +3472,7 @@ texture = ExtResource("34_ec8r6")
 z_index = 1
 position = Vector2(346, 389)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("41_mstb3")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter7"]
 offset_left = -71.0
@@ -3496,6 +3512,7 @@ flip_h = true
 z_index = 1
 position = Vector2(806, 389)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("42_jflyh")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter8"]
 offset_left = -71.0
@@ -3534,6 +3551,7 @@ texture = ExtResource("34_ec8r6")
 z_index = 1
 position = Vector2(1000, 389)
 scale = Vector2(0.75, 0.75)
+player_data = ExtResource("43_v3gjt")
 
 [node name="PlayerName" type="Label" parent="PlayerSelectScreen/PlayerContainer/MenuCharacter9"]
 offset_left = -71.0

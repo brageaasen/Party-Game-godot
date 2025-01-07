@@ -23,6 +23,7 @@ var player_data_paths = {
 	9 : "res://scenes/game/characters/player/data/player_9_data.tres",
 }
 
+@onready var character_selection = $CharacterSelection
 @onready var player_container = $PlayerContainer  # Container for player slots
 @onready var cursor_container = $CharacterSelection/Cursors  # Container for all cursors
 
@@ -45,6 +46,7 @@ func _ready():
 	
 	# Connect cursor signals to handle character selection and deselection
 	for cursor in cursor_container.get_children():
+		cursor.connect("hover_character", _on_hover_character)
 		cursor.connect("character_selected", _on_character_selected)
 		cursor.connect("character_deselected", _on_character_deselected)
 
@@ -52,11 +54,9 @@ func _ready():
 	_update_cursors()
 
 func _on_player_added(player_index, player_name):
-	print("Player added signal received for index:", player_index, "name:", player_name)
 	_update_cursors()  # Update cursors dynamically
 
 func _on_player_removed(player_index):
-	print("Player removed signal received for index:", player_index)
 	_update_cursors()  # Update cursors dynamically
 
 
@@ -70,21 +70,32 @@ func _update_cursors():
 		print("Cursor for player", cursor.current_player, "visibility set to", cursor.visible)
 
 
-
-func _on_character_selected(player_index, sprite_path):
+func _on_hover_character(player_index, sprite_path):
 	# Update the sprite of the player's selected MenuCharacter
 	var player_slot = player_container.get_child(player_index - 1)
 	var sprite_node = player_slot.get_node("Sprite2D")
 	sprite_node.texture = load(sprite_path as String)
+	sprite_node.modulate.a = 0.5
+
+func _on_character_selected(player_index, sprite, sprite_path):
+	# Add character to player data
+	player_data_paths.get(player_index).character = character_selection.character_to_sprite[sprite]
+	
+	
+	# Update the sprite of the player's selected MenuCharacter
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	sprite_node.texture = load(sprite_path as String)
+	sprite_node.modulate.a = 1
 	print("Player", player_index, "selected character:", sprite_path)
 
 func _on_character_deselected(player_index):
 	# Reset the player's sprite
 	var player_slot = player_container.get_child(player_index - 1)
 	var sprite_node = player_slot.get_node("Sprite2D")
-	sprite_node.texture = null
+	#sprite_node.texture = null
+	sprite_node.modulate.a = 0.5
 	print("Player", player_index, "deselected their character.")
-
 
 # Dictionary to keep track of which player is in which slot
 var player_slots = {}
@@ -131,9 +142,15 @@ func _remove_player(player_index):
 		print("Player not in lobby.")
 		print(player_index)
 		return
+	
 
 	# Remove player data from current players
 	var player_data = current_players.players[player_index]
+	
+	if player_data.character != "": # If player has selected a character, exit character first
+		print("Exit characte before lobby")
+		return
+	
 	current_players.remove(player_data)
 	
 	# Remove the player from the slot
@@ -244,7 +261,7 @@ func _update_lobby_display():
 			join_button_image.show()
 			join_button_image.play("press")
 
-		
+
 
 func _hide_player_slot(slot_index):
 	var player_slot = player_container.get_child(slot_index)

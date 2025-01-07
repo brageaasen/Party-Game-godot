@@ -3,6 +3,8 @@ extends Node2D
 @onready var sprite_2d = $Sprite2D
 @onready var animation_player = $AnimationPlayer
 
+@export var player_data : Resource
+
 var look_directions : Array = ["d", "d_l", "d_r"]
 var possible_animations : Array = ["idle", "looking", "laying", "sitting"]
 

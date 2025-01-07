@@ -1,8 +1,10 @@
 extends Sprite2D
 
 @onready var characters_container = $"../../CharactersContainer"
+@onready var character_selection = $"../.."
 
-signal character_selected(player_index, character_name)
+signal hover_character(player_index, character_sprite_path)
+signal character_selected(player_index, character_sprite_path)
 signal character_deselected(player_index)
 
 @export var current_player : int  # The index of the player controlling this cursor
@@ -10,34 +12,8 @@ var current_col: int = 0  # Current column position in the grid
 var current_row: int = 0  # Current row position in the grid
 @export var portrait_offset: Vector2  # Distance between grid cells
 
-
-var character_to_sprite: Dictionary = {
-	"Black": "res://assets/sprites/characters/black_0.png",
-	"Blue": "res://assets/sprites/characters/blue_0.png",
-	"Brown": "res://assets/sprites/characters/brown_0.png",
-	"Calico": "res://assets/sprites/characters/calico_0.png",
-	"CottonCandyBlue": "res://assets/sprites/characters/cotton_candy_blue_0.png",
-	"CottonCandyPink": "res://assets/sprites/characters/cotton_candy_pink_0.png",
-	"Creme": "res://assets/sprites/characters/creme_0.png",
-	"Dark": "res://assets/sprites/characters/dark_0.png",
-	"GameBoy": "res://assets/sprites/characters/game_boy_0.png",
-	"Ghost": "res://assets/sprites/characters/ghost_0.png",
-	"Gold": "res://assets/sprites/characters/gold_0.png",
-	"Grey": "res://assets/sprites/characters/grey_0.png",
-	"Hairless": "res://assets/sprites/characters/hairless_0.png",
-	"Indigo": "res://assets/sprites/characters/indigo_0.png",
-	"Orange": "res://assets/sprites/characters/orange_0.png",
-	"Peach": "res://assets/sprites/characters/peach_0.png",
-	"Pink": "res://assets/sprites/characters/pink_0.png",
-	"Radioactive": "res://assets/sprites/characters/radioactive_0.png",
-	"Red": "res://assets/sprites/characters/red_0.png",
-	"SealPoint": "res://assets/sprites/characters/seal_point_0.png",
-	"Teal": "res://assets/sprites/characters/teal_0.png",
-	"White": "res://assets/sprites/characters/white_0.png",
-	"WhiteGrey": "res://assets/sprites/characters/white_grey_0.png",
-	"Yellow": "res://assets/sprites/characters/yellow_0.png",
-}
-
+# Tracks the currently locked character by this player
+var locked_character: String = ""  # Default to an empty string
 
 func _process(delta):
 	if visible:
@@ -74,12 +50,45 @@ func _move_cursor(dx: int, dy: int):
 	current_col = new_col
 	current_row = new_row
 	position = characters_container.position + Vector2(current_col * portrait_offset.x, current_row * portrait_offset.y)
+	
+	_hover_character()
 
 func _select_character():
 	var selected_index = current_row * characters_container.columns + current_col
 	if selected_index < characters_container.get_child_count():
 		var selected_character = characters_container.get_child(selected_index).name
-		emit_signal("character_selected", current_player, character_to_sprite[selected_character])
+
+		# Check if the character is already locked by another player
+		if character_selection.locked_characters.has(selected_character):
+			if character_selection.locked_characters[selected_character] != current_player:
+				print("Character", selected_character, "is already locked by player", character_selection.locked_characters[selected_character])
+				return
+
+		# Unlock the previously locked character if any
+		if locked_character != "":
+			character_selection.locked_characters.erase(locked_character)
+			emit_signal("character_deselected", current_player)
+			print("Player", current_player, "unlocked previous character:", locked_character)
+
+		# Lock the new character for the current player
+		character_selection.locked_characters[selected_character] = current_player
+		locked_character = selected_character
+		emit_signal("character_selected", current_player, character_selection.character_to_sprite[selected_character])
+		print("Player", current_player, "selected and locked character:", selected_character)
 
 func _deselect_character():
-	emit_signal("character_deselected", current_player)
+	# Unlock the currently locked character
+	if locked_character != "":
+		if character_selection.locked_characters.has(locked_character) and character_selection.locked_characters[locked_character] == current_player:
+			character_selection.locked_characters.erase(locked_character)
+			emit_signal("character_deselected", current_player)
+			print("Player", current_player, "deselected and unlocked character:", locked_character)
+			locked_character = ""  # Reset to an empty string
+		else:
+			print("Character", locked_character, "is not locked by player", current_player)
+
+func _hover_character():
+	var selected_index = current_row * characters_container.columns + current_col
+	if selected_index < characters_container.get_child_count():
+		var selected_character = characters_container.get_child(selected_index).name
+		emit_signal("hover_character", current_player, character_selection.character_to_sprite[selected_character])
