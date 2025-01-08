@@ -27,6 +27,7 @@ var waiting_for_animation_to_finish : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.sprite_2d.modulate.a = 0.5
 	load_random_sprite()
 	
 	# Randomly choose a direction once

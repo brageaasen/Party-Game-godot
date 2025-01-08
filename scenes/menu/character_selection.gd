@@ -29,3 +29,94 @@ var character_to_sprite: Dictionary = {
 
 # Tracks locked characters (character_name -> player_index)
 var locked_characters: Dictionary = {}
+
+@export var current_players : Resource # Current players resource
+
+@onready var cursor_container = $Cursors
+@onready var player_container = $"../PlayerContainer"
+@onready var player_select_screen = $".."
+
+func _ready():
+	current_players.connect("added_player", _on_player_added)
+	current_players.connect("removed_player", _on_player_removed)
+	
+	# Connect cursor signals to handle character selection and deselection
+	for cursor in cursor_container.get_children():
+		cursor.connect("hover_character", _on_hover_character)
+		cursor.connect("character_selected", _on_character_selected)
+		cursor.connect("character_deselected", _on_character_deselected)
+
+	# Update cursors based on current players
+	_update_cursors()
+
+
+func _on_player_added(player_index, player_name):
+	_update_cursors()  # Update cursors dynamically
+
+func _on_player_removed(player_index):
+	_update_cursors()  # Update cursors dynamically
+
+
+func _update_cursors():
+	# Debug: Print the current players
+	print("Current players:", current_players.players)
+
+	# Make cursors visible only for joined players
+	for cursor in cursor_container.get_children():
+		cursor.visible = cursor.current_player in current_players.players.keys()
+		print("Cursor for player", cursor.current_player, "visibility set to", cursor.visible)
+
+
+func _on_hover_character(player_index, sprite_path):
+	# Update the sprite of the player's selected MenuCharacter
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	sprite_node.texture = load(sprite_path as String)
+	sprite_node.modulate.a = 0.5
+
+func _on_character_selected(player_index, sprite, sprite_path):
+	# Load the PlayerData resource
+	var player_data_path = player_select_screen.player_data_paths.get(player_index)
+	if player_data_path == null:
+		print("Error: No path found for player index", player_index)
+		return
+	
+	var player_data = load(player_data_path) as PlayerData
+	if player_data == null:
+		print("Error: Could not load PlayerData for path", player_data_path)
+		return
+	
+	# Add character to player data
+	player_data.character = sprite  # Update the character property in PlayerData
+	print()
+	print("PlayerData for index", player_index, "character set to:", player_data.character)
+	print()
+	
+	# Update the sprite of the player's selected MenuCharacter
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	sprite_node.texture = load(sprite_path as String)
+	sprite_node.modulate.a = 1
+	print(sprite_node.modulate.a)
+	print("Player", player_index, " selected character:", sprite_path)
+
+func _on_character_deselected(player_index):
+	# Load the PlayerData resource
+	var player_data_path = player_select_screen.player_data_paths.get(player_index)
+	if player_data_path == null:
+		print("Error: No path found for player index", player_index)
+		return
+	
+	var player_data = load(player_data_path) as PlayerData
+	if player_data == null:
+		print("Error: Could not load PlayerData for path", player_data_path)
+		return
+	
+	# Remove character from player data
+	player_data.character = ""  # Update the character property in PlayerData
+	# Reset the player's sprite
+	var player_slot = player_container.get_child(player_index - 1)
+	var sprite_node = player_slot.get_node("Sprite2D")
+	#sprite_node.texture = null
+	sprite_node.modulate.a = 0.5
+	print("Player", player_index, " deselected their character.")

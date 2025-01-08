@@ -40,68 +40,19 @@ func _ready():
 	for i in range(GAME_DATA.max_players):
 		_hide_player_slot(i)
 	_update_lobby_display()
-	
-	current_players.connect("added_player", _on_player_added)
-	current_players.connect("removed_player", _on_player_removed)
-	
-	# Connect cursor signals to handle character selection and deselection
-	for cursor in cursor_container.get_children():
-		cursor.connect("hover_character", _on_hover_character)
-		cursor.connect("character_selected", _on_character_selected)
-		cursor.connect("character_deselected", _on_character_deselected)
-
-	# Update cursors based on current players
-	_update_cursors()
-
-func _on_player_added(player_index, player_name):
-	_update_cursors()  # Update cursors dynamically
-
-func _on_player_removed(player_index):
-	_update_cursors()  # Update cursors dynamically
 
 
-func _update_cursors():
-	# Debug: Print the current players
-	print("Current players:", current_players.players)
-
-	# Make cursors visible only for joined players
-	for cursor in cursor_container.get_children():
-		cursor.visible = cursor.current_player in current_players.players.keys()
-		print("Cursor for player", cursor.current_player, "visibility set to", cursor.visible)
-
-
-func _on_hover_character(player_index, sprite_path):
-	# Update the sprite of the player's selected MenuCharacter
-	var player_slot = player_container.get_child(player_index - 1)
-	var sprite_node = player_slot.get_node("Sprite2D")
-	sprite_node.texture = load(sprite_path as String)
-	sprite_node.modulate.a = 0.5
-
-func _on_character_selected(player_index, sprite, sprite_path):
-	# Add character to player data
-	player_data_paths.get(player_index).character = character_selection.character_to_sprite[sprite]
-	
-	
-	# Update the sprite of the player's selected MenuCharacter
-	var player_slot = player_container.get_child(player_index - 1)
-	var sprite_node = player_slot.get_node("Sprite2D")
-	sprite_node.texture = load(sprite_path as String)
-	sprite_node.modulate.a = 1
-	print("Player", player_index, "selected character:", sprite_path)
-
-func _on_character_deselected(player_index):
-	# Reset the player's sprite
-	var player_slot = player_container.get_child(player_index - 1)
-	var sprite_node = player_slot.get_node("Sprite2D")
-	#sprite_node.texture = null
-	sprite_node.modulate.a = 0.5
-	print("Player", player_index, "deselected their character.")
 
 # Dictionary to keep track of which player is in which slot
 var player_slots = {}
 
+signal player_ready_for_selection(player_index)
+signal player_not_ready_for_selection(player_index)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Reset input handling at the start of each frame
+	
 	if current_players.players.size() >= 2:
 		# Enable start button
 		start_label.show()
@@ -117,6 +68,7 @@ func _process(delta):
 		for i in range(1, GAME_DATA.max_players + 1):
 			if Input.is_action_just_pressed("p%d_join" % i):
 				_add_player(i)
+				emit_signal("player_ready_for_selection", i)  # Notify that a player is ready
 			elif Input.is_action_just_pressed("p%d_leave" % i):
 				_remove_player(i)
 
@@ -124,7 +76,7 @@ func _add_player(player_index):
 	if player_index in current_players.players:
 		print("Player already joined.")
 		return
-
+	
 	# Load the existing PlayerData resource
 	var player_data_path = player_data_paths[player_index]
 	var player_data = load(player_data_path)
@@ -143,7 +95,6 @@ func _remove_player(player_index):
 		print(player_index)
 		return
 	
-
 	# Remove player data from current players
 	var player_data = current_players.players[player_index]
 	
@@ -155,6 +106,8 @@ func _remove_player(player_index):
 	
 	# Remove the player from the slot
 	player_slots.erase(player_index)
+	
+	emit_signal("player_not_ready_for_selection", player_index)
 	
 	_update_lobby_display()
 
@@ -232,7 +185,6 @@ func _update_lobby_display():
 			player_shadow.hide()
 			player_hill.show()
 			player_name.hide()
-			print(player_name.text)
 			to_join_label.show()
 			join_button_image.show()
 			join_button_image.play("press")

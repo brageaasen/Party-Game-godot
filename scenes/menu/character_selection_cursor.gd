@@ -2,21 +2,57 @@ extends Sprite2D
 
 @onready var characters_container = $"../../CharactersContainer"
 @onready var character_selection = $"../.."
+@onready var player_select_screen = $"../../.."
 
 signal hover_character(player_index, character_sprite_path)
-signal character_selected(player_index, character_sprite_path)
+signal character_selected(player_index, character_sprite, character_sprite_path)
 signal character_deselected(player_index)
 
 @export var current_player : int  # The index of the player controlling this cursor
-var current_col: int = 0  # Current column position in the grid
-var current_row: int = 0  # Current row position in the grid
+var current_col : int = 0  # Current column position in the grid
+var current_row : int = 0  # Current row position in the grid
 @export var portrait_offset: Vector2  # Distance between grid cells
 
+var can_move : bool = true
+var is_player_ready : bool = false
+@onready var delay_timer = Timer.new()
+
 # Tracks the currently locked character by this player
-var locked_character: String = ""  # Default to an empty string
+var locked_character : String = ""  # Default to an empty string
+
+func _ready():
+	player_select_screen.connect("player_ready_for_selection", _on_player_ready)
+	player_select_screen.connect("player_not_ready_for_selection", _on_player_not_ready)
+	
+	# Create and configure the Timer
+	delay_timer.wait_time = 0.1
+	delay_timer.one_shot = true
+	delay_timer.connect("timeout", _enable_player_ready)
+	add_child(delay_timer)
+
+func _on_player_not_ready(player_index):
+	if player_index == current_player:
+		is_player_ready = false
+
+func _on_player_ready(player_index):
+	if player_index == current_player:
+		print("Starting delay for player:", player_index)
+		
+		# Reset and start the Timer
+		if delay_timer.is_stopped():
+			delay_timer.start()
+		else:
+			delay_timer.stop()
+			delay_timer.start()
+
+func _enable_player_ready():
+	print("SET TO TRUE!!!")
+	is_player_ready = true
+
 
 func _process(delta):
-	if visible:
+	# Prevent race condition with player select script
+	if is_player_ready:
 		# Handle player movement
 		if Input.is_action_just_pressed("p%d_move_right" % current_player):
 			_move_cursor(1, 0)
@@ -26,14 +62,19 @@ func _process(delta):
 			_move_cursor(0, 1)
 		elif Input.is_action_just_pressed("p%d_move_up" % current_player):
 			_move_cursor(0, -1)
-
+		
 		# Handle character selection
 		if Input.is_action_just_pressed("p%d_join" % current_player):
 			_select_character()
+			print("SET TO FALSE!!!")
 		elif Input.is_action_just_pressed("p%d_leave" % current_player):
 			_deselect_character()
-
+		
 func _move_cursor(dx: int, dy: int):
+	# Don't allow movement if player has character
+	if not can_move:
+		return
+	
 	var new_col = current_col + dx
 	var new_row = current_row + dy
 
@@ -73,7 +114,13 @@ func _select_character():
 		# Lock the new character for the current player
 		character_selection.locked_characters[selected_character] = current_player
 		locked_character = selected_character
-		emit_signal("character_selected", current_player, character_selection.character_to_sprite[selected_character])
+		
+		# Hide cursor and prevent new movement
+		self.hide()
+		can_move = false
+		
+
+		emit_signal("character_selected", current_player, selected_character, character_selection.character_to_sprite[selected_character])
 		print("Player", current_player, "selected and locked character:", selected_character)
 
 func _deselect_character():
@@ -84,6 +131,11 @@ func _deselect_character():
 			emit_signal("character_deselected", current_player)
 			print("Player", current_player, "deselected and unlocked character:", locked_character)
 			locked_character = ""  # Reset to an empty string
+			
+			# Show cursor and enable new movement
+			self.show()
+			can_move = true
+		
 		else:
 			print("Character", locked_character, "is not locked by player", current_player)
 

@@ -3600,6 +3600,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_yx0bm")
+current_players = ExtResource("18_ytq35")
 
 [node name="Cursors" type="Control" parent="PlayerSelectScreen/CharacterSelection"]
 anchors_preset = 0
@@ -3622,24 +3623,6 @@ scale = Vector2(3, 3)
 texture = ExtResource("35_gevbd")
 script = ExtResource("36_y0d8v")
 current_player = 2
-portrait_offset = Vector2(50, 42)
-
-[node name="Player3Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
-z_index = 1
-position = Vector2(453, 419)
-scale = Vector2(3, 3)
-texture = ExtResource("35_gevbd")
-script = ExtResource("36_y0d8v")
-current_player = 3
-portrait_offset = Vector2(50, 42)
-
-[node name="Player4Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
-z_index = 1
-position = Vector2(453, 419)
-scale = Vector2(3, 3)
-texture = ExtResource("35_gevbd")
-script = ExtResource("36_y0d8v")
-current_player = 4
 portrait_offset = Vector2(50, 42)
 
 [node name="CharactersContainer" type="GridContainer" parent="PlayerSelectScreen/CharacterSelection"]
