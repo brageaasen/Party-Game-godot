@@ -5,6 +5,8 @@ extends Control
 @onready var start_label = $StartLabel
 @onready var back_option = $BackOption
 
+@onready var camera_2d = $"../Camera2D"
+
 var GAME_DATA = preload("res://scenes/game/game_data.tres")
 
 @export var current_players : Resource # Current players resource
@@ -27,6 +29,7 @@ var player_data_paths = {
 @onready var player_container = $PlayerContainer  # Container for player slots
 @onready var cursor_container = $CharacterSelection/Cursors  # Container for all cursors
 
+@onready var back_button = $BackOption/BackButton
 
 func _ready():
 	var back_button = back_option.get_node("BackButton")
@@ -51,9 +54,8 @@ signal player_not_ready_for_selection(player_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Reset input handling at the start of each frame
-	
-	if current_players.players.size() >= 2:
+	# Can only start game if all players are ready, and player count >= 2
+	if character_selection.locked_characters.size() >= 2 and character_selection.locked_characters.size() == current_players.players.size():
 		# Enable start button
 		start_label.show()
 		hold_down_button.show()
@@ -214,7 +216,6 @@ func _update_lobby_display():
 			join_button_image.play("press")
 
 
-
 func _hide_player_slot(slot_index):
 	var player_slot = player_container.get_child(slot_index)
 	var player_name = player_slot.get_node("PlayerName")
@@ -228,6 +229,8 @@ func _hide_player_slot(slot_index):
 
 
 func _on_back_button_pressed():
+	camera_2d.apply_shake()
+	
 	set_process(false)
 	self.hide()
 	main.show()

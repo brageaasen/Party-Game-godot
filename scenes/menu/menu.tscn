@@ -3033,6 +3033,8 @@ mouse_filter = 1
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 44.0
+focus_neighbor_top = NodePath("../../Start/StartButton")
+focus_neighbor_bottom = NodePath("../../Quit/QuitButton")
 mouse_filter = 1
 theme = ExtResource("19_2vosj")
 text = "Options"
@@ -3053,6 +3055,7 @@ mouse_filter = 1
 layout_mode = 2
 offset_right = 180.0
 offset_bottom = 44.0
+focus_neighbor_top = NodePath("../../Options/OptionsButton")
 focus_neighbor_bottom = NodePath("../../Start/StartButton")
 mouse_filter = 1
 theme = ExtResource("19_2vosj")
@@ -3137,25 +3140,22 @@ layout_mode = 0
 
 [node name="PlayerSelectScreen" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("17_yuje3")
 current_players = ExtResource("18_ytq35")
 
 [node name="HoldDownButton" parent="PlayerSelectScreen" instance=ExtResource("23_gr0kc")]
-position = Vector2(576, 324)
+position = Vector2(681, 541)
 scale = Vector2(3, 3)
 
 [node name="StartLabel" type="Label" parent="PlayerSelectScreen"]
 z_index = 10
 layout_mode = 0
-offset_left = 521.0
-offset_top = 351.0
-offset_right = 635.0
-offset_bottom = 395.0
+offset_left = 626.0
+offset_top = 568.0
+offset_right = 740.0
+offset_bottom = 612.0
 theme = ExtResource("19_2vosj")
 text = "Start"
 
@@ -3189,6 +3189,7 @@ position = Vector2(8, -2)
 emitting = false
 
 [node name="Rain" parent="PlayerSelectScreen/Art/TileMap" instance=ExtResource("1_idx4l")]
+position = Vector2(0, 1.5)
 
 [node name="Snow" type="Node2D" parent="PlayerSelectScreen/Art/TileMap"]
 
@@ -3210,18 +3211,13 @@ process_material = SubResource("ParticleProcessMaterial_kvcg5")
 
 [node name="BackOption" parent="PlayerSelectScreen" instance=ExtResource("26_fabrw")]
 layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 555.0
-offset_top = 547.0
-offset_right = 651.0
-offset_bottom = 591.0
-grow_vertical = 1
+offset_left = 384.0
+offset_top = 520.0
+offset_right = 584.0
+offset_bottom = 620.0
 
 [node name="Circle" parent="PlayerSelectScreen/BackOption" index="0"]
+position = Vector2(91.424, 21.136)
 frame_progress = 0.0956393
 
 [node name="PlayerContainer" type="HBoxContainer" parent="PlayerSelectScreen"]
@@ -3232,6 +3228,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(578, 324)
+mouse_filter = 2
 
 [node name="MenuCharacter1" parent="PlayerSelectScreen/PlayerContainer" instance=ExtResource("2_trcri")]
 z_index = 1
@@ -3599,28 +3596,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("35_yx0bm")
 current_players = ExtResource("18_ytq35")
 
 [node name="Cursors" type="Control" parent="PlayerSelectScreen/CharacterSelection"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="Player1Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
 z_index = 1
-position = Vector2(453, 419)
+position = Vector2(454, 417)
 scale = Vector2(3, 3)
 texture = ExtResource("35_gevbd")
 script = ExtResource("36_y0d8v")
 current_player = 1
-portrait_offset = Vector2(50, 42)
+portrait_offset = Vector2(51, 42)
 
 [node name="Player2Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
 z_index = 1
-position = Vector2(453, 419)
+position = Vector2(442, 407)
 scale = Vector2(3, 3)
 texture = ExtResource("35_gevbd")
+offset = Vector2(4, 3.33334)
 script = ExtResource("36_y0d8v")
 current_player = 2
 portrait_offset = Vector2(50, 42)
@@ -3628,9 +3631,9 @@ portrait_offset = Vector2(50, 42)
 [node name="CharactersContainer" type="GridContainer" parent="PlayerSelectScreen/CharacterSelection"]
 layout_mode = 0
 offset_left = 433.0
-offset_top = 403.0
+offset_top = 270.0
 offset_right = 531.0
-offset_bottom = 455.0
+offset_bottom = 322.0
 scale = Vector2(3, 3)
 columns = 6
 
@@ -3738,6 +3741,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("23_x1n21")
 
 [node name="Art" type="Node2D" parent="GameSettings"]
@@ -3810,9 +3814,12 @@ text = "Everything!"
 
 [node name="BackOption" parent="GameSettings" instance=ExtResource("26_fabrw")]
 layout_mode = 1
-grow_vertical = 1
+
+[node name="Circle" parent="GameSettings/BackOption" index="0"]
+position = Vector2(91.424, 21.136)
 
 [node name="CircleTransition" parent="." instance=ExtResource("27_nv27j")]
+mouse_filter = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -3825,6 +3832,8 @@ script = ExtResource("27_llmq1")
 [connection signal="pressed" from="Main/OptionsMenu/BackButton" to="Main/OptionsMenu" method="_on_back_button_pressed"]
 [connection signal="change_to_game_settings" from="PlayerSelectScreen" to="GameSettings" method="_on_player_select_screen_change_to_game_settings"]
 [connection signal="back_button_pressed" from="PlayerSelectScreen/BackOption" to="PlayerSelectScreen" method="_on_back_button_pressed"]
+[connection signal="button_down" from="PlayerSelectScreen/BackOption/BackButton" to="PlayerSelectScreen/BackOption" method="_on_back_button_button_down"]
+[connection signal="button_up" from="PlayerSelectScreen/BackOption/BackButton" to="PlayerSelectScreen/BackOption" method="_on_back_button_button_up"]
 [connection signal="pressed" from="PlayerSelectScreen/BackOption/BackButton" to="PlayerSelectScreen" method="_on_back_button_pressed"]
 [connection signal="pressed" from="GameSettings/HBoxContainer/EverythingButton" to="GameSettings" method="_on_everything_button_pressed"]
 [connection signal="back_button_pressed" from="GameSettings/BackOption" to="GameSettings" method="_on_back_button_pressed"]

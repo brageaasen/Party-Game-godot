@@ -5,7 +5,9 @@ extends Node2D
 @onready var animation_player = $AnimationPlayer
 @onready var symbol_sprite = $Symbol
 
-var max_players = 4
+const GAME_DATA = preload("res://scenes/game/game_data.tres")
+
+var max_players = GAME_DATA.max_players
 var button_hold_start = {} # Dictionary to keep track of button hold start times
 
 # Constants for frame indices
