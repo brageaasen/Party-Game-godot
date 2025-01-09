@@ -2884,7 +2884,6 @@ animations = [{
 [node name="Menu" type="Node"]
 
 [node name="Main" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3139,6 +3138,7 @@ text = "Back"
 layout_mode = 0
 
 [node name="PlayerSelectScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1

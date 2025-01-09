@@ -8,12 +8,24 @@ signal hover_character(player_index, character_sprite_path)
 signal character_selected(player_index, character_sprite, character_sprite_path)
 signal character_deselected(player_index)
 
+var start_pos : Dictionary = {
+	1 : [0, 0],
+	2 : [0, 1],
+	3 : [0, 3],
+	4 : [0, 4],
+	5 : [0, 5],
+	6 : [1, 0],
+	7 : [1, 1],
+	8 : [1, 2],
+	9 : [1, 3],
+}
+
 @export var current_player : int  # The index of the player controlling this cursor
-var current_col : int = 0  # Current column position in the grid
-var current_row : int = 0  # Current row position in the grid
 @export var portrait_offset: Vector2  # Distance between grid cells
 
 var can_move : bool = true
+var current_row : int
+var current_col : int
 var is_player_ready : bool = false
 @onready var delay_timer = Timer.new()
 
@@ -21,6 +33,15 @@ var is_player_ready : bool = false
 var locked_character : String = ""  # Default to an empty string
 
 func _ready():
+	current_row = start_pos[current_player][0]  # Current row position in the grid
+	current_col = start_pos[current_player][1]  # Current column position in the grid
+	
+	# Calculate initial position based on current_row and current_col
+	position = characters_container.position + Vector2(
+		current_col * portrait_offset.x,
+		current_row * portrait_offset.y
+	)
+	
 	player_select_screen.connect("player_ready_for_selection", _on_player_ready)
 	player_select_screen.connect("player_not_ready_for_selection", _on_player_not_ready)
 	
@@ -29,6 +50,8 @@ func _ready():
 	delay_timer.one_shot = true
 	delay_timer.connect("timeout", _enable_player_ready)
 	add_child(delay_timer)
+	
+	_hover_character()
 
 func _on_player_not_ready(player_index):
 	if player_index == current_player:
@@ -46,7 +69,6 @@ func _on_player_ready(player_index):
 			delay_timer.start()
 
 func _enable_player_ready():
-	print("SET TO TRUE!!!")
 	is_player_ready = true
 
 

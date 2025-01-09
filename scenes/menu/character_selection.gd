@@ -52,6 +52,7 @@ func _ready():
 
 func _on_player_added(player_index, player_name):
 	_update_cursors()  # Update cursors dynamically
+	cursor_container.get_child(player_index - 1)._hover_character()
 
 func _on_player_removed(player_index):
 	_update_cursors()  # Update cursors dynamically
@@ -71,6 +72,7 @@ func _on_hover_character(player_index, sprite_path):
 	# Update the sprite of the player's selected MenuCharacter
 	var player_slot = player_container.get_child(player_index - 1)
 	var sprite_node = player_slot.get_node("Sprite2D")
+	print("got it")
 	sprite_node.texture = load(sprite_path as String)
 	sprite_node.modulate.a = 0.5
 
