@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg373l73l72wg"]
+[gd_scene load_steps=7 format=3 uid="uid://cg373l73l72wg"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/sorter.gd" id="1_wkdoq"]
 [ext_resource type="Texture2D" uid="uid://ddk6wqt6hpy7i" path="res://assets/sprites/cursors/hands/back21.png" id="2_l2c5e"]
+[ext_resource type="Resource" uid="uid://q7ddebftfpf0" path="res://scenes/game/characters/player/controls/player_1_controls.tres" id="2_lw2ai"]
 [ext_resource type="Texture2D" uid="uid://b7oh0ay3enly1" path="res://assets/sprites/cursors/hands/back17.png" id="3_fuiuc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iw4df"]
@@ -29,6 +30,7 @@ radius = 16.0312
 [node name="Sorter" type="Node2D"]
 z_index = 2
 script = ExtResource("1_wkdoq")
+controls = ExtResource("2_lw2ai")
 
 [node name="Cursor" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

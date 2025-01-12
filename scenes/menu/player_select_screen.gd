@@ -5,6 +5,8 @@ extends Control
 @onready var start_label = $StartLabel
 @onready var back_option = $BackOption
 
+@onready var tile_map = $"../Main/Art/TileMap"
+
 @onready var camera_2d = $"../Camera2D"
 
 var GAME_DATA = preload("res://scenes/game/game_data.tres")
@@ -35,6 +37,8 @@ func _ready():
 	var back_button = back_option.get_node("BackButton")
 	back_button.connect("back_button_pressed", _on_back_button_pressed)
 	
+	tile_map.connect("changed_season", _on_changed_season)
+	
 	# Disable start button
 	start_label.hide()
 	hold_down_button.hide()
@@ -54,6 +58,11 @@ signal player_not_ready_for_selection(player_index)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if current_players.players.size() < 1:
+		character_selection.visible = false
+	else:
+		character_selection.visible = true
+	
 	# Can only start game if all players are ready, and player count >= 2
 	if character_selection.locked_characters.size() >= 2 and character_selection.locked_characters.size() == current_players.players.size():
 		# Enable start button
@@ -227,6 +236,8 @@ func _hide_player_slot(slot_index):
 	to_join_label.hide()
 	join_button_image.hide()
 
+func _on_changed_season():
+	_update_lobby_display()
 
 func _on_back_button_pressed():
 	camera_2d.apply_shake()

@@ -16,6 +16,11 @@ func get_rect_aabb():
 	var rect_size = rectangle_shape.extents * 2.0
 	return Rect2(transform.origin - rectangle_shape.extents, rect_size)
 
+func get_center():
+	var aabb = get_rect_aabb()
+	return aabb.position + aabb.size * 0.5
+
+
 func get_random_valid_spawn_position():
 	var max_attempts = 100
 	var attempt = 0

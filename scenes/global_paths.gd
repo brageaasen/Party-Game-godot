@@ -55,3 +55,7 @@ var character_to_portrait: Dictionary = {
 	"WhiteGrey": "res://assets/player_select/character_icons/white_grey.png",
 	"Yellow": "res://assets/player_select/character_icons/yellow.png",
 }
+
+const npc_scene_path : String = "res://scenes/game/characters/NPC/npc.tscn"
+const player_scene_path : String = "res://scenes/game/characters/player/player.tscn"
+const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.tscn"

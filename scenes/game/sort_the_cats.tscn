@@ -1,9 +1,10 @@
-[gd_scene load_steps=104 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=105 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_xnb40"]
 [ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="3_pvm54"]
 [ext_resource type="PackedScene" uid="uid://baq8t8ly00ypf" path="res://scenes/game/ui/round_time.tscn" id="4_7lsgf"]
+[ext_resource type="Resource" uid="uid://c3tl7vf48j3hc" path="res://scenes/global_paths.tres" id="4_y43bt"]
 [ext_resource type="PackedScene" uid="uid://cqpf43lj4tav7" path="res://scenes/game/ui/round_start.tscn" id="5_a7mt7"]
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="6_tho8p"]
 [ext_resource type="Script" path="res://scenes/game/tile_map.gd" id="7_3e2kk"]
@@ -1239,6 +1240,7 @@ y_sort_enabled = true
 script = ExtResource("1_k1mcq")
 current_players = ExtResource("2_xnb40")
 game_data = ExtResource("17_kcxm3")
+global_paths = ExtResource("4_y43bt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1246,7 +1248,7 @@ game_data = ExtResource("17_kcxm3")
 
 [node name="RoundTime" parent="CanvasLayer" instance=ExtResource("4_7lsgf")]
 visible = false
-round_time_seconds = 2
+round_time_seconds = 30
 
 [node name="RoundStart" parent="CanvasLayer" instance=ExtResource("5_a7mt7")]
 

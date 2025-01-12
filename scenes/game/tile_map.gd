@@ -58,6 +58,8 @@ const SEASON_TEXTURES = {
 
 @export var game_data : GameData
 
+signal changed_season
+
 func _ready():
 	# Connect to the game_data signal
 	game_data.connect("field_changed", _on_game_data_field_changed)
@@ -78,6 +80,8 @@ var season_effects = {
 }
 
 func change_season_textures(new_season):
+	emit_signal("changed_season")
+	
 	if new_season == GameData.Season.RANDOM:
 		# Handle random season by picking one at random
 		new_season = random_season()

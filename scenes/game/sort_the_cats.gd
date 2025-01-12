@@ -44,14 +44,9 @@ func _process(delta):
 @export var wrong_guess_score : int = 1
 
 @export var game_data : GameData
+@export var global_paths : GlobalPaths
 
 signal round_start
-
-# TODO: Put in global paths file?
-const npc_scene_path : String = "res://scenes/game/characters/NPC/npc.tscn"
-const player_scene_path : String = "res://scenes/game/characters/player/player.tscn"
-const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.tscn"
-
 
 
 func _ready():
@@ -74,12 +69,14 @@ func spawn_players():
 	sorter_player.is_sorter = true
 
 	# Load the sorter scene
-	var sorter_scene = preload(sorter_scene_path)
+	var sorter_scene = preload(global_paths.sorter_scene_path)
 	var sorter_instance = sorter_scene.instantiate()
 	sorter_instance.controls = sorter_player.controls
 
 	# Get a valid spawn position for the sorter
-	var sorter_spawn_position = spawn_area.get_random_valid_spawn_position()
+	var sorter_spawn_position = spawn_area.get_center()
+	print("SORTER POS")
+	print(sorter_spawn_position)
 	if sorter_spawn_position:
 		sorter_instance.position = sorter_spawn_position
 		add_child(sorter_instance)
@@ -87,7 +84,7 @@ func spawn_players():
 		print("Could not find a valid spawn position for sorter")
 
 	# Spawn the rest as players
-	var player_scene = preload(player_scene_path)
+	var player_scene = preload(global_paths.player_scene_path)
 	for index in player_indices:
 		if index == sorter_index:
 			continue  # Skip the sorter
@@ -105,7 +102,7 @@ func spawn_players():
 			print("Could not find a valid spawn position for player", player.name)
 
 func spawn_npcs():
-	var npc_scene = preload(npc_scene_path)
+	var npc_scene = preload(global_paths.npc_scene_path)
 	for i in range(npc_count):
 		var npc_instance = npc_scene.instantiate()
 		npc_instance.name = "NPC_" + str(i)
