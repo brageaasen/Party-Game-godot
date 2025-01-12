@@ -12,6 +12,11 @@ enum CardType {
 	BRONZE,
 }
 
+func _ready():
+	gold_card.visible = false
+	silver_card.visible = false
+	bronze_card.visible = false
+
 # Updates the leaderboard
 func update_leaderboard():
 	if not current_players:
@@ -35,9 +40,10 @@ func _sort_by_score_desc(a, b):
 
 # Helper function to update a card with player data
 func _update_card(card: Control, player: PlayerData, card_type: CardType):
-	print("updated card")
+	card.visible = true
 	card.set_card_type(card_type)
 	card.set_card_name(player.name)
+	card.set_portrait(player.character)
 	print("new score: ", player.score)
 	print()
 	card.set_card_score(player.score)

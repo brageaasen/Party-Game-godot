@@ -84,6 +84,9 @@ func change_season_textures(new_season):
 
 	# Update the season in game_data
 	game_data.season = new_season
+	
+	# Change pre-set enviorment sprites
+	_change_enviorment_sprites(new_season)
 
 	# Update emitters for the season
 	var effects = season_effects.get(new_season, {})
@@ -125,3 +128,11 @@ func random_season():
 	# Select a random season from the filtered list
 	var random_index = randi() % season_values.size()
 	return season_values[random_index]
+
+func _change_enviorment_sprites(season):
+	var sprite_enviorment = get_node("../SpriteEnviorment")
+	if not sprite_enviorment:
+		return
+	print(sprite_enviorment)
+	sprite_enviorment.disable_enviorment_sprites()
+	sprite_enviorment.enable_enviorment_sprites(season)

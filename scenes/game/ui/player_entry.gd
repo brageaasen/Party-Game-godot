@@ -6,6 +6,7 @@ extends Control
 @onready var player_name : Label = $Name
 @onready var score_label : Label = $Score
 
+@export var global_paths : GlobalPaths 
 
 const GOLD_CARD = preload("res://assets/ui/leaderboard/gold_card.png")
 const GOLD_BORDER = preload("res://assets/ui/leaderboard/gold_border.png")
@@ -22,8 +23,11 @@ enum CardType {
 	BRONZE,
 }
 
-func set_portrait(new_texture : Texture):
-	portrait.texture = new_texture
+func set_portrait(new_texture : String):
+	if global_paths and global_paths.character_to_portrait.has(new_texture):
+		portrait.texture = load(global_paths.character_to_portrait[new_texture])
+	else:
+		print("Error: Invalid global_paths or texture key not found:", new_texture)
 
 # Set card and border to the correct type according to input "type"
 func set_card_type(type : CardType):

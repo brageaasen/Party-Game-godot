@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dngs5sx0hl8ys"]
+[gd_scene load_steps=104 format=3 uid="uid://dngs5sx0hl8ys"]
 
 [ext_resource type="Script" path="res://scenes/game/sort_the_cats.gd" id="1_k1mcq"]
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="2_xnb40"]
@@ -19,10 +19,33 @@
 [ext_resource type="Texture2D" uid="uid://dx52mftmvsq8k" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill - water.png" id="14_dtbsu"]
 [ext_resource type="Texture2D" uid="uid://cfwso1248vjc2" path="res://assets/sprites/tile_sets/Tilesets/Summer/autotiles/autotiles hill.png" id="15_eqh5k"]
 [ext_resource type="Resource" uid="uid://u6w30uf2hbpe" path="res://scenes/game/game_data.tres" id="17_kcxm3"]
-[ext_resource type="PackedScene" uid="uid://vaucgv5fmlyv" path="res://scenes/game/particles/leaves_falling.tscn" id="18_owqm7"]
-[ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="18_qjexw"]
 [ext_resource type="Script" path="res://scenes/game/enclosure.gd" id="18_uvh1q"]
+[ext_resource type="Texture2D" uid="uid://kbaqe50o6mk2" path="res://assets/sprites/leaf.png" id="20_qa2ck"]
+[ext_resource type="Texture2D" uid="uid://d1t2tq786ili4" path="res://assets/sprites/rain.png" id="21_ho6fj"]
+[ext_resource type="Texture2D" uid="uid://ch6yxfuhy3iyt" path="res://assets/sprites/rain_drop.png" id="22_i5kq8"]
+[ext_resource type="Script" path="res://scenes/menu/sprite_enviorment.gd" id="23_4vx1w"]
 [ext_resource type="Script" path="res://scenes/game/spawn_area.gd" id="23_mqngj"]
+[ext_resource type="Shader" path="res://assets/shaders/wind_sway.gdshader" id="24_ablm3"]
+[ext_resource type="Texture2D" uid="uid://db7antbxqf6j8" path="res://assets/sprites/nature_sprites/summer/lily_pad_1_summer.png" id="25_dk0ad"]
+[ext_resource type="Texture2D" uid="uid://ulgfbn4c6m6h" path="res://assets/sprites/nature_sprites/summer/lily_pad_2_summer.png" id="26_gkaeu"]
+[ext_resource type="Texture2D" uid="uid://v4bqyii6tbba" path="res://assets/sprites/nature_sprites/summer/lily_pad_3_summer.png" id="27_cb6fp"]
+[ext_resource type="Texture2D" uid="uid://c3gngrppndc7h" path="res://assets/sprites/nature_sprites/summer/clover_1_summer.png" id="28_8haxg"]
+[ext_resource type="Texture2D" uid="uid://cbocmroui6vtn" path="res://assets/sprites/nature_sprites/summer/clover_2_summer.png" id="29_20wcb"]
+[ext_resource type="Texture2D" uid="uid://df58w2pqgpqy" path="res://assets/sprites/nature_sprites/spring/lily_pad_1_spring.png" id="30_shuj1"]
+[ext_resource type="Texture2D" uid="uid://dppj0hdl86slf" path="res://assets/sprites/nature_sprites/spring/lily_pad_2_spring.png" id="31_a1nh4"]
+[ext_resource type="Texture2D" uid="uid://dkwycrbav8o60" path="res://assets/sprites/nature_sprites/spring/lily_pad_3_spring.png" id="32_co76o"]
+[ext_resource type="Texture2D" uid="uid://cti2gt6l1ljun" path="res://assets/sprites/nature_sprites/spring/clover_1_spring.png" id="33_olue5"]
+[ext_resource type="Texture2D" uid="uid://b746urxoh6k88" path="res://assets/sprites/nature_sprites/spring/clover_2_spring.png" id="34_kj1tg"]
+[ext_resource type="Texture2D" uid="uid://cv0xn6s3px2r0" path="res://assets/sprites/nature_sprites/winter/rock_1_winter.png" id="35_1uijf"]
+[ext_resource type="Texture2D" uid="uid://btkpmjps4svrl" path="res://assets/sprites/nature_sprites/winter/rock_2_winter.png" id="36_dlvh7"]
+[ext_resource type="Texture2D" uid="uid://g05uy3rrme8n" path="res://assets/sprites/nature_sprites/winter/rock_3_winter.png" id="37_15k8d"]
+[ext_resource type="Texture2D" uid="uid://bt2jx8vvbbc7d" path="res://assets/sprites/nature_sprites/winter/clover_1_winter.png" id="38_55bss"]
+[ext_resource type="Texture2D" uid="uid://brqsek6071vdm" path="res://assets/sprites/nature_sprites/winter/clover_2_winter.png" id="39_ytqrk"]
+[ext_resource type="Texture2D" uid="uid://dwudcj6p31vsb" path="res://assets/sprites/nature_sprites/fall/lily_pad_1_fall.png" id="40_neiyd"]
+[ext_resource type="Texture2D" uid="uid://cyx8njql8jwte" path="res://assets/sprites/nature_sprites/fall/lily_pad_2_fall.png" id="41_82cd4"]
+[ext_resource type="Texture2D" uid="uid://b34ys31vsksg2" path="res://assets/sprites/nature_sprites/fall/lily_pad_3_fall.png" id="42_umpg0"]
+[ext_resource type="Texture2D" uid="uid://be2ufc7bv3iow" path="res://assets/sprites/nature_sprites/fall/clover_1_fall.png" id="43_1m03a"]
+[ext_resource type="Texture2D" uid="uid://dvglwfwe4hgfd" path="res://assets/sprites/nature_sprites/fall/clover_2_fall.png" id="44_75ui2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnqq6"]
 texture = ExtResource("6_tho8p")
@@ -965,6 +988,67 @@ sources/7 = SubResource("TileSetAtlasSource_8g5r0")
 sources/8 = SubResource("TileSetAtlasSource_xaavj")
 sources/9 = SubResource("TileSetAtlasSource_s2ipi")
 
+[sub_resource type="Curve" id="Curve_hxdso"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 27.2477), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pare6"]
+curve = SubResource("Curve_hxdso")
+
+[sub_resource type="Curve" id="Curve_co1hu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.659341), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oayxg"]
+curve = SubResource("Curve_co1hu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vemhi"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(450, 1, 1)
+angle_max = 84.8
+angle_curve = SubResource("CurveTexture_pare6")
+gravity = Vector3(100, 98, 0)
+linear_accel_max = 4.32
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_oayxg")
+turbulence_noise_strength = 0.5
+turbulence_noise_speed_random = 0.14
+turbulence_influence_min = 0.005
+turbulence_influence_max = 0.069
+
+[sub_resource type="GDScript" id="GDScript_vbhej"]
+
+[sub_resource type="Gradient" id="Gradient_kygd0"]
+colors = PackedColorArray(1, 1, 1, 0.560784, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_415fk"]
+gradient = SubResource("Gradient_kygd0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cfvia"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(350, 1, 1)
+direction = Vector3(-0.4, 1, 0)
+spread = 2.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_415fk")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fqal2"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="Gradient" id="Gradient_sbxj7"]
 colors = PackedColorArray(1, 1, 1, 1, 0.847059, 0.847059, 0.847059, 1)
 
@@ -996,6 +1080,90 @@ gradient = SubResource("Gradient_jj4cy")
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_acj2n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ecpx"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_53ert"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7aij3"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 40.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe5kq"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0vkm0"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 60.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovq2n"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 0.445
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.464
+shader_parameter/offset = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qysm7"]
+shader = ExtResource("24_ablm3")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 0.445
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.464
+shader_parameter/offset = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfls7"]
 size = Vector2(108, 44)
@@ -1070,12 +1238,15 @@ size = Vector2(578, 346)
 y_sort_enabled = true
 script = ExtResource("1_k1mcq")
 current_players = ExtResource("2_xnb40")
+game_data = ExtResource("17_kcxm3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CircleTransition" parent="CanvasLayer" instance=ExtResource("3_pvm54")]
 
 [node name="RoundTime" parent="CanvasLayer" instance=ExtResource("4_7lsgf")]
+visible = false
+round_time_seconds = 2
 
 [node name="RoundStart" parent="CanvasLayer" instance=ExtResource("5_a7mt7")]
 
@@ -1083,7 +1254,9 @@ current_players = ExtResource("2_xnb40")
 
 [node name="Leaderboard" parent="CanvasLayer" instance=ExtResource("8_sdw8y")]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Art" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Art"]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_egwwx")
 format = 2
@@ -1108,19 +1281,47 @@ layer_7/tile_data = PackedInt32Array(262128, 3, 0, 262129, 131075, 2, 196593, 3,
 layer_8/name = "enviorment"
 layer_8/y_sort_enabled = true
 layer_8/z_index = 1
-layer_8/tile_data = PackedInt32Array(196616, 1, 5, 65519, 131073, 1, -524285, 262145, 5, -393206, 262145, 5, 589834, 196609, 5, -196625, 262145, 1, 393199, 458753, 1, 524271, 262145, 0, 589807, 1, 0, 393200, 196609, 0, 524272, 131073, 1, -262159, 458753, 1, 65521, 327681, 0, 458737, 65537, 1, -65550, 458753, 1, 65522, 327681, 1, 524274, 131073, 0, -65549, 393217, 1, 327667, 393217, 0, 262132, 131073, 1, 589812, 65537, 1, 196597, 458753, 0, 327669, 196609, 0, -524298, 131073, 1, -10, 458753, 0, -524297, 196609, 0, 131063, 393217, 1, 196600, 131073, 0, 327672, 327681, 0, -7, 393217, 0, -524294, 131073, 0, -458758, 327681, 0, 327674, 327681, 0, 262140, 131073, 0, 327676, 65537, 1, 262141, 131073, 0, 458749, 458753, 0, 524285, 196609, 1, 196606, 327681, 0, 524286, 196609, 1, 65535, 327681, 0, 327679, 131073, 1, 524287, 196609, 1, 327680, 458753, 1, 393216, 1, 1, -65535, 393217, 1, 327681, 458753, 0, 458753, 1, 1, -65534, 262145, 0, 131074, 196609, 0, 65539, 327681, 0, 196611, 65537, 1, 262147, 458753, 1, 458755, 262145, 0, 524291, 1, 0, 589827, 1, 0, -458748, 327681, 0, -131068, 262145, 1, -65532, 458753, 1, 458756, 65537, 1, -589819, 65537, 0, -327675, 1, 0, -131067, 65537, 1, -65531, 65537, 0, 458758, 196609, 0, 589830, 131073, 0, -589817, 65537, 0, -393209, 393217, 0, 196615, 327681, 1, 393223, 458753, 1, -589816, 131073, 1, -131064, 458753, 0, 458760, 131073, 1, -589815, 327681, 0, -524279, 1, 0, -458743, 327681, 0, -393207, 262145, 0, -131063, 1, 0, 65545, 393217, 1, 262153, 458753, 1, 327689, 458753, 0, 458761, 196609, 0, 524297, 327681, 1, -65526, 196609, 1, 65546, 393217, 1, -458741, 65537, 1, -393205, 262145, 0, -196597, 393217, 0, 11, 262145, 1, 458763, 327681, 0, -458740, 327681, 1, -65524, 65537, 0, 262156, 1, 1, 327692, 196609, 0, 589836, 327681, 1, -458739, 196609, 1, -327666, 65537, 0, 262158, 1, 0, -393201, 458753, 0, -327665, 327681, 1, 262159, 262145, 1, 393231, 393217, 1, 524303, 1, 1, -393200, 327681, 1, -65543, 196609, 1, -393225, 655364, 9, -393215, 720900, 9, -262157, 786436, 9, -196612, 851972, 8, -720894, 786436, 8, -655368, 393220, 3, -524306, 262148, 3, -589841, 393220, 3, -458769, 851972, 3, -327697, 1, 0, -458768, 983044, 2, -393231, 327681, 1, -589838, 786436, 3, -458766, 1, 0, -65554, 655364, 3, -262133, 1, 1, -393218, 655364, 8, -589827, 589828, 8, -196615, 655364, 8, -393228, 720900, 8, -262144, 720900, 8)
+layer_8/tile_data = PackedInt32Array(196616, 1, 5, 65519, 131073, 1, -524285, 262145, 5, -393206, 262145, 5, 589834, 196609, 5, -196625, 262145, 1, 393199, 458753, 1, 524271, 262145, 0, 589807, 1, 0, 393200, 196609, 0, 524272, 131073, 1, -262159, 458753, 1, 65521, 327681, 0, 458737, 65537, 1, -65550, 458753, 1, 65522, 327681, 1, 524274, 131073, 0, -65549, 393217, 1, 327667, 393217, 0, 262132, 131073, 1, 589812, 65537, 1, 196597, 458753, 0, 327669, 196609, 0, -524298, 131073, 1, -10, 458753, 0, -524297, 196609, 0, 131063, 393217, 1, 196600, 131073, 0, 327672, 327681, 0, -7, 393217, 0, -524294, 131073, 0, -458758, 327681, 0, 327674, 327681, 0, 262140, 131073, 0, 327676, 65537, 1, 262141, 131073, 0, 458749, 458753, 0, 524285, 196609, 1, 196606, 327681, 0, 524286, 196609, 1, 65535, 327681, 0, 327679, 131073, 1, 524287, 196609, 1, 327680, 458753, 1, 393216, 1, 1, -65535, 393217, 1, 327681, 458753, 0, 458753, 1, 1, -65534, 262145, 0, 131074, 196609, 0, 65539, 327681, 0, 196611, 65537, 1, 262147, 458753, 1, 458755, 262145, 0, 524291, 1, 0, 589827, 1, 0, -458748, 327681, 0, -131068, 262145, 1, -65532, 458753, 1, 458756, 65537, 1, -589819, 65537, 0, -327675, 1, 0, -131067, 65537, 1, -65531, 65537, 0, 458758, 196609, 0, 589830, 131073, 0, -589817, 65537, 0, -393209, 393217, 0, 196615, 327681, 1, 393223, 458753, 1, -589816, 131073, 1, -131064, 458753, 0, 458760, 131073, 1, -589815, 327681, 0, -524279, 1, 0, -458743, 327681, 0, -393207, 262145, 0, -131063, 1, 0, 65545, 393217, 1, 262153, 458753, 1, 327689, 458753, 0, 458761, 196609, 0, 524297, 327681, 1, -65526, 196609, 1, 65546, 393217, 1, -458741, 65537, 1, -393205, 262145, 0, -196597, 393217, 0, 11, 262145, 1, 458763, 327681, 0, -458740, 327681, 1, -65524, 65537, 0, 262156, 1, 1, 327692, 196609, 0, 589836, 327681, 1, -458739, 196609, 1, -327666, 65537, 0, 262158, 1, 0, -393201, 458753, 0, -327665, 327681, 1, 262159, 262145, 1, 393231, 393217, 1, 524303, 1, 1, -393200, 327681, 1, -65543, 196609, 1, -393225, 655364, 9, -393215, 720900, 9, -262157, 786436, 9, -196612, 851972, 8, -720894, 786436, 8, -655368, 393220, 3, -524306, 262148, 3, -589841, 393220, 3, -458769, 851972, 3, -327697, 1, 0, -458768, 983044, 2, -393231, 327681, 1, -589838, 786436, 3, -458766, 1, 0, -65554, 655364, 3, -262133, 1, 1)
 script = ExtResource("7_3e2kk")
 game_data = ExtResource("17_kcxm3")
 
-[node name="LeavesFalling" parent="TileMap" instance=ExtResource("18_owqm7")]
+[node name="LeavesFalling" type="GPUParticles2D" parent="Art/TileMap"]
 z_index = 10
+position = Vector2(-199, -208)
 emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_vemhi")
+texture = ExtResource("20_qa2ck")
+lifetime = 4.0
+preprocess = 4.0
 
-[node name="Rain" parent="TileMap" instance=ExtResource("18_qjexw")]
+[node name="Rain" type="Node2D" parent="Art/TileMap"]
+script = SubResource("GDScript_vbhej")
 
-[node name="Snow" type="Node2D" parent="TileMap"]
+[node name="RainFalling" type="GPUParticles2D" parent="Art/TileMap/Rain"]
+z_index = 10
+position = Vector2(66, -208)
+emitting = false
+amount = 200
+sub_emitter = NodePath("../Splash")
+process_material = SubResource("ParticleProcessMaterial_cfvia")
+texture = ExtResource("21_ho6fj")
+lifetime = 2.0
+preprocess = 3.0
+trail_lifetime = 0.02
 
-[node name="SnowFalling" type="GPUParticles2D" parent="TileMap/Snow"]
+[node name="Splash" type="GPUParticles2D" parent="Art/TileMap/Rain"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_fqal2")
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_cfvia")
+texture = ExtResource("22_i5kq8")
+lifetime = 0.7
+
+[node name="Snow" type="Node2D" parent="Art/TileMap"]
+
+[node name="SnowFalling" type="GPUParticles2D" parent="Art/TileMap/Snow"]
 z_index = 10
 position = Vector2(96, -183)
 emitting = false
@@ -1130,13 +1331,170 @@ process_material = SubResource("ParticleProcessMaterial_y05ev")
 lifetime = 8.0
 preprocess = 4.0
 
-[node name="Impact" type="GPUParticles2D" parent="TileMap/Snow"]
+[node name="Impact" type="GPUParticles2D" parent="Art/TileMap/Snow"]
 z_index = 1
 emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_ggpnt")
 
+[node name="SpriteEnviorment" type="Node2D" parent="Art" node_paths=PackedStringArray("summer_enviorment", "spring_enviorment", "winter_enviorment", "fall_enviorment")]
+script = ExtResource("23_4vx1w")
+summer_enviorment = NodePath("SummerEnviorment")
+spring_enviorment = NodePath("SpringEnviorment")
+winter_enviorment = NodePath("WinterEnviorment")
+fall_enviorment = NodePath("FallEnviorment")
+
+[node name="SummerEnviorment" type="Node2D" parent="Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_1ecpx")
+position = Vector2(-40, -152)
+texture = ExtResource("25_dk0ad")
+
+[node name="LilyPad2" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_53ert")
+position = Vector2(-24, -104)
+texture = ExtResource("26_gkaeu")
+
+[node name="LilyPad4" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_7aij3")
+position = Vector2(-104, -56)
+texture = ExtResource("26_gkaeu")
+
+[node name="LilyPad3" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_qe5kq")
+position = Vector2(8, -56)
+texture = ExtResource("27_cb6fp")
+
+[node name="LilyPad5" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_0vkm0")
+position = Vector2(-184, -104)
+texture = ExtResource("27_cb6fp")
+
+[node name="Clover1" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_ovq2n")
+position = Vector2(1056, 96)
+texture = ExtResource("28_8haxg")
+
+[node name="Clover2" type="Sprite2D" parent="Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_qysm7")
+position = Vector2(1120, 608)
+texture = ExtResource("29_20wcb")
+
+[node name="SpringEnviorment" type="Node2D" parent="Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_1ecpx")
+position = Vector2(-40, -152)
+texture = ExtResource("30_shuj1")
+
+[node name="LilyPad2" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_53ert")
+position = Vector2(-24, -104)
+texture = ExtResource("31_a1nh4")
+
+[node name="LilyPad4" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_7aij3")
+position = Vector2(-104, -56)
+texture = ExtResource("31_a1nh4")
+
+[node name="LilyPad3" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_qe5kq")
+position = Vector2(8, -56)
+texture = ExtResource("32_co76o")
+
+[node name="LilyPad5" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_0vkm0")
+position = Vector2(-184, -104)
+texture = ExtResource("32_co76o")
+
+[node name="Clover1" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_ovq2n")
+position = Vector2(1056, 96)
+texture = ExtResource("33_olue5")
+
+[node name="Clover2" type="Sprite2D" parent="Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_qysm7")
+position = Vector2(1120, 608)
+texture = ExtResource("34_kj1tg")
+
+[node name="WinterEnviorment" type="Node2D" parent="Art/SpriteEnviorment"]
+visible = false
+
+[node name="Rock1" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(-40, -152)
+texture = ExtResource("35_1uijf")
+
+[node name="Rock2" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(-23, -104)
+texture = ExtResource("36_dlvh7")
+
+[node name="Rock4" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_7aij3")
+position = Vector2(-104, -56)
+texture = ExtResource("36_dlvh7")
+
+[node name="Rock3" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(8, -56)
+texture = ExtResource("37_15k8d")
+
+[node name="Rock5" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_0vkm0")
+position = Vector2(-184, -104)
+texture = ExtResource("37_15k8d")
+
+[node name="Clover1" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_ovq2n")
+position = Vector2(1056, 96)
+texture = ExtResource("38_55bss")
+
+[node name="Clover2" type="Sprite2D" parent="Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_qysm7")
+position = Vector2(1120, 608)
+texture = ExtResource("39_ytqrk")
+
+[node name="FallEnviorment" type="Node2D" parent="Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_1ecpx")
+position = Vector2(-40, -152)
+texture = ExtResource("40_neiyd")
+
+[node name="LilyPad2" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_53ert")
+position = Vector2(-24, -104)
+texture = ExtResource("41_82cd4")
+
+[node name="LilyPad4" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_7aij3")
+position = Vector2(-104, -56)
+texture = ExtResource("41_82cd4")
+
+[node name="LilyPad3" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_qe5kq")
+position = Vector2(8, -56)
+texture = ExtResource("42_umpg0")
+
+[node name="LilyPad5" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_0vkm0")
+position = Vector2(-184, -104)
+texture = ExtResource("42_umpg0")
+
+[node name="Clover1" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_ovq2n")
+position = Vector2(1056, 96)
+texture = ExtResource("43_1m03a")
+
+[node name="Clover2" type="Sprite2D" parent="Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_qysm7")
+position = Vector2(1120, 608)
+texture = ExtResource("44_75ui2")
+
 [node name="Collision" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 3
 
@@ -1229,6 +1587,7 @@ position = Vector2(-247.5, -166)
 shape = SubResource("RectangleShape2D_ke5r8")
 
 [node name="Enclosure" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("18_uvh1q")
@@ -1238,6 +1597,7 @@ position = Vector2(-237, 75)
 polygon = PackedVector2Array(-11, -11, -11, -21, 6, -21, 6, -37, 22, -37, 22, -54, 86, -54, 86, -70, 132, -70, 132, -53, 147, -53, 148, -20, 163, -20, 163, 8, 132, 8, 132, 24, 39, 25, 39, 9, -11, 9)
 
 [node name="SpawnArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("23_mqngj")
@@ -1248,6 +1608,9 @@ shape = SubResource("RectangleShape2D_6d5f5")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="RoundTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="round_over" from="CanvasLayer/RoundTime" to="." method="_on_round_time_round_over"]
 [connection signal="start_round" from="CanvasLayer/RoundStart" to="." method="_on_round_start_start_round"]

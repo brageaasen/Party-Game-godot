@@ -1,5 +1,7 @@
 extends Control
 
+@onready var sort_the_cats = $"../.."
+
 @onready var timer = $Timer
 @onready var blink_timer = $BlinkTimer
 
@@ -17,6 +19,10 @@ var total_time = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	sort_the_cats.connect("round_start", _on_round_start_start_round)
+	
+	self.visible = false
+	
 	total_time = round_time_minutes * 60 + round_time_seconds
 	timer.wait_time = 0.01  # Set timer to tick every 0.01 seconds (10 milliseconds)
 	minutes.visible = false
@@ -48,6 +54,7 @@ func round_finished():
 
 func _on_round_start_start_round():
 	timer.start()
+	self.visible = true
 	minutes.visible = true
 	seconds.visible = true
 

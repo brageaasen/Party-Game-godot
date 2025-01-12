@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GlobalPaths" load_steps=2 format=3 uid="uid://c3tl7vf48j3hc"]
+
+[ext_resource type="Script" path="res://scenes/global_paths.gd" id="1_lthf8"]
+
+[resource]
+script = ExtResource("1_lthf8")

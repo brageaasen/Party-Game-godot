@@ -26,6 +26,8 @@ func _process(delta):
 
 # TODO: Add game difficulty (number of NPC's)
 
+
+@onready var tile_map = $Art/TileMap
 @onready var enclosure = $Enclosure
 @onready var circle_transition = $CanvasLayer/CircleTransition
 
@@ -41,6 +43,9 @@ func _process(delta):
 @export var correct_guess_score : int = 3
 @export var wrong_guess_score : int = 1
 
+@export var game_data : GameData
+
+signal round_start
 
 # TODO: Put in global paths file?
 const npc_scene_path : String = "res://scenes/game/characters/NPC/npc.tscn"
@@ -52,6 +57,7 @@ const sorter_scene_path : String = "res://scenes/game/characters/player/sorter.t
 func _ready():
 	circle_transition.get_node("AnimationPlayer").play("open")
 	tutorial.show()
+	tile_map._change_enviorment_sprites(game_data.season)
 
 
 func spawn_players():
@@ -148,6 +154,8 @@ func calculate_player_score():
 func start_round():
 	spawn_players()
 	spawn_npcs()
+	
+	emit_signal("round_start")
 
 func end_round():
 	# Update sorter score

@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://c7ebur2t4kcqy"]
+[gd_scene load_steps=134 format=3 uid="uid://c7ebur2t4kcqy"]
 
 [ext_resource type="Texture2D" uid="uid://sslvjb33xvej" path="res://assets/sprites/tile_sets/Tilesets/Summer/simplified/tileset - simplified transparent.png" id="1_1jpse"]
 [ext_resource type="PackedScene" uid="uid://6iab8pacnp3j" path="res://scenes/game/particles/rain.tscn" id="1_idx4l"]
@@ -24,33 +24,55 @@
 [ext_resource type="Resource" uid="uid://csqxr3vh3tjcu" path="res://scenes/game/characters/player/current_players.tres" id="18_ytq35"]
 [ext_resource type="Theme" uid="uid://b3pn2l5fh3pcb" path="res://assets/ui/standard.tres" id="19_2vosj"]
 [ext_resource type="Script" path="res://scenes/menu/options_menu.gd" id="19_23as4"]
+[ext_resource type="Script" path="res://scenes/menu/sprite_enviorment.gd" id="20_0ejvf"]
 [ext_resource type="PackedScene" uid="uid://dk1ibpbubhp0d" path="res://scenes/menu/hover_animation.tscn" id="20_kj4xe"]
 [ext_resource type="Script" path="res://scenes/menu/remove_focus.gd" id="21_4d07r"]
 [ext_resource type="Texture2D" uid="uid://bcooyhtrsyins" path="res://assets/ui/player_select/SUMMER_grass_selected_player.png" id="21_5pym0"]
 [ext_resource type="Texture2D" uid="uid://b5c54lx27umhq" path="res://assets/ui/Pack.png" id="21_cyn4o"]
 [ext_resource type="Script" path="res://scenes/menu/options_selection.gd" id="22_aqyl3"]
+[ext_resource type="Texture2D" uid="uid://db7antbxqf6j8" path="res://assets/sprites/nature_sprites/summer/lily_pad_1_summer.png" id="23_8vc3w"]
 [ext_resource type="PackedScene" uid="uid://ihlvlxbresmw" path="res://scenes/menu/hold_down_button.tscn" id="23_gr0kc"]
 [ext_resource type="Script" path="res://scenes/menu/game_settings.gd" id="23_x1n21"]
+[ext_resource type="Texture2D" uid="uid://ulgfbn4c6m6h" path="res://assets/sprites/nature_sprites/summer/lily_pad_2_summer.png" id="24_jlgbq"]
+[ext_resource type="Texture2D" uid="uid://v4bqyii6tbba" path="res://assets/sprites/nature_sprites/summer/lily_pad_3_summer.png" id="25_ku15k"]
+[ext_resource type="Texture2D" uid="uid://df58w2pqgpqy" path="res://assets/sprites/nature_sprites/spring/lily_pad_1_spring.png" id="26_1jjdt"]
 [ext_resource type="PackedScene" uid="uid://chffnq1dswfgw" path="res://scenes/menu/back_option.tscn" id="26_fabrw"]
+[ext_resource type="Texture2D" uid="uid://c3gngrppndc7h" path="res://assets/sprites/nature_sprites/summer/clover_1_summer.png" id="26_fh0k3"]
+[ext_resource type="Texture2D" uid="uid://dppj0hdl86slf" path="res://assets/sprites/nature_sprites/spring/lily_pad_2_spring.png" id="27_5quyh"]
 [ext_resource type="Script" path="res://scenes/game/screen_shake.gd" id="27_llmq1"]
+[ext_resource type="Texture2D" uid="uid://cbocmroui6vtn" path="res://assets/sprites/nature_sprites/summer/clover_2_summer.png" id="27_my1c1"]
 [ext_resource type="PackedScene" uid="uid://dr75wyds5s07i" path="res://scenes/transitions/circle_transition.tscn" id="27_nv27j"]
+[ext_resource type="Texture2D" uid="uid://dkwycrbav8o60" path="res://assets/sprites/nature_sprites/spring/lily_pad_3_spring.png" id="28_pq5qr"]
+[ext_resource type="Texture2D" uid="uid://cti2gt6l1ljun" path="res://assets/sprites/nature_sprites/spring/clover_1_spring.png" id="29_3qgcj"]
+[ext_resource type="Shader" path="res://assets/shaders/wind_sway.gdshader" id="29_5pu4k"]
+[ext_resource type="Texture2D" uid="uid://b746urxoh6k88" path="res://assets/sprites/nature_sprites/spring/clover_2_spring.png" id="30_aogfj"]
 [ext_resource type="Resource" uid="uid://36ppynbriqfv" path="res://scenes/game/characters/player/data/player_1_data.tres" id="30_lr4tc"]
+[ext_resource type="Texture2D" uid="uid://cv0xn6s3px2r0" path="res://assets/sprites/nature_sprites/winter/rock_1_winter.png" id="32_4bwto"]
 [ext_resource type="Texture2D" uid="uid://dbe44gibc1b17" path="res://assets/ui/player_select/bridge/bridge_side.png" id="32_h1744"]
+[ext_resource type="Texture2D" uid="uid://btkpmjps4svrl" path="res://assets/sprites/nature_sprites/winter/rock_2_winter.png" id="33_7m775"]
 [ext_resource type="Texture2D" uid="uid://csllqkkvkb7na" path="res://assets/ui/player_select/bridge/bridge_side_stop.png" id="33_kcf1r"]
 [ext_resource type="Texture2D" uid="uid://chckg760d6oe8" path="res://assets/ui/player_select/bridge/bridge_down_short.png" id="34_ec8r6"]
 [ext_resource type="Resource" uid="uid://cwyjpeq5ab8si" path="res://scenes/game/characters/player/data/player_2_data.tres" id="34_iqi7i"]
+[ext_resource type="Texture2D" uid="uid://g05uy3rrme8n" path="res://assets/sprites/nature_sprites/winter/rock_3_winter.png" id="34_krkhj"]
+[ext_resource type="Texture2D" uid="uid://bt2jx8vvbbc7d" path="res://assets/sprites/nature_sprites/winter/clover_1_winter.png" id="35_emddi"]
 [ext_resource type="Texture2D" uid="uid://da1m0kyskxkgb" path="res://assets/player_select/selection_cursor.png" id="35_gevbd"]
 [ext_resource type="Script" path="res://scenes/menu/character_selection.gd" id="35_yx0bm"]
 [ext_resource type="Texture2D" uid="uid://ch0hjnqmhra54" path="res://assets/player_select/character_icons/black.png" id="36_bxrug"]
 [ext_resource type="Resource" uid="uid://dthn37icn73u" path="res://scenes/game/characters/player/data/player_3_data.tres" id="36_h86e5"]
+[ext_resource type="Texture2D" uid="uid://brqsek6071vdm" path="res://assets/sprites/nature_sprites/winter/clover_2_winter.png" id="36_ljntx"]
 [ext_resource type="Script" path="res://scenes/menu/character_selection_cursor.gd" id="36_y0d8v"]
 [ext_resource type="Resource" uid="uid://2dcan0fb3d4u" path="res://scenes/game/characters/player/data/player_4_data.tres" id="37_2ldmc"]
 [ext_resource type="Texture2D" uid="uid://cw4op4ufmr0sj" path="res://assets/player_select/character_icons/blue.png" id="37_i1gnm"]
+[ext_resource type="Texture2D" uid="uid://dwudcj6p31vsb" path="res://assets/sprites/nature_sprites/fall/lily_pad_1_fall.png" id="37_maqwj"]
 [ext_resource type="Texture2D" uid="uid://birs7tyo7badp" path="res://assets/player_select/character_icons/brown.png" id="38_7wcnl"]
+[ext_resource type="Texture2D" uid="uid://cyx8njql8jwte" path="res://assets/sprites/nature_sprites/fall/lily_pad_2_fall.png" id="38_s707y"]
 [ext_resource type="Resource" uid="uid://c5s1accaj2oic" path="res://scenes/game/characters/player/data/player_5_data.tres" id="38_tefta"]
 [ext_resource type="Resource" uid="uid://c8ch73mv3awi7" path="res://scenes/game/characters/player/data/player_6_data.tres" id="39_glahk"]
+[ext_resource type="Texture2D" uid="uid://b34ys31vsksg2" path="res://assets/sprites/nature_sprites/fall/lily_pad_3_fall.png" id="39_uklmf"]
 [ext_resource type="Texture2D" uid="uid://dbn2jn3unj2te" path="res://assets/player_select/character_icons/calico.png" id="39_y6von"]
 [ext_resource type="Texture2D" uid="uid://b7071gvg5ha16" path="res://assets/player_select/character_icons/cotton_candy_blue.png" id="40_pd6tn"]
+[ext_resource type="Texture2D" uid="uid://be2ufc7bv3iow" path="res://assets/sprites/nature_sprites/fall/clover_1_fall.png" id="40_wnc3o"]
+[ext_resource type="Texture2D" uid="uid://dvglwfwe4hgfd" path="res://assets/sprites/nature_sprites/fall/clover_2_fall.png" id="41_4ccos"]
 [ext_resource type="Resource" uid="uid://eiwyf3pdeey1" path="res://scenes/game/characters/player/data/player_7_data.tres" id="41_mstb3"]
 [ext_resource type="Texture2D" uid="uid://dd2ksuj2140ql" path="res://assets/player_select/character_icons/cotton_candy_pink.png" id="41_p8p1n"]
 [ext_resource type="Resource" uid="uid://b1kuamjghtdqq" path="res://scenes/game/characters/player/data/player_8_data.tres" id="42_jflyh"]
@@ -2837,6 +2859,66 @@ _data = {
 "logo_pulse": SubResource("Animation_turti")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_464vn"]
+shader = ExtResource("29_5pu4k")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0iou0"]
+shader = ExtResource("29_5pu4k")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86e3l"]
+shader = ExtResource("29_5pu4k")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.779
+shader_parameter/offset = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_et2k4"]
+shader = ExtResource("29_5pu4k")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 0.445
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.464
+shader_parameter/offset = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxo5k"]
+shader = ExtResource("29_5pu4k")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 0.445
+shader_parameter/distortion = null
+shader_parameter/heightOffset = 0.464
+shader_parameter/offset = 10.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_i50qh"]
 atlas = ExtResource("21_cyn4o")
 region = Rect2(0, 0, 16, 16)
@@ -2918,7 +3000,7 @@ layer_7/tile_data = PackedInt32Array(262154, 3, 2, 196618, 196611, 0, 262155, 13
 layer_8/name = "enviorment"
 layer_8/y_sort_enabled = true
 layer_8/z_index = 1
-layer_8/tile_data = PackedInt32Array(524301, 1, 1, 65550, 393217, 1, 393232, 131073, 1, 131089, 262145, 1, 327697, 196609, 1, 524306, 1, 1, 393223, 262148, 3, 458760, 917508, 2, 458767, 917508, 7, 65552, 786436, 3, 589841, 720900, 3, 17, 393220, 3, 393227, 851972, 8, 65543, 655364, 8, 524292, 589828, 8, 589825, 720900, 8, 589836, 720900, 9)
+layer_8/tile_data = PackedInt32Array(524301, 1, 1, 65550, 393217, 1, 393232, 131073, 1, 131089, 262145, 1, 327697, 196609, 1, 524306, 1, 1, 458767, 917508, 7, 393227, 851972, 8, 589836, 720900, 9, 458760, 917508, 2, 393223, 262148, 3, 17, 393220, 3)
 script = ExtResource("11_sp23x")
 game_data = ExtResource("13_8s2vi")
 
@@ -2993,6 +3075,142 @@ texture = ExtResource("17_blbpm")
 libraries = {
 "": SubResource("AnimationLibrary_p4bkw")
 }
+
+[node name="SpriteEnviorment" type="Node2D" parent="Main/Art" node_paths=PackedStringArray("summer_enviorment", "spring_enviorment", "winter_enviorment", "fall_enviorment")]
+script = ExtResource("20_0ejvf")
+summer_enviorment = NodePath("SummerEnviorment")
+spring_enviorment = NodePath("SpringEnviorment")
+winter_enviorment = NodePath("WinterEnviorment")
+fall_enviorment = NodePath("FallEnviorment")
+
+[node name="SummerEnviorment" type="Node2D" parent="Main/Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_464vn")
+position = Vector2(288, 544)
+scale = Vector2(4, 4)
+texture = ExtResource("23_8vc3w")
+
+[node name="LilyPad2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_0iou0")
+position = Vector2(480, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("24_jlgbq")
+
+[node name="LilyPad3" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_86e3l")
+position = Vector2(96, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("25_ku15k")
+
+[node name="Clover1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_et2k4")
+position = Vector2(1056, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("26_fh0k3")
+
+[node name="Clover2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SummerEnviorment"]
+material = SubResource("ShaderMaterial_hxo5k")
+position = Vector2(1120, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("27_my1c1")
+
+[node name="SpringEnviorment" type="Node2D" parent="Main/Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_464vn")
+position = Vector2(288, 544)
+scale = Vector2(4, 4)
+texture = ExtResource("26_1jjdt")
+
+[node name="LilyPad2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_0iou0")
+position = Vector2(480, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("27_5quyh")
+
+[node name="LilyPad3" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_86e3l")
+position = Vector2(96, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("28_pq5qr")
+
+[node name="Clover1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_et2k4")
+position = Vector2(1056, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("29_3qgcj")
+
+[node name="Clover2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/SpringEnviorment"]
+material = SubResource("ShaderMaterial_hxo5k")
+position = Vector2(1120, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("30_aogfj")
+
+[node name="WinterEnviorment" type="Node2D" parent="Main/Art/SpriteEnviorment"]
+visible = false
+
+[node name="Rock1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(288, 544)
+scale = Vector2(4, 4)
+texture = ExtResource("32_4bwto")
+
+[node name="Rock2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(480, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("33_7m775")
+
+[node name="Rock3" type="Sprite2D" parent="Main/Art/SpriteEnviorment/WinterEnviorment"]
+position = Vector2(96, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("34_krkhj")
+
+[node name="Clover1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_et2k4")
+position = Vector2(1056, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("35_emddi")
+
+[node name="Clover2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/WinterEnviorment"]
+material = SubResource("ShaderMaterial_hxo5k")
+position = Vector2(1120, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("36_ljntx")
+
+[node name="FallEnviorment" type="Node2D" parent="Main/Art/SpriteEnviorment"]
+visible = false
+
+[node name="LilyPad1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_464vn")
+position = Vector2(288, 544)
+scale = Vector2(4, 4)
+texture = ExtResource("37_maqwj")
+
+[node name="LilyPad2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_0iou0")
+position = Vector2(480, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("38_s707y")
+
+[node name="LilyPad3" type="Sprite2D" parent="Main/Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_86e3l")
+position = Vector2(96, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("39_uklmf")
+
+[node name="Clover1" type="Sprite2D" parent="Main/Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_et2k4")
+position = Vector2(1056, 96)
+scale = Vector2(4, 4)
+texture = ExtResource("40_wnc3o")
+
+[node name="Clover2" type="Sprite2D" parent="Main/Art/SpriteEnviorment/FallEnviorment"]
+material = SubResource("ShaderMaterial_hxo5k")
+position = Vector2(1120, 608)
+scale = Vector2(4, 4)
+texture = ExtResource("41_4ccos")
 
 [node name="StartMenu" type="VBoxContainer" parent="Main"]
 layout_mode = 0
@@ -3217,7 +3435,6 @@ offset_right = 584.0
 offset_bottom = 620.0
 
 [node name="Circle" parent="PlayerSelectScreen/BackOption" index="0"]
-position = Vector2(91.424, 21.136)
 frame_progress = 0.0956393
 
 [node name="PlayerContainer" type="HBoxContainer" parent="PlayerSelectScreen"]
@@ -3814,9 +4031,10 @@ text = "Everything!"
 
 [node name="BackOption" parent="GameSettings" instance=ExtResource("26_fabrw")]
 layout_mode = 1
-
-[node name="Circle" parent="GameSettings/BackOption" index="0"]
-position = Vector2(91.424, 21.136)
+offset_left = 485.0
+offset_top = 506.0
+offset_right = 685.0
+offset_bottom = 606.0
 
 [node name="CircleTransition" parent="." instance=ExtResource("27_nv27j")]
 mouse_filter = 1
