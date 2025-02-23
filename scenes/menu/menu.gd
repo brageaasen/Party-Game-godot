@@ -15,7 +15,6 @@ func _ready():
 	animation_player.play("logo_pulse")
 
 
-
 func _on_start_button_pressed():
 	set_process(false)
 	self.hide()

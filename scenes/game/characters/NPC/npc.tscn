@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scenes/game/characters/NPC/states/looking.gd" id="7_44sya"]
 [ext_resource type="Script" path="res://scenes/game/characters/NPC/states/laying.gd" id="8_814l4"]
 [ext_resource type="Script" path="res://scenes/game/characters/NPC/states/running_wander.gd" id="9_627rd"]
-[ext_resource type="Script" path="res://scenes/game/characters/NPC/lifted.gd" id="10_1l66h"]
+[ext_resource type="Script" path="res://scenes/game/characters/NPC/states/lifted.gd" id="10_1l66h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v1bo3"]
 radius = 5.0

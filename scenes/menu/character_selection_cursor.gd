@@ -21,7 +21,8 @@ var start_pos : Dictionary = {
 }
 
 @export var current_player : int  # The index of the player controlling this cursor
-@export var portrait_offset: Vector2  # Distance between grid cells
+@export var portrait_offset : Vector2  # Distance between grid cells
+var initial_pos_offset : Vector2 = Vector2(20, 15)
 
 var can_move : bool = true
 var current_row : int
@@ -40,7 +41,7 @@ func _ready():
 	position = characters_container.position + Vector2(
 		current_col * portrait_offset.x,
 		current_row * portrait_offset.y
-	)
+	) + initial_pos_offset
 	
 	player_select_screen.connect("player_ready_for_selection", _on_player_ready)
 	player_select_screen.connect("player_not_ready_for_selection", _on_player_not_ready)
@@ -100,11 +101,13 @@ func _move_cursor(dx: int, dy: int):
 	var new_col = current_col + dx
 	var new_row = current_row + dy
 
+	# Handle outside of grid for columns
 	if new_col < 0:
 		new_col = characters_container.columns - 1
 	elif new_col >= characters_container.columns:
 		new_col = 0
-
+	
+	# Handle outside of grid for rows
 	if new_row < 0:
 		new_row = ceil(float(characters_container.get_child_count()) / characters_container.columns) - 1
 	elif new_row >= ceil(float(characters_container.get_child_count()) / characters_container.columns):
@@ -112,7 +115,11 @@ func _move_cursor(dx: int, dy: int):
 
 	current_col = new_col
 	current_row = new_row
-	position = characters_container.position + Vector2(current_col * portrait_offset.x, current_row * portrait_offset.y)
+	
+	position = characters_container.position + Vector2(
+		current_col * portrait_offset.x,
+		current_row * portrait_offset.y
+	) + initial_pos_offset
 	
 	_hover_character()
 

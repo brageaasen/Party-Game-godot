@@ -50,6 +50,7 @@ signal round_start
 
 
 func _ready():
+	RandomNumberGenerator.new().randomize()  # Ensure randomness every run
 	circle_transition.get_node("AnimationPlayer").play("open")
 	tutorial.show()
 	tile_map._change_enviorment_sprites(game_data.season)

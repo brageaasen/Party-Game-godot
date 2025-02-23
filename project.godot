@@ -21,6 +21,8 @@ run/custom_image="res://assets/sprites/cursors/mouse1.png"
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/cursors/mouse1.png"
 mouse_cursor/custom_image_hotspot=Vector2(32, 16)
+window/snap/snap_2d_transforms_to_pixel=false
+window/snap/snap_2d_vertices_to_pixel=false
 
 [input]
 
@@ -338,3 +340,6 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

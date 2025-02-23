@@ -90,16 +90,31 @@ var wander_angle : float = 0
 
 @export var wandering : bool = true
 
+
+var last_direction_change = 0.0
+const direction_change_interval = 0.2  # 200ms cooldown
+
 func steer(delta):
+	if Time.get_ticks_msec() - last_direction_change > direction_change_interval * 1000:
+		var new_direction = avoid_obstacles_steering(delta)
+
+		# Force AI to move sideways if stuck
+		if stuck_time > 0.5:
+			new_direction = Vector2((1 if randf() > 0.5 else -1) * 2.0, 0)  # Strong side push
+
+		if new_direction.length() > 0.1:
+			character.velocity = lerp(character.velocity, new_direction, 0.1)
+			last_direction_change = Time.get_ticks_msec()
+
 	var steering : Vector2 = Vector2.ZERO
 	
 	if wandering:
 		steering += enclosure_steering()
 		steering += wander_steering()
 	
-	steering += avoid_obstacles_steering()
-	character.velocity += steering
-	character.velocity = character.velocity.limit_length(character.MAX_WALK_SPEED)
+	steering += avoid_obstacles_steering(delta)
+	character.velocity = lerp(character.velocity, character.velocity + steering, 0.1)
+	character.velocity = character.velocity.limit_length(character.MAX_RUN_SPEED)
 	character.move_and_slide()
 
 func wander_steering() -> Vector2:
@@ -134,14 +149,45 @@ func enclosure_steering() -> Vector2:
 
 var avoid_force : int = 250
 
-func avoid_obstacles_steering() -> Vector2:
+var last_valid_direction = Vector2.ZERO  # Store last movement direction
+var stuck_time = 0.0  # Track how long AI is stuck
+
+func avoid_obstacles_steering(delta) -> Vector2:
+	var avoidance = Vector2.ZERO
+	var count = 0
+	var lateral_bias = Vector2.RIGHT if randf() > 0.5 else Vector2.LEFT  # Encourage side movement
+
 	for raycast in character.raycasts.get_children():
 		raycast.target_position.x = character.velocity.length() / 2
 		if raycast.is_colliding():
 			var obstacle = raycast.get_collider()
-			return (character.position + character.velocity - obstacle.position).normalized() * avoid_force
-	
-	return Vector2.ZERO
+			var steer_direction = (character.position - obstacle.position).normalized() * avoid_force
+			avoidance += steer_direction
+			count += 1
+
+	if count > 0:
+		avoidance /= count  # Average out multiple obstacle forces
+		avoidance = lerp(Vector2.ZERO, avoidance, 0.05)  # Smooth transition
+
+		# If AI is moving up/down too much, start tracking time
+		if abs(avoidance.y) > abs(avoidance.x):
+			stuck_time += delta
+		else:
+			stuck_time = 0.0  # Reset when moving properly
+
+		# If AI is stuck for 0.2s, force lateral movement
+		if stuck_time > 0.2:
+			avoidance = Vector2((1 if randf() > 0.5 else -1) * 2.0, 0)  # Strong side push
+			stuck_time = 0.0  # Reset counter
+
+		# Prevent rapid direction flipping
+		if last_valid_direction.dot(avoidance) < -0.5:
+			avoidance = last_valid_direction  # Prevent full reversal
+
+	last_valid_direction = avoidance if avoidance.length() > 0.1 else last_valid_direction
+	return avoidance
+
+
 
 
 func _on_state_timer_timeout():

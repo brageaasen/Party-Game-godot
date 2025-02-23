@@ -14,6 +14,7 @@ signal transitioned(state_name)
 
 
 func _ready() -> void:
+	randomize()
 	await owner.ready
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():

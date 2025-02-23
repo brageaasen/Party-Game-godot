@@ -68,6 +68,8 @@ func _ready():
 
 func _on_game_data_field_changed(field_name, new_value):
 	if field_name == "season":
+		if new_value == game_data.Season.RANDOM: # Don't change to random on field change
+			return
 		# If season changes, update the tilemap and emitters
 		change_season_textures(new_value)
 

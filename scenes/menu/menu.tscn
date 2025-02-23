@@ -3828,7 +3828,7 @@ mouse_filter = 1
 
 [node name="Player1Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
 z_index = 1
-position = Vector2(454, 417)
+position = Vector2(452, 285)
 scale = Vector2(3, 3)
 texture = ExtResource("35_gevbd")
 script = ExtResource("36_y0d8v")
@@ -3837,13 +3837,12 @@ portrait_offset = Vector2(51, 42)
 
 [node name="Player2Cursor" type="Sprite2D" parent="PlayerSelectScreen/CharacterSelection/Cursors"]
 z_index = 1
-position = Vector2(442, 407)
+position = Vector2(503, 285)
 scale = Vector2(3, 3)
 texture = ExtResource("35_gevbd")
-offset = Vector2(4, 3.33334)
 script = ExtResource("36_y0d8v")
 current_player = 2
-portrait_offset = Vector2(50, 42)
+portrait_offset = Vector2(51, 42)
 
 [node name="CharactersContainer" type="GridContainer" parent="PlayerSelectScreen/CharacterSelection"]
 layout_mode = 0
