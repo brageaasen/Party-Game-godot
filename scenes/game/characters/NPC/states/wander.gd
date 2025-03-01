@@ -1,195 +1,197 @@
 extends CharacterState
 
 @onready var animation_player = $"../../AnimationPlayer"
+@onready var label = $"../../Label"
 
-@export var state_countdown : float = 8
-var countdown_variable : float = 3
+@export var state_duration: float = 8.0
+@export var duration_variance: float = 2.0
 
 @export_group("State Behaviour")
-@export var chance_to_idle : float = 0.8
-@export var chance_to_sit_down : float = 0
-@export var chance_to_lay_down : float = 0
-@export var chance_to_run : float = 0.2
+@export var chance_to_idle: float = 0.8
+@export var chance_to_sit: float = 0.0
+@export var chance_to_lay: float = 0.0
+@export var chance_to_run: float = 0.2
 
-@onready var label = $"../../Label"
+# Wander settings
+@export var wander_change_interval: float = 1.0  # seconds between target changes
+@export var wander_min_distance: float = 50.0
+@export var wander_max_distance: float = 100.0
+var wander_timer: float = 0.0
+var wander_target: Vector2
+
+# Obstacle avoidance settings
+@export var avoid_force: float = 1000.0
+
+# Enclosure boundary (adjust as needed)
+@export var enclosure_zone: Rect2 = Rect2(0, 0, 2000, 2000)
 
 func enter(_msg := {}) -> void:
 	label.text = "WANDER"
-	# Stop the timer before starting it
+	# Stop and restart the state timer with random duration
 	character.state_timer.stop()
-	# Start timer
-	var random_countdown = randf_range(state_countdown - countdown_variable, state_countdown + countdown_variable)
-	character.state_timer.wait_time = random_countdown
+	var duration = randf_range(state_duration - duration_variance, state_duration + duration_variance)
+	character.state_timer.wait_time = duration
 	character.state_timer.start()
+	
+	# Initialize wander target to a point ahead
+	wander_target = character.position + (character.velocity.normalized() * wander_max_distance)
+	wander_timer = 0.0
 
-func physics_update(delta):
+func physics_update(delta: float) -> void:
 	update_animation()
-	steer(delta)
+	
+	# Update wander target periodically
+	wander_timer += delta
+	if wander_timer >= wander_change_interval:
+		wander_timer = 0.0
+		_set_new_wander_target()
+	
+	# Calculate desired velocity from wander target
+	var desired_velocity = (wander_target - character.position).normalized() * character.MAX_WALK_SPEED
+	
+	# Add obstacle avoidance force
+	desired_velocity += _calculate_avoidance(delta) * 0.5
+	# Add correction if outside enclosure
+	desired_velocity += _enclosure_correction()
+	
+	# Blend current velocity toward desired velocity
+	character.velocity = character.velocity.lerp(desired_velocity, 0.1)
+	character.velocity = character.velocity.limit_length(character.MAX_WALK_SPEED)
+	
+	character.move_and_slide()
 
-func change_state():
+func _set_new_wander_target() -> void:
+	# Pick a random angle and distance
+	var angle = randf_range(-PI, PI)
+	var distance = randf_range(wander_min_distance, wander_max_distance)
+	wander_target = character.position + Vector2(cos(angle), sin(angle)) * distance
+
+var prev_avoidance: Vector2 = Vector2.ZERO
+
+func _calculate_avoidance(delta: float) -> Vector2:
+	var avoidance: Vector2 = Vector2.ZERO
+	var rays = [
+		character.raycasts.get_node("Forward"),
+		character.raycasts.get_node("Left"),
+		character.raycasts.get_node("Right")
+	]
+	var count = 0
+	for ray in rays:
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			var push_vector: Vector2 = Vector2.ZERO
+			
+			if collider is StaticBody2D:
+				var best_push: Vector2 = Vector2.ZERO
+				var best_dist = INF
+				for child in collider.get_children():
+					if child is CollisionShape2D and child.shape is RectangleShape2D:
+						var rect_shape = child.shape as RectangleShape2D
+						var extents = rect_shape.extents
+						# Convert NPC's global position into the child's local space.
+						var local_pos = child.global_transform.affine_inverse() * character.position
+						# Clamp local position to the rectangle bounds.
+						var clamped_x = clamp(local_pos.x, -extents.x, extents.x)
+						var clamped_y = clamp(local_pos.y, -extents.y, extents.y)
+						var nearest_local = Vector2(clamped_x, clamped_y)
+						# Convert the clamped point back to global space.
+						var nearest_global = child.global_transform * nearest_local
+						var push = character.position - nearest_global
+						var dist = push.length()
+						if dist < best_dist:
+							best_dist = dist
+							best_push = push.normalized()
+				push_vector = best_push
+			else:
+				if collider is CollisionShape2D and collider.shape is RectangleShape2D:
+					var rect_shape = collider.shape as RectangleShape2D
+					var extents = rect_shape.extents
+					var local_pos = collider.global_transform.affine_inverse() * character.position
+					var clamped_x = clamp(local_pos.x, -extents.x, extents.x)
+					var clamped_y = clamp(local_pos.y, -extents.y, extents.y)
+					var nearest_local = Vector2(clamped_x, clamped_y)
+					var nearest_global = collider.global_transform * nearest_local
+					push_vector = (character.position - nearest_global).normalized()
+				else:
+					push_vector = (character.position - collider.global_position).normalized()
+			
+			var factor = (1.5 if ray.name == "Forward" else 0.75)
+			avoidance += push_vector * avoid_force * factor
+			count += 1
+	if count > 0:
+		avoidance /= count
+	
+	# Blend with the previous avoidance vector for smooth transitions.
+	prev_avoidance = prev_avoidance.lerp(avoidance, 0.05 * delta)
+	return prev_avoidance
+
+
+
+func _enclosure_correction() -> Vector2:
+	var correction: Vector2 = Vector2.ZERO
+	if character.position.x < enclosure_zone.position.x:
+		correction.x = 1
+	elif character.position.x > enclosure_zone.position.x + enclosure_zone.size.x:
+		correction.x = -1
+	if character.position.y < enclosure_zone.position.y:
+		correction.y = 1
+	elif character.position.y > enclosure_zone.position.y + enclosure_zone.size.y:
+		correction.y = -1
+	if correction != Vector2.ZERO:
+		return correction.normalized() * character.MAX_WALK_SPEED
+	return Vector2.ZERO
+
+func update_animation() -> void:
+	# Use the moving velocity direction to determine animation
+	var new_animation: String = ""
+	if character.velocity.length() < 0.1:
+		new_animation = "idle"
+	else:
+		var angle = character.velocity.angle()
+		# Map angle to one of 8 directional walking animations.
+		if angle >= -PI/8 and angle < PI/8:
+			new_animation = "walking_r"
+		elif angle >= PI/8 and angle < 3*PI/8:
+			new_animation = "walking_d_r"
+		elif angle >= 3*PI/8 and angle < 5*PI/8:
+			new_animation = "walking_d"
+		elif angle >= 5*PI/8 and angle < 7*PI/8:
+			new_animation = "walking_d_l"
+		elif angle >= -3*PI/8 and angle < -PI/8:
+			new_animation = "walking_u_r"
+		elif angle >= -5*PI/8 and angle < -3*PI/8:
+			new_animation = "walking_u"
+		elif angle >= -7*PI/8 and angle < -5*PI/8:
+			new_animation = "walking_u_l"
+		else:
+			new_animation = "walking_l"
+	
+	if animation_player.current_animation != new_animation:
+		animation_player.play(new_animation)
+	elif not animation_player.is_playing():
+		animation_player.play(new_animation)
+
+func change_state() -> void:
+	# Ensure probabilities add up to 1
 	var tolerance = 0.0001
-	var total_chance = chance_to_idle + chance_to_sit_down + chance_to_lay_down + chance_to_run
-	assert(abs(total_chance - 1.0) < tolerance)
+	var total = chance_to_idle + chance_to_sit + chance_to_lay + chance_to_run
+	assert(abs(total - 1.0) < tolerance)
 	
 	var actions = [
 		{"chance": chance_to_idle, "action": "Idle"},
-		{"chance": chance_to_sit_down, "action": "Sitting"},
-		{"chance": chance_to_lay_down, "action": "Laying"},
+		{"chance": chance_to_sit, "action": "Sitting"},
+		{"chance": chance_to_lay, "action": "Laying"},
 		{"chance": chance_to_run, "action": "RunningWander"}
 	]
-	
-	var rand_value = randf()  # Generate a random number between 0 and 1
-	var cumulative_chance = 0.0
-	
+	var rand_value = randf()
+	var cumulative = 0.0
 	for action in actions:
-		cumulative_chance += action["chance"]
-		if rand_value < cumulative_chance:
+		cumulative += action["chance"]
+		if rand_value < cumulative:
 			character.last_state = self
 			state_machine.transition_to(action["action"])
 			break
 
-
-func update_animation():
-	# Determine the new animation based on the direction angle
-	var new_animation = ""
-	if character.look_direction >= -PI/8 and character.look_direction < PI/8:
-		new_animation = "walking_r"
-	elif character.look_direction >= PI/8 and character.look_direction < 3*PI/8:
-		new_animation = "walking_d_r"
-	elif character.look_direction >= 3*PI/8 and character.look_direction < 5*PI/8:
-		new_animation = "walking_d"
-	elif character.look_direction >= 5*PI/8 and character.look_direction < 7*PI/8:
-		new_animation = "walking_d_l"
-	elif character.look_direction >= -3*PI/8 and character.look_direction < -PI/8:
-		new_animation = "walking_u_r"
-	elif character.look_direction >= -5*PI/8 and character.look_direction < -3*PI/8:
-		new_animation = "walking_u"
-	elif character.look_direction >= -7*PI/8 and character.look_direction < -5*PI/8:
-		new_animation = "walking_u_l"
-	else:
-		new_animation = "walking_l"
-
-	# Get the current frame to preserve the frame progress
-	var current_frame = animation_player.current_animation_position
-
-	# Only change the animation if it's different from the current one
-	if animation_player.current_animation != new_animation:
-		animation_player.play(new_animation)
-		animation_player.seek(current_frame, true)
-	else:
-		# Ensure the animation continues playing if it's the same
-		if !animation_player.is_playing():
-			animation_player.play(new_animation)
-
-
-
-const WANDER_CIRCLE_RADIUS : int = 8
-const WANDER_RANDOMNESS : float = 0.2
-
-var wander_angle : float = 0
-
-@export var wandering : bool = true
-
-
-var last_direction_change = 0.0
-const direction_change_interval = 0.2  # 200ms cooldown
-
-func steer(delta):
-	if Time.get_ticks_msec() - last_direction_change > direction_change_interval * 1000:
-		var new_direction = avoid_obstacles_steering(delta)
-
-		# Force AI to move sideways if stuck
-		if stuck_time > 0.5:
-			new_direction = Vector2((1 if randf() > 0.5 else -1) * 2.0, 0)  # Strong side push
-
-		if new_direction.length() > 0.1:
-			character.velocity = lerp(character.velocity, new_direction, 0.1)
-			last_direction_change = Time.get_ticks_msec()
-
-	var steering : Vector2 = Vector2.ZERO
-	
-	if wandering:
-		steering += enclosure_steering()
-		steering += wander_steering()
-	
-	steering += avoid_obstacles_steering(delta)
-	character.velocity = lerp(character.velocity, character.velocity + steering, 0.1)
-	character.velocity = character.velocity.limit_length(character.MAX_RUN_SPEED)
-	character.move_and_slide()
-
-func wander_steering() -> Vector2:
-	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
-	
-	var vector_to_circle : Vector2 = character.velocity.normalized() * character.MAX_WALK_SPEED
-	var desired_velocity : Vector2 = vector_to_circle + Vector2(WANDER_CIRCLE_RADIUS, 0).rotated(wander_angle)
-	
-	return desired_velocity - character.velocity
-
-
-# TODO: Make enclosure_zone scale according viewport size
-@export var enclosure_zone : Rect2 = Rect2(0, 0, 2000, 2000)
-
-func enclosure_steering() -> Vector2:
-	var desired_velocity : Vector2 = Vector2.ZERO
-	if character.position.x < enclosure_zone.position.x:
-		desired_velocity.x += 1
-	elif character.position.x > enclosure_zone.position.x + enclosure_zone.size.x:
-		desired_velocity.x -= 1
-	if character.position.y < enclosure_zone.position.y:
-		desired_velocity.y += 1
-	elif character.position.y > enclosure_zone.position.y + enclosure_zone.size.y:
-		desired_velocity.y -= 1
-	
-	desired_velocity = desired_velocity.normalized() * character.MAX_WALK_SPEED
-	if desired_velocity != Vector2.ZERO:
-		wander_angle = desired_velocity.angle()
-		return desired_velocity - character.velocity
-	else :
-		return Vector2.ZERO
-
-var avoid_force : int = 250
-
-var last_valid_direction = Vector2.ZERO  # Store last movement direction
-var stuck_time = 0.0  # Track how long AI is stuck
-
-func avoid_obstacles_steering(delta) -> Vector2:
-	var avoidance = Vector2.ZERO
-	var count = 0
-	var lateral_bias = Vector2.RIGHT if randf() > 0.5 else Vector2.LEFT  # Encourage side movement
-
-	for raycast in character.raycasts.get_children():
-		raycast.target_position.x = character.velocity.length() / 2
-		if raycast.is_colliding():
-			var obstacle = raycast.get_collider()
-			var steer_direction = (character.position - obstacle.position).normalized() * avoid_force
-			avoidance += steer_direction
-			count += 1
-
-	if count > 0:
-		avoidance /= count  # Average out multiple obstacle forces
-		avoidance = lerp(Vector2.ZERO, avoidance, 0.05)  # Smooth transition
-
-		# If AI is moving up/down too much, start tracking time
-		if abs(avoidance.y) > abs(avoidance.x):
-			stuck_time += delta
-		else:
-			stuck_time = 0.0  # Reset when moving properly
-
-		# If AI is stuck for 0.2s, force lateral movement
-		if stuck_time > 0.2:
-			avoidance = Vector2((1 if randf() > 0.5 else -1) * 2.0, 0)  # Strong side push
-			stuck_time = 0.0  # Reset counter
-
-		# Prevent rapid direction flipping
-		if last_valid_direction.dot(avoidance) < -0.5:
-			avoidance = last_valid_direction  # Prevent full reversal
-
-	last_valid_direction = avoidance if avoidance.length() > 0.1 else last_valid_direction
-	return avoidance
-
-
-
-
-func _on_state_timer_timeout():
+func _on_state_timer_timeout() -> void:
 	if get_parent().state.name == self.name and character.state_timer.time_left < 1:
 		change_state()

@@ -1496,7 +1496,7 @@ position = Vector2(1120, 608)
 texture = ExtResource("44_75ui2")
 
 [node name="Collision" type="StaticBody2D" parent="."]
-visible = false
+disable_mode = 1
 collision_layer = 4
 collision_mask = 3
 
